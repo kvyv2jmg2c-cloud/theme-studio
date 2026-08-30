@@ -1,0 +1,2767 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width,
+    initial-scale=1,
+    maximum-scale=1,
+    user-scalable=no"
+>
+
+<meta name="theme-color" content="#09090d">
+
+<title>Theme Studio</title>
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: #09090d;
+    color: #fff;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "Segoe UI",
+        sans-serif;
+}
+
+button,
+input {
+    font-family: inherit;
+}
+
+button {
+    border: 0;
+}
+
+
+/* =====================================================
+   APP
+===================================================== */
+
+.app {
+    width: 100%;
+    max-width: 650px;
+    margin: auto;
+
+    padding:
+        15px
+        14px
+        120px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 14px;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.logo span {
+    color: #ff4fa3;
+}
+
+.save-button {
+    background: #18181e;
+    color: #fff;
+
+    padding: 9px 13px;
+
+    border-radius: 12px;
+
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   NAME
+===================================================== */
+
+.theme-name {
+
+    width: 100%;
+
+    height: 48px;
+
+    background: #15151a;
+
+    border:
+        1px solid
+        #2b2b32;
+
+    border-radius: 14px;
+
+    color: #fff;
+
+    padding:
+        0 14px;
+
+    outline: none;
+
+    font-size: 15px;
+
+    margin-bottom: 12px;
+}
+
+
+/* =====================================================
+   PLATFORM
+===================================================== */
+
+.platform {
+
+    display: flex;
+
+    background: #15151a;
+
+    border:
+        1px solid
+        #292930;
+
+    border-radius: 15px;
+
+    padding: 4px;
+
+    margin-bottom: 13px;
+}
+
+.platform button {
+
+    flex: 1;
+
+    height: 43px;
+
+    background: transparent;
+
+    color: #8e8e98;
+
+    border-radius: 11px;
+
+    font-size: 13px;
+
+    font-weight: 650;
+}
+
+.platform button.active {
+
+    background: #fff;
+
+    color: #000;
+}
+
+
+/* =====================================================
+   PREVIEW
+===================================================== */
+
+.preview {
+
+    overflow: hidden;
+
+    border-radius: 29px;
+
+    border:
+        1px solid
+        #34343b;
+
+    box-shadow:
+        0 18px 60px
+        rgba(0,0,0,.5);
+
+    margin-bottom: 12px;
+}
+
+
+/* =====================================================
+   IOS HEADER
+===================================================== */
+
+.ios-header {
+
+    height: 62px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 14px;
+
+    background: #18181d;
+}
+
+.ios-back {
+
+    font-size: 30px;
+
+    margin-right: 9px;
+}
+
+.ios-avatar {
+
+    width: 37px;
+    height: 37px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 700;
+
+    margin-right: 9px;
+}
+
+.ios-user-name {
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+.ios-status {
+
+    font-size: 10px;
+
+    opacity: .55;
+
+    margin-top: 2px;
+}
+
+
+/* =====================================================
+   ANDROID HEADER
+===================================================== */
+
+.android-header {
+
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 11px;
+
+    background: #18181d;
+}
+
+.android-back {
+
+    font-size: 27px;
+
+    margin-right: 10px;
+}
+
+.android-avatar {
+
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 700;
+
+    margin-right: 9px;
+}
+
+.android-name {
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+.android-status {
+
+    font-size: 10px;
+
+    opacity: .55;
+}
+
+
+/* =====================================================
+   CHAT
+===================================================== */
+
+.chat {
+
+    min-height: 390px;
+
+    padding: 13px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+
+    background:
+        #111114;
+
+    background-size: cover;
+
+    background-position: center;
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.message {
+
+    max-width: 80%;
+
+    padding:
+        9px
+        12px;
+
+    font-size: 14px;
+
+    line-height: 1.3;
+
+    position: relative;
+}
+
+.message.in {
+
+    align-self: flex-start;
+}
+
+.message.out {
+
+    align-self: flex-end;
+}
+
+.message-time {
+
+    text-align: right;
+
+    font-size: 9px;
+
+    opacity: .55;
+
+    margin-top: 4px;
+}
+
+
+/* =====================================================
+   COMPOSER
+===================================================== */
+
+.composer {
+
+    height: 57px;
+
+    padding: 8px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    background: #18181d;
+}
+
+.fake-input {
+
+    flex: 1;
+
+    padding:
+        10px
+        13px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    background: #111114;
+
+    color: #85858d;
+}
+
+.send {
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 17px;
+}
+
+
+/* =====================================================
+   SCREEN NAVIGATION
+===================================================== */
+
+.screens {
+
+    display: flex;
+
+    gap: 7px;
+
+    overflow-x: auto;
+
+    padding-bottom: 2px;
+
+    margin-bottom: 12px;
+}
+
+.screens button {
+
+    flex: none;
+
+    padding:
+        10px
+        13px;
+
+    background: #15151a;
+
+    border:
+        1px solid
+        #292930;
+
+    color: #999;
+
+    border-radius: 12px;
+
+    font-size: 12px;
+}
+
+.screens button.active {
+
+    background: #fff;
+
+    color: #000;
+}
+
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+.card {
+
+    background: #15151a;
+
+    border:
+        1px solid
+        #28282f;
+
+    border-radius: 19px;
+
+    padding: 15px;
+
+    margin-bottom: 11px;
+}
+
+.card-title {
+
+    font-size: 14px;
+
+    font-weight: 750;
+
+    margin-bottom: 13px;
+}
+
+
+/* =====================================================
+   COLOR GRID
+===================================================== */
+
+.colors {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 10px;
+}
+
+.color label {
+
+    display: block;
+
+    color: #92929b;
+
+    font-size: 10px;
+
+    margin-bottom: 5px;
+}
+
+.color-box {
+
+    height: 47px;
+
+    padding: 4px;
+
+    background: #101014;
+
+    border:
+        1px solid
+        #303039;
+
+    border-radius: 12px;
+}
+
+.color-box input {
+
+    width: 100%;
+    height: 100%;
+
+    padding: 0;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    background: transparent;
+}
+
+
+/* =====================================================
+   TEXT COLOR
+===================================================== */
+
+.hex {
+
+    margin-top: 5px;
+
+    width: 100%;
+
+    background: #101014;
+
+    border:
+        1px solid
+        #303039;
+
+    color: #fff;
+
+    border-radius: 9px;
+
+    padding: 7px 8px;
+
+    font-size: 10px;
+
+    outline: none;
+}
+
+
+/* =====================================================
+   RANGE
+===================================================== */
+
+.range-block {
+
+    margin-bottom: 17px;
+}
+
+.range-block:last-child {
+
+    margin-bottom: 0;
+}
+
+.range-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 7px;
+}
+
+.range-name {
+
+    font-size: 12px;
+
+    color: #aaa;
+}
+
+.range-number {
+
+    font-size: 11px;
+
+    color: #777;
+}
+
+input[type="range"] {
+
+    width: 100%;
+
+    accent-color: #ff4fa3;
+}
+
+
+/* =====================================================
+   GRADIENT
+===================================================== */
+
+.gradient-list {
+
+    display: flex;
+
+    gap: 7px;
+
+    overflow-x: auto;
+}
+
+.gradient-list button {
+
+    flex: none;
+
+    padding:
+        10px
+        13px;
+
+    border:
+        1px solid
+        #33333b;
+
+    background: #101014;
+
+    color: #aaa;
+
+    border-radius: 11px;
+
+    font-size: 11px;
+}
+
+.gradient-list button.active {
+
+    border-color:
+        #ff4fa3;
+
+    color: #fff;
+}
+
+
+/* =====================================================
+   PRESETS
+===================================================== */
+
+.presets {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap: 8px;
+}
+
+.preset {
+
+    height: 54px;
+
+    border-radius: 14px;
+
+    color: #fff;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    text-shadow:
+        0 1px 4px #000;
+
+    border:
+        1px solid
+        #333;
+}
+
+
+/* =====================================================
+   WALLPAPER
+===================================================== */
+
+.upload {
+
+    display: block;
+
+    text-align: center;
+
+    padding: 16px;
+
+    border:
+        1px dashed
+        #44444d;
+
+    border-radius: 14px;
+
+    color: #aaa;
+
+    font-size: 12px;
+
+    background: #101014;
+}
+
+.upload input {
+
+    display: none;
+}
+
+
+/* =====================================================
+   ACTION ROW
+===================================================== */
+
+.actions {
+
+    display: flex;
+
+    gap: 8px;
+}
+
+.actions button {
+
+    flex: 1;
+
+    padding: 12px;
+
+    border:
+        1px solid
+        #33333a;
+
+    border-radius: 12px;
+
+    background: #101014;
+
+    color: #fff;
+
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   BOTTOM
+===================================================== */
+
+.bottom {
+
+    position: fixed;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    z-index: 100;
+
+    display: flex;
+
+    gap: 8px;
+
+    padding:
+        10px
+        13px;
+
+    padding-bottom:
+        calc(
+            10px +
+            env(safe-area-inset-bottom)
+        );
+
+    background:
+        rgba(9,9,13,.92);
+
+    border-top:
+        1px solid
+        #28282f;
+
+    backdrop-filter:
+        blur(18px);
+}
+
+.bottom button {
+
+    flex: 1;
+
+    height: 48px;
+
+    border-radius: 14px;
+
+    border:
+        1px solid
+        #33333b;
+
+    background: #17171c;
+
+    color: #fff;
+
+    font-weight: 700;
+}
+
+.bottom .primary {
+
+    background: #fff;
+
+    color: #000;
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+.toast {
+
+    position: fixed;
+
+    top: 15px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    padding:
+        11px
+        15px;
+
+    border-radius: 14px;
+
+    background: #fff;
+
+    color: #000;
+
+    font-size: 12px;
+
+    display: none;
+
+    z-index: 999;
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<div class="header">
+
+    <div class="logo">
+        Theme<span>Studio</span>
+    </div>
+
+    <button
+        class="save-button"
+        onclick="saveTheme()">
+
+        Сохранить
+
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     NAME
+===================================================== -->
+
+<input
+    id="themeName"
+    class="theme-name"
+    value="Pink Night"
+    placeholder="Название темы"
+>
+
+
+<!-- =====================================================
+     PLATFORM
+===================================================== -->
+
+<div class="platform">
+
+    <button
+        id="iosButton"
+        class="active"
+        onclick="setPlatform('ios')">
+
+        🍎 iOS
+
+    </button>
+
+    <button
+        id="androidButton"
+        onclick="setPlatform('android')">
+
+        🤖 Android
+
+    </button>
+
+    <button
+        id="universalButton"
+        onclick="setPlatform('universal')">
+
+        🌐 Universal
+
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     PREVIEW
+===================================================== -->
+
+<div class="preview">
+
+
+<!-- IOS -->
+
+<div
+    id="iosHeader"
+    class="ios-header">
+
+    <div class="ios-back">
+        ‹
+    </div>
+
+    <div
+        class="ios-avatar"
+        id="iosAvatar">
+
+        A
+
+    </div>
+
+    <div>
+
+        <div class="ios-user-name">
+            Alex
+        </div>
+
+        <div class="ios-status">
+            в сети
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ANDROID -->
+
+<div
+    id="androidHeader"
+    class="android-header"
+    style="display:none">
+
+    <div class="android-back">
+        ←
+    </div>
+
+    <div
+        class="android-avatar"
+        id="androidAvatar">
+
+        A
+
+    </div>
+
+    <div>
+
+        <div class="android-name">
+            Alex
+        </div>
+
+        <div class="android-status">
+            в сети
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- CHAT -->
+
+<div
+    id="chat"
+    class="chat">
+
+
+    <div
+        id="messageIn1"
+        class="message in">
+
+        Привет! Как тебе новая тема?
+
+        <div class="message-time">
+            21:42
+        </div>
+
+    </div>
+
+
+    <div
+        id="messageOut1"
+        class="message out">
+
+        Она шикарная 😍
+
+        <div class="message-time">
+            21:43 ✓✓
+        </div>
+
+    </div>
+
+
+    <div
+        id="messageIn2"
+        class="message in">
+
+        Особенно этот розовый.
+
+        <div class="message-time">
+            21:43
+        </div>
+
+    </div>
+
+
+    <div
+        id="messageOut2"
+        class="message out">
+
+        Я сам его выбрал 😎
+
+        <div class="message-time">
+            21:44 ✓✓
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<!-- COMPOSER -->
+
+<div
+    id="composer"
+    class="composer">
+
+    <div
+        id="fakeInput"
+        class="fake-input">
+
+        Сообщение
+
+    </div>
+
+    <div
+        id="send"
+        class="send">
+
+        ➤
+
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     SCREEN
+===================================================== -->
+
+<div class="screens">
+
+<button
+    class="active"
+    onclick="screen(this,'dialog')">
+
+    💬 Диалог
+
+</button>
+
+<button
+    onclick="screen(this,'chats')">
+
+    💬 Чаты
+
+</button>
+
+<button
+    onclick="screen(this,'profile')">
+
+    👤 Профиль
+
+</button>
+
+<button
+    onclick="screen(this,'settings')">
+
+    ⚙️ Настройки
+
+</button>
+
+</div>
+
+
+<!-- =====================================================
+     PRESETS
+===================================================== -->
+
+<div class="card">
+
+<div class="card-title">
+    Готовые стили
+</div>
+
+
+<div class="presets">
+
+
+<button
+    class="preset"
+    style="
+    background:
+    linear-gradient(
+        135deg,
+        #ff4fa3,
+        #7928ca
+    )"
+    onclick="preset('pink')">
+
+    Pink
+
+</button>
+
+
+<button
+    class="preset"
+    style="
+    background:
+    linear-gradient(
+        135deg,
+        #050505,
+        #444
+    )"
+    onclick="preset('black')">
+
+    Black
+
+</button>
+
+
+<button
+    class="preset"
+    style="
+    background:
+    linear-gradient(
+        135deg,
+        #7b0000,
+        #ff3030
+    )"
+    onclick="preset('blood')">
+
+    Blood
+
+</button>
+
+
+<button
+    class="preset"
+    style="
+    background:
+    linear-gradient(
+        135deg,
+        #162447,
+        #1f8cff
+    )"
+    onclick="preset('ocean')">
+
+    Ocean
+
+</button>
+
+
+<button
+    class="preset"
+    style="
+    background:
+    linear-gradient(
+        135deg,
+        #24103f,
+        #9b59ff
+    )"
+    onclick="preset('purple')">
+
+    Purple
+
+</button>
+
+
+<button
+    class="preset"
+    style="
+    background:
+    linear-gradient(
+        135deg,
+        #092e20,
+        #2ecc71
+    )"
+    onclick="preset('forest')">
+
+    Forest
+
+</button>
+
+
+<button
+    class="preset"
+    style="
+    background:
+    linear-gradient(
+        135deg,
+        #111,
+        #00e5ff
+    )"
+    onclick="preset('cyber')">
+
+    Cyber
+
+</button>
+
+
+<button
+    class="preset"
+    style="
+    background:
+    linear-gradient(
+        135deg,
+        #fff,
+        #ddd
+    )"
+    onclick="preset('minimal')">
+
+    Minimal
+
+</button>
+
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     COLORS
+===================================================== -->
+
+<div class="card">
+
+<div class="card-title">
+    Цвета
+</div>
+
+
+<div class="colors">
+
+
+<div class="color">
+
+<label>
+Фон чата
+</label>
+
+<div class="color-box">
+
+<input
+    id="bg"
+    type="color"
+    value="#111114">
+
+</div>
+
+<input
+    id="bgHex"
+    class="hex"
+    value="#111114">
+
+</div>
+
+
+<div class="color">
+
+<label>
+Шапка
+</label>
+
+<div class="color-box">
+
+<input
+    id="header"
+    type="color"
+    value="#18181d">
+
+</div>
+
+<input
+    id="headerHex"
+    class="hex"
+    value="#18181d">
+
+</div>
+
+
+<div class="color">
+
+<label>
+Акцент
+</label>
+
+<div class="color-box">
+
+<input
+    id="accent"
+    type="color"
+    value="#ff4fa3">
+
+</div>
+
+<input
+    id="accentHex"
+    class="hex"
+    value="#ff4fa3">
+
+</div>
+
+
+<div class="color">
+
+<label>
+Исходящие
+</label>
+
+<div class="color-box">
+
+<input
+    id="outgoing"
+    type="color"
+    value="#ff4fa3">
+
+</div>
+
+<input
+    id="outgoingHex"
+    class="hex"
+    value="#ff4fa3">
+
+</div>
+
+
+<div class="color">
+
+<label>
+Входящие
+</label>
+
+<div class="color-box">
+
+<input
+    id="incoming"
+    type="color"
+    value="#292930">
+
+</div>
+
+<input
+    id="incomingHex"
+    class="hex"
+    value="#292930">
+
+</div>
+
+
+<div class="color">
+
+<label>
+Основной текст
+</label>
+
+<div class="color-box">
+
+<input
+    id="text"
+    type="color"
+    value="#ffffff">
+
+</div>
+
+<input
+    id="textHex"
+    class="hex"
+    value="#ffffff">
+
+</div>
+
+
+<div class="color">
+
+<label>
+Ссылки
+</label>
+
+<div class="color-box">
+
+<input
+    id="link"
+    type="color"
+    value="#ff4fa3">
+
+</div>
+
+<input
+    id="linkHex"
+    class="hex"
+    value="#ff4fa3">
+
+</div>
+
+
+<div class="color">
+
+<label>
+Вторичный текст
+</label>
+
+<div class="color-box">
+
+<input
+    id="secondary"
+    type="color"
+    value="#9999a3">
+
+</div>
+
+<input
+    id="secondaryHex"
+    class="hex"
+    value="#9999a3">
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     EFFECTS
+===================================================== -->
+
+<div class="card">
+
+<div class="card-title">
+    Эффекты
+</div>
+
+
+<div class="range-block">
+
+<div class="range-top">
+
+<span class="range-name">
+Прозрачность сообщений
+</span>
+
+<span
+id="opacityValue"
+class="range-number">
+
+100%
+
+</span>
+
+</div>
+
+<input
+id="opacity"
+type="range"
+min="30"
+max="100"
+value="100">
+
+</div>
+
+
+<div class="range-block">
+
+<div class="range-top">
+
+<span class="range-name">
+Скругление сообщений
+</span>
+
+<span
+id="radiusValue"
+class="range-number">
+
+17 px
+
+</span>
+
+</div>
+
+<input
+id="radius"
+type="range"
+min="4"
+max="30"
+value="17">
+
+</div>
+
+
+<div class="range-block">
+
+<div class="range-top">
+
+<span class="range-name">
+Затемнение фона
+</span>
+
+<span
+id="darkValue"
+class="range-number">
+
+0%
+
+</span>
+
+</div>
+
+<input
+id="darkness"
+type="range"
+min="0"
+max="70"
+value="0">
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     GRADIENTS
+===================================================== -->
+
+<div class="card">
+
+<div class="card-title">
+    Градиент исходящих
+</div>
+
+
+<div class="gradient-list">
+
+<button
+    class="active"
+    onclick="setGradient('none',this)">
+
+    Нет
+
+</button>
+
+<button
+    onclick="setGradient('pink',this)">
+
+    🩷 Pink
+
+</button>
+
+<button
+    onclick="setGradient('purple',this)">
+
+    💜 Purple
+
+</button>
+
+<button
+    onclick="setGradient('blue',this)">
+
+    💙 Blue
+
+</button>
+
+<button
+    onclick="setGradient('sunset',this)">
+
+    🌅 Sunset
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     WALLPAPER
+===================================================== -->
+
+<div class="card">
+
+<div class="card-title">
+    Фон
+</div>
+
+
+<label class="upload">
+
+    🖼️ Выбрать изображение
+
+    <input
+        id="wallpaper"
+        type="file"
+        accept="image/*">
+
+</label>
+
+
+<br>
+
+
+<div class="actions">
+
+<button
+    onclick="removeWallpaper()">
+
+    Убрать
+
+</button>
+
+<button
+    onclick="gradientWallpaper()">
+
+    Случайный градиент
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     EXPORT
+===================================================== -->
+
+<div class="card">
+
+<div class="card-title">
+    Экспорт
+</div>
+
+
+<div class="actions">
+
+<button
+    onclick="exportTheme()">
+
+    📦 Экспорт настроек
+
+</button>
+
+<button
+    onclick="resetTheme()">
+
+    ↺ Сбросить
+
+</button>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- =====================================================
+     BOTTOM
+===================================================== -->
+
+<div class="bottom">
+
+<button
+    onclick="saveTheme()">
+
+    💾 Сохранить
+
+</button>
+
+
+<button
+    class="primary"
+    onclick="shareTheme()">
+
+    🔗 Поделиться
+
+</button>
+
+</div>
+
+
+<div
+    id="toast"
+    class="toast">
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   CURRENT PLATFORM
+===================================================== */
+
+let platform = "ios";
+
+
+/* =====================================================
+   HELPERS
+===================================================== */
+
+const $ = id =>
+    document.getElementById(id);
+
+
+/* =====================================================
+   PLATFORM
+===================================================== */
+
+function setPlatform(type){
+
+    platform = type;
+
+
+    $("iosButton")
+        .classList.remove("active");
+
+    $("androidButton")
+        .classList.remove("active");
+
+    $("universalButton")
+        .classList.remove("active");
+
+
+    if(type === "ios"){
+
+        $("iosButton")
+            .classList.add("active");
+
+        $("iosHeader").style.display =
+            "flex";
+
+        $("androidHeader").style.display =
+            "none";
+
+    }
+
+
+    if(type === "android"){
+
+        $("androidButton")
+            .classList.add("active");
+
+        $("iosHeader").style.display =
+            "none";
+
+        $("androidHeader").style.display =
+            "flex";
+
+    }
+
+
+    if(type === "universal"){
+
+        $("universalButton")
+            .classList.add("active");
+
+        $("iosHeader").style.display =
+            "flex";
+
+        $("androidHeader").style.display =
+            "none";
+
+    }
+
+}
+
+
+/* =====================================================
+   APPLY THEME
+===================================================== */
+
+function applyTheme(){
+
+    const bg =
+        $("bg").value;
+
+    const header =
+        $("header").value;
+
+    const accent =
+        $("accent").value;
+
+    const outgoing =
+        $("outgoing").value;
+
+    const incoming =
+        $("incoming").value;
+
+    const text =
+        $("text").value;
+
+    const opacity =
+        Number(
+            $("opacity").value
+        ) / 100;
+
+    const radius =
+        $("radius").value;
+
+    const darkness =
+        Number(
+            $("darkness").value
+        ) / 100;
+
+
+    /* CHAT */
+
+    $("chat").style.backgroundColor =
+        bg;
+
+
+    $("chat").style.boxShadow =
+        `inset 0 0 0 9999px rgba(0,0,0,${darkness})`;
+
+
+    /* HEADERS */
+
+    $("iosHeader")
+        .style.backgroundColor =
+        header;
+
+    $("androidHeader")
+        .style.backgroundColor =
+        header;
+
+    $("composer")
+        .style.backgroundColor =
+        header;
+
+
+    /* AVATARS */
+
+    $("iosAvatar")
+        .style.backgroundColor =
+        accent;
+
+    $("androidAvatar")
+        .style.backgroundColor =
+        accent;
+
+
+    /* SEND */
+
+    $("send")
+        .style.backgroundColor =
+        accent;
+
+
+    /* MESSAGES */
+
+    $("messageIn1")
+        .style.backgroundColor =
+        incoming;
+
+    $("messageIn2")
+        .style.backgroundColor =
+        incoming;
+
+
+    $("messageOut1")
+        .style.background =
+        outgoing;
+
+    $("messageOut2")
+        .style.background =
+        outgoing;
+
+
+    document
+        .querySelectorAll(".message")
+        .forEach(message => {
+
+            message.style.opacity =
+                opacity;
+
+            message.style.borderRadius =
+                radius + "px";
+
+        });
+
+
+    $("fakeInput")
+        .style.backgroundColor =
+        bg;
+
+
+    $("fakeInput")
+        .style.color =
+        $("secondary").value;
+
+
+    $("opacityValue")
+        .textContent =
+        $("opacity").value + "%";
+
+
+    $("radiusValue")
+        .textContent =
+        radius + " px";
+
+
+    $("darkValue")
+        .textContent =
+        $("darkness").value + "%";
+
+}
+
+
+/* =====================================================
+   COLOR PICKERS + HEX
+===================================================== */
+
+const colorPairs = [
+
+    ["bg","bgHex"],
+    ["header","headerHex"],
+    ["accent","accentHex"],
+    ["outgoing","outgoingHex"],
+    ["incoming","incomingHex"],
+    ["text","textHex"],
+    ["link","linkHex"],
+    ["secondary","secondaryHex"]
+
+];
+
+
+colorPairs.forEach(
+    ([color,hex]) => {
+
+
+        $(color)
+            .addEventListener(
+                "input",
+                () => {
+
+                    $(hex).value =
+                        $(color).value
+                        .toUpperCase();
+
+                    applyTheme();
+
+                }
+            );
+
+
+        $(hex)
+            .addEventListener(
+                "change",
+                () => {
+
+                    let value =
+                        $(hex).value
+                        .trim();
+
+
+                    if(
+                        !/^#[0-9A-Fa-f]{6}$/
+                        .test(value)
+                    ){
+
+                        $(hex).value =
+                            $(color).value;
+
+                        return;
+
+                    }
+
+
+                    $(color).value =
+                        value;
+
+                    applyTheme();
+
+                }
+            );
+
+    }
+);
+
+
+/* =====================================================
+   RANGES
+===================================================== */
+
+[
+    "opacity",
+    "radius",
+    "darkness"
+
+].forEach(id => {
+
+    $(id)
+        .addEventListener(
+            "input",
+            applyTheme
+        );
+
+});
+
+
+/* =====================================================
+   GRADIENT
+===================================================== */
+
+function setGradient(
+    type,
+    button
+){
+
+    document
+        .querySelectorAll(
+            ".gradient-list button"
+        )
+        .forEach(
+            b =>
+            b.classList.remove(
+                "active"
+            )
+        );
+
+
+    button.classList.add(
+        "active"
+    );
+
+
+    let value;
+
+
+    switch(type){
+
+        case "pink":
+
+            value =
+            "linear-gradient(135deg,#ff4fa3,#ff7abe)";
+
+            break;
+
+
+        case "purple":
+
+            value =
+            "linear-gradient(135deg,#7c3aed,#c084fc)";
+
+            break;
+
+
+        case "blue":
+
+            value =
+            "linear-gradient(135deg,#2563eb,#38bdf8)";
+
+            break;
+
+
+        case "sunset":
+
+            value =
+            "linear-gradient(135deg,#ff512f,#dd2476)";
+
+            break;
+
+
+        default:
+
+            value =
+                $("outgoing").value;
+
+    }
+
+
+    $("messageOut1")
+        .style.background =
+        value;
+
+    $("messageOut2")
+        .style.background =
+        value;
+
+}
+
+
+/* =====================================================
+   PRESETS
+===================================================== */
+
+function preset(type){
+
+    const themes = {
+
+        pink:{
+            bg:"#111114",
+            header:"#18181d",
+            accent:"#ff4fa3",
+            outgoing:"#ff4fa3",
+            incoming:"#292930",
+            text:"#ffffff"
+        },
+
+
+        black:{
+            bg:"#050505",
+            header:"#101010",
+            accent:"#777777",
+            outgoing:"#292929",
+            incoming:"#171717",
+            text:"#ffffff"
+        },
+
+
+        blood:{
+            bg:"#160607",
+            header:"#22090b",
+            accent:"#ff3030",
+            outgoing:"#9e1118",
+            incoming:"#351014",
+            text:"#ffffff"
+        },
+
+
+        ocean:{
+            bg:"#07131f",
+            header:"#0b1e30",
+            accent:"#2498ff",
+            outgoing:"#1677c8",
+            incoming:"#132d43",
+            text:"#ffffff"
+        },
+
+
+        purple:{
+            bg:"#10091b",
+            header:"#1a0e2b",
+            accent:"#a855f7",
+            outgoing:"#7936bd",
+            incoming:"#28183c",
+            text:"#ffffff"
+        },
+
+
+        forest:{
+            bg:"#07120c",
+            header:"#0c1d12",
+            accent:"#35c978",
+            outgoing:"#18834a",
+            incoming:"#14291d",
+            text:"#ffffff"
+        },
+
+
+        cyber:{
+            bg:"#05090c",
+            header:"#081218",
+            accent:"#00e5ff",
+            outgoing:"#007f91",
+            incoming:"#102229",
+            text:"#ffffff"
+        },
+
+
+        minimal:{
+            bg:"#eeeeF2",
+            header:"#ffffff",
+            accent:"#777777",
+            outgoing:"#d8d8df",
+            incoming:"#ffffff",
+            text:"#111111"
+        }
+
+    };
+
+
+    const theme =
+        themes[type];
+
+
+    Object
+        .keys(theme)
+        .forEach(key => {
+
+            $(key).value =
+                theme[key];
+
+            const hex =
+                $(key + "Hex");
+
+            if(hex)
+                hex.value =
+                    theme[key]
+                    .toUpperCase();
+
+        });
+
+
+    applyTheme();
+
+
+    toast(
+        "Стиль применён ✓"
+    );
+
+}
+
+
+/* =====================================================
+   WALLPAPER
+===================================================== */
+
+$("wallpaper")
+.addEventListener(
+    "change",
+    event => {
+
+        const file =
+            event.target.files[0];
+
+        if(!file)
+            return;
+
+
+        const url =
+            URL.createObjectURL(
+                file
+            );
+
+
+        $("chat")
+            .style.backgroundImage =
+            `url("${url}")`;
+
+    }
+);
+
+
+function removeWallpaper(){
+
+    $("chat")
+        .style.backgroundImage =
+        "none";
+
+    $("wallpaper").value =
+        "";
+
+}
+
+
+function gradientWallpaper(){
+
+    const gradients = [
+
+        "linear-gradient(135deg,#ff4fa3,#7928ca)",
+
+        "linear-gradient(135deg,#0f2027,#203a43,#2c5364)",
+
+        "linear-gradient(135deg,#200122,#6f0000)",
+
+        "linear-gradient(135deg,#141e30,#243b55)",
+
+        "linear-gradient(135deg,#000428,#004e92)",
+
+        "linear-gradient(135deg,#42275a,#734b6d)"
+
+    ];
+
+
+    const gradient =
+        gradients[
+            Math.floor(
+                Math.random()
+                *
+                gradients.length
+            )
+        ];
+
+
+    $("chat")
+        .style.backgroundImage =
+        gradient;
+
+}
+
+
+/* =====================================================
+   SCREENS
+===================================================== */
+
+function screen(
+    button,
+    type
+){
+
+    document
+        .querySelectorAll(
+            ".screens button"
+        )
+        .forEach(
+            b =>
+            b.classList.remove(
+                "active"
+            )
+        );
+
+
+    button.classList.add(
+        "active"
+    );
+
+
+    /*
+       Здесь позже можно сделать
+       полноценные отдельные
+       экраны Telegram:
+       Чаты / Диалог / Профиль /
+       Настройки.
+    */
+
+}
+
+
+/* =====================================================
+   GET THEME
+===================================================== */
+
+function getTheme(){
+
+    return {
+
+        name:
+            $("themeName").value,
+
+        platform:
+            platform,
+
+        colors:{
+
+            background:
+                $("bg").value,
+
+            header:
+                $("header").value,
+
+            accent:
+                $("accent").value,
+
+            outgoing:
+                $("outgoing").value,
+
+            incoming:
+                $("incoming").value,
+
+            text:
+                $("text").value,
+
+            link:
+                $("link").value,
+
+            secondary:
+                $("secondary").value
+
+        },
+
+        effects:{
+
+            opacity:
+                $("opacity").value,
+
+            radius:
+                $("radius").value,
+
+            darkness:
+                $("darkness").value
+
+        }
+
+    };
+
+}
+
+
+/* =====================================================
+   SAVE
+===================================================== */
+
+function saveTheme(){
+
+    localStorage.setItem(
+        "themeStudio",
+        JSON.stringify(
+            getTheme()
+        )
+    );
+
+
+    toast(
+        "Тема сохранена ✓"
+    );
+
+}
+
+
+/* =====================================================
+   EXPORT
+===================================================== */
+
+function exportTheme(){
+
+    const data =
+        JSON.stringify(
+            getTheme(),
+            null,
+            2
+        );
+
+
+    const blob =
+        new Blob(
+            [data],
+            {
+                type:
+                    "application/json"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+
+    link.href =
+        url;
+
+    link.download =
+        "telegram-theme.json";
+
+
+    link.click();
+
+
+    URL.revokeObjectURL(
+        url
+    );
+
+
+    toast(
+        "Настройки экспортированы ✓"
+    );
+
+}
+
+
+/* =====================================================
+   SHARE
+===================================================== */
+
+async function shareTheme(){
+
+    const name =
+        $("themeName").value
+        ||
+        "My Telegram Theme";
+
+
+    const slug =
+        name
+        .toLowerCase()
+        .replace(
+            /[^a-z0-9]+/g,
+            "-"
+        )
+        .replace(
+            /^-|-$/g,
+            ""
+        )
+        ||
+        "my-theme";
+
+
+    const url =
+        location.href
+        .split("#")[0]
+        +
+        "#theme="
+        +
+        encodeURIComponent(
+            slug
+        );
+
+
+    if(
+        navigator.share
+    ){
+
+        try{
+
+            await navigator.share({
+
+                title:name,
+
+                text:
+                    "Моя тема Telegram",
+
+                url:url
+
+            });
+
+            return;
+
+        }
+
+        catch(e){}
+
+    }
+
+
+    try{
+
+        await navigator
+            .clipboard
+            .writeText(url);
+
+
+        toast(
+            "Ссылка скопирована ✓"
+        );
+
+    }
+
+    catch(e){
+
+        prompt(
+            "Скопируй ссылку:",
+            url
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+function resetTheme(){
+
+    localStorage.removeItem(
+        "themeStudio"
+    );
+
+    location.reload();
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function toast(text){
+
+    const element =
+        $("toast");
+
+
+    element.textContent =
+        text;
+
+
+    element.style.display =
+        "block";
+
+
+    setTimeout(
+        () => {
+
+            element.style.display =
+                "none";
+
+        },
+        1800
+    );
+
+}
+
+
+/* =====================================================
+   LOAD SAVED
+===================================================== */
+
+function loadSaved(){
+
+    const saved =
+        localStorage.getItem(
+            "themeStudio"
+        );
+
+
+    if(!saved)
+        return;
+
+
+    try{
+
+        const theme =
+            JSON.parse(saved);
+
+
+        if(theme.name)
+            $("themeName").value =
+                theme.name;
+
+
+        if(theme.platform)
+            setPlatform(
+                theme.platform
+            );
+
+
+        if(theme.colors){
+
+            Object
+                .keys(theme.colors)
+                .forEach(key => {
+
+                    if($(key))
+                        $(key).value =
+                            theme.colors[key];
+
+
+                    if(
+                        $(key + "Hex")
+                    )
+                        $(key + "Hex").value =
+                            theme.colors[key]
+                            .toUpperCase();
+
+                });
+
+        }
+
+
+        if(theme.effects){
+
+            if(theme.effects.opacity)
+                $("opacity").value =
+                    theme.effects.opacity;
+
+            if(theme.effects.radius)
+                $("radius").value =
+                    theme.effects.radius;
+
+            if(theme.effects.darkness)
+                $("darkness").value =
+                    theme.effects.darkness;
+
+        }
+
+
+    }
+
+    catch(e){}
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+loadSaved();
+
+applyTheme();
+
+</script>
+
+</body>
+</html>
