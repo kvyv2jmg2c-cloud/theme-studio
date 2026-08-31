@@ -2,535 +2,560 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
 <title>Theme Studio</title>
 
 <style>
-:root {
-    --bg: #f5f5f7;
-    --surface: #ffffff;
-    --surface-2: #f0f0f3;
-    --border: #e3e3e8;
-    --text: #17171a;
-    --muted: #85858d;
-    --accent: #ff4fa3;
-    --shadow: 0 8px 30px rgba(0,0,0,.06);
+:root{
+    --bg:#0b0c0f;
+    --panel:#111318;
+    --panel2:#171920;
+    --input:#1b1e25;
+    --line:#272b35;
+    --text:#f4f5f7;
+    --muted:#858b99;
+    --accent:#7180ff;
+    --accent2:#8794ff;
+    --danger:#ff5964;
+    --shadow:0 20px 60px rgba(0,0,0,.28);
 }
 
-html[data-theme="dark"] {
-    --bg: #0c0c0f;
-    --surface: #151518;
-    --surface-2: #1d1d21;
-    --border: #29292f;
-    --text: #f7f7f8;
-    --muted: #92929a;
-    --shadow: 0 12px 35px rgba(0,0,0,.25);
+html.light{
+    --bg:#f5f6f8;
+    --panel:#ffffff;
+    --panel2:#f0f1f4;
+    --input:#f7f7f9;
+    --line:#dedfe5;
+    --text:#15171c;
+    --muted:#747985;
+    --accent:#5d6df5;
+    --accent2:#7180ff;
+    --shadow:0 16px 45px rgba(20,25,40,.08);
 }
 
-* {
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
 }
 
-html,
-body {
-    margin: 0;
-    padding: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "SF Pro Display",
-        "SF Pro Text",
-        "Segoe UI",
-        sans-serif;
+body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+    transition:.25s;
 }
 
-body {
-    padding-bottom: 96px;
-    transition:
-        background .2s ease,
-        color .2s ease;
+button,input{
+    font:inherit;
 }
 
-button,
-input {
-    font-family: inherit;
+button{
+    cursor:pointer;
 }
 
-button {
-    border: 0;
-}
-
-.app {
-    width: 100%;
-    max-width: 680px;
-    margin: auto;
-    padding: 18px 15px 30px;
+.app{
+    width:min(100%,760px);
+    margin:auto;
+    padding:18px 16px 110px;
 }
 
 /* HEADER */
 
-.topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 18px;
+.header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:24px;
 }
 
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.logo{
+    display:flex;
+    align-items:center;
+    gap:11px;
 }
 
-.brand-icon {
-    width: 38px;
-    height: 38px;
-    border-radius: 12px;
-    background: var(--text);
-    color: var(--bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 16px;
+.logo-mark{
+    width:38px;
+    height:38px;
+    border-radius:11px;
+    display:grid;
+    place-items:center;
+    background:var(--accent);
+    color:white;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:-.5px;
 }
 
-.brand-name {
-    font-size: 19px;
-    font-weight: 750;
-    letter-spacing: -.4px;
+.logo-title{
+    font-size:16px;
+    font-weight:750;
+    letter-spacing:-.35px;
 }
 
-.brand-name span {
-    color: var(--accent);
+.logo-sub{
+    margin-top:2px;
+    color:var(--muted);
+    font-size:10px;
 }
 
-.theme-toggle {
-    width: 42px;
-    height: 42px;
-    border-radius: 13px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    color: var(--text);
-    font-size: 17px;
-    box-shadow: var(--shadow);
+.header-actions{
+    display:flex;
+    gap:7px;
+}
+
+.icon-button{
+    width:40px;
+    height:40px;
+    border-radius:12px;
+    border:1px solid var(--line);
+    background:var(--panel);
+    color:var(--text);
+}
+
+/* TITLE */
+
+.intro{
+    margin-bottom:20px;
+}
+
+.intro h1{
+    margin:0;
+    font-size:28px;
+    line-height:1.1;
+    letter-spacing:-1px;
+}
+
+.intro p{
+    margin:7px 0 0;
+    color:var(--muted);
+    font-size:12px;
 }
 
 /* NAME */
 
-.name-wrap {
-    margin-bottom: 13px;
+.field{
+    margin-bottom:13px;
 }
 
-.name-input {
-    width: 100%;
-    height: 52px;
-    padding: 0 16px;
-    border-radius: 15px;
-    border: 1px solid var(--border);
-    background: var(--surface);
-    color: var(--text);
-    outline: none;
-    font-size: 15px;
-    box-shadow: var(--shadow);
+.field-label{
+    display:block;
+    margin:0 0 7px 2px;
+    color:var(--muted);
+    font-size:10px;
+    font-weight:650;
+    text-transform:uppercase;
+    letter-spacing:.6px;
 }
 
-.name-input:focus {
-    border-color: var(--accent);
+.text-input{
+    width:100%;
+    height:48px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    outline:none;
+    padding:0 14px;
+    background:var(--panel);
+    color:var(--text);
+    font-size:13px;
+    transition:.2s;
+}
+
+.text-input:focus{
+    border-color:var(--accent);
 }
 
 /* PLATFORM */
 
-.platform {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4px;
-    padding: 4px;
-    margin-bottom: 14px;
-    border-radius: 15px;
-    background: var(--surface-2);
-    border: 1px solid var(--border);
+.segment{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    padding:3px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:var(--panel2);
+    margin-bottom:15px;
 }
 
-.platform button {
-    height: 42px;
-    border-radius: 11px;
-    background: transparent;
-    color: var(--muted);
-    font-size: 13px;
-    font-weight: 700;
+.segment button{
+    height:39px;
+    border:0;
+    border-radius:9px;
+    background:transparent;
+    color:var(--muted);
+    font-size:11px;
+    font-weight:700;
 }
 
-.platform button.active {
-    background: var(--surface);
-    color: var(--text);
-    box-shadow: 0 3px 10px rgba(0,0,0,.08);
+.segment button.active{
+    background:var(--panel);
+    color:var(--text);
+    box-shadow:0 2px 8px rgba(0,0,0,.15);
 }
 
 /* PREVIEW */
 
-.preview-card {
-    overflow: hidden;
-    border-radius: 22px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow);
-    margin-bottom: 14px;
+.preview{
+    overflow:hidden;
+    border:1px solid var(--line);
+    border-radius:18px;
+    background:#101115;
+    box-shadow:var(--shadow);
+    margin-bottom:14px;
 }
 
-.preview-top {
-    height: 58px;
-    display: flex;
-    align-items: center;
-    padding: 0 14px;
-    background: #18181d;
-    color: white;
+.telegram-header{
+    height:57px;
+    display:flex;
+    align-items:center;
+    padding:0 14px;
+    gap:10px;
 }
 
-.back {
-    font-size: 28px;
-    margin-right: 8px;
-    line-height: 1;
+.tg-back{
+    color:#fff;
+    font-size:25px;
+    line-height:1;
 }
 
-.avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    margin-right: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    font-weight: 800;
-    background: var(--accent);
-    color: white;
+.tg-avatar{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    color:#fff;
+    background:var(--accent);
+    font-size:11px;
+    font-weight:800;
 }
 
-.preview-name {
-    font-size: 13px;
-    font-weight: 700;
+.tg-user{
+    color:#fff;
+    font-size:12px;
+    font-weight:700;
 }
 
-.preview-status {
-    font-size: 10px;
-    opacity: .55;
-    margin-top: 2px;
+.tg-status{
+    color:#888c98;
+    font-size:9px;
+    margin-top:2px;
 }
 
-.chat {
-    min-height: 380px;
-    padding: 14px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    gap: 8px;
-    background: #111114;
-    background-position: center;
-    background-size: cover;
+.chat{
+    height:370px;
+    padding:13px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    gap:8px;
+    background:#0d0e12;
+    background-position:center;
+    background-size:cover;
 }
 
-.message {
-    max-width: 78%;
-    padding: 9px 12px;
-    color: white;
-    font-size: 13px;
-    line-height: 1.35;
+.msg{
+    max-width:75%;
+    padding:9px 11px;
+    color:#fff;
+    font-size:12px;
+    line-height:1.35;
 }
 
-.message.in {
-    align-self: flex-start;
-    background: #292930;
-    border-radius: 16px 16px 16px 5px;
+.msg.in{
+    align-self:flex-start;
+    background:#252831;
+    border-radius:15px 15px 15px 4px;
 }
 
-.message.out {
-    align-self: flex-end;
-    background: var(--accent);
-    border-radius: 16px 16px 5px 16px;
+.msg.out{
+    align-self:flex-end;
+    background:var(--accent);
+    border-radius:15px 15px 4px 15px;
 }
 
-.time {
-    margin-top: 3px;
-    text-align: right;
-    font-size: 9px;
-    opacity: .55;
+.msg-time{
+    margin-top:3px;
+    opacity:.5;
+    text-align:right;
+    font-size:8px;
 }
 
-.composer {
-    height: 57px;
-    padding: 8px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: #18181d;
+.composer{
+    height:56px;
+    padding:8px;
+    display:flex;
+    gap:8px;
+    align-items:center;
+    background:#15171c;
 }
 
-.fake-input {
-    flex: 1;
-    height: 40px;
-    padding: 11px 14px;
-    border-radius: 20px;
-    background: #111114;
-    color: #888891;
-    font-size: 12px;
+.composer-input{
+    flex:1;
+    height:39px;
+    padding:0 13px;
+    display:flex;
+    align-items:center;
+    border-radius:20px;
+    background:#0e0f13;
+    color:#707580;
+    font-size:11px;
 }
 
-.send {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--accent);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 15px;
+.send{
+    width:39px;
+    height:39px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    color:white;
+    background:var(--accent);
+    font-size:13px;
 }
 
-/* CARDS */
+/* SECTION */
 
-.card {
-    padding: 16px;
-    margin-bottom: 11px;
-    border-radius: 18px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow);
+.section{
+    margin-bottom:13px;
+    padding:15px;
+    border:1px solid var(--line);
+    border-radius:16px;
+    background:var(--panel);
 }
 
-.card-title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 14px;
+.section-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:13px;
 }
 
-.card-title strong {
-    font-size: 14px;
+.section-title{
+    font-size:12px;
+    font-weight:750;
 }
 
-.card-title span {
-    color: var(--muted);
-    font-size: 11px;
-}
-
-/* COLORS */
-
-.colors {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 11px;
-}
-
-.color-item label {
-    display: block;
-    margin-bottom: 6px;
-    color: var(--muted);
-    font-size: 10px;
-}
-
-.color-row {
-    display: flex;
-    gap: 6px;
-}
-
-.color-picker {
-    width: 47px;
-    height: 39px;
-    padding: 3px;
-    flex-shrink: 0;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    background: var(--surface-2);
-}
-
-.hex {
-    min-width: 0;
-    width: 100%;
-    height: 39px;
-    padding: 0 9px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    background: var(--surface-2);
-    color: var(--text);
-    outline: none;
-    font-size: 10px;
-}
-
-.hex:focus {
-    border-color: var(--accent);
+.section-note{
+    color:var(--muted);
+    font-size:9px;
 }
 
 /* PRESETS */
 
-.presets {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
+.presets{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:7px;
 }
 
-.preset {
-    height: 52px;
-    border-radius: 13px;
-    color: white;
-    font-size: 10px;
-    font-weight: 750;
+.preset{
+    height:47px;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:11px;
+    color:white;
+    font-size:9px;
+    font-weight:750;
+    position:relative;
+    overflow:hidden;
 }
 
-/* IMAGE */
-
-.upload {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    height: 50px;
-    border-radius: 13px;
-    border: 1px dashed var(--border);
-    background: var(--surface-2);
-    color: var(--muted);
-    font-size: 12px;
-    font-weight: 650;
+.preset::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(135deg,rgba(255,255,255,.15),transparent 50%);
 }
 
-.upload input {
-    display: none;
+/* COLORS */
+
+.colors{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
 }
 
-.small-actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-top: 9px;
+.color-item label{
+    display:block;
+    margin-bottom:6px;
+    color:var(--muted);
+    font-size:9px;
 }
 
-.small-actions button {
-    height: 43px;
-    border-radius: 12px;
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    color: var(--text);
-    font-size: 11px;
-    font-weight: 700;
+.color-line{
+    display:flex;
+    gap:6px;
+}
+
+.color-picker{
+    width:42px;
+    height:38px;
+    padding:2px;
+    border:1px solid var(--line);
+    border-radius:9px;
+    background:var(--input);
+}
+
+.hex{
+    width:100%;
+    min-width:0;
+    height:38px;
+    padding:0 8px;
+    border:1px solid var(--line);
+    border-radius:9px;
+    background:var(--input);
+    color:var(--text);
+    outline:none;
+    font-size:9px;
+}
+
+.hex:focus{
+    border-color:var(--accent);
+}
+
+/* UPLOAD */
+
+.upload{
+    height:48px;
+    border:1px dashed var(--line);
+    border-radius:11px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--muted);
+    background:var(--input);
+    font-size:10px;
+    font-weight:650;
+}
+
+.upload input{
+    display:none;
+}
+
+.secondary-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+    margin-top:7px;
+}
+
+.secondary-actions button{
+    height:39px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--panel2);
+    color:var(--text);
+    font-size:10px;
+    font-weight:650;
 }
 
 /* ACTIONS */
 
-.actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
+.actions{
+    display:grid;
+    grid-template-columns:1fr 1.5fr;
+    gap:8px;
 }
 
-.action-button {
-    height: 46px;
-    border-radius: 13px;
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    color: var(--text);
-    font-size: 12px;
-    font-weight: 700;
+.action{
+    height:45px;
+    border-radius:11px;
+    border:1px solid var(--line);
+    background:var(--panel2);
+    color:var(--text);
+    font-size:10px;
+    font-weight:700;
 }
 
-.action-button.primary {
-    background: var(--accent);
-    color: white;
-    border-color: transparent;
+.action.primary{
+    background:var(--accent);
+    border-color:var(--accent);
+    color:#fff;
 }
 
 /* BOTTOM */
 
-.bottom {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 100;
-    display: flex;
-    gap: 8px;
-    padding: 9px 13px;
-    padding-bottom: calc(9px + env(safe-area-inset-bottom));
-    background: color-mix(
-        in srgb,
-        var(--bg) 92%,
-        transparent
-    );
-    backdrop-filter: blur(18px);
-    border-top: 1px solid var(--border);
+.bottom{
+    position:fixed;
+    z-index:20;
+    left:0;
+    right:0;
+    bottom:0;
+    display:flex;
+    gap:8px;
+    padding:9px 13px calc(9px + env(safe-area-inset-bottom));
+    border-top:1px solid var(--line);
+    background:rgba(11,12,15,.88);
+    backdrop-filter:blur(20px);
 }
 
-.bottom button {
-    height: 48px;
-    border-radius: 14px;
-    font-size: 12px;
-    font-weight: 750;
+.light .bottom{
+    background:rgba(245,246,248,.88);
 }
 
-.bottom-save {
-    width: 38%;
-    background: var(--surface);
-    color: var(--text);
-    border: 1px solid var(--border);
+.bottom button{
+    height:47px;
+    border-radius:12px;
+    font-size:10px;
+    font-weight:750;
 }
 
-.bottom-create {
-    width: 62%;
-    background: var(--accent);
-    color: white;
+.save{
+    width:35%;
+    border:1px solid var(--line);
+    background:var(--panel);
+    color:var(--text);
+}
+
+.create{
+    width:65%;
+    border:0;
+    background:var(--accent);
+    color:#fff;
 }
 
 /* TOAST */
 
-.toast {
-    position: fixed;
-    z-index: 999;
-    left: 50%;
-    top: 16px;
-    transform: translateX(-50%) translateY(-10px);
-    padding: 11px 15px;
-    border-radius: 13px;
-    background: var(--text);
-    color: var(--bg);
-    font-size: 11px;
-    font-weight: 650;
-    opacity: 0;
-    pointer-events: none;
-    transition: .2s ease;
+.toast{
+    position:fixed;
+    z-index:100;
+    left:50%;
+    top:15px;
+    transform:translate(-50%,-12px);
+    padding:10px 14px;
+    border-radius:10px;
+    background:var(--text);
+    color:var(--bg);
+    font-size:10px;
+    font-weight:650;
+    opacity:0;
+    pointer-events:none;
+    transition:.2s;
 }
 
-.toast.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
+.toast.show{
+    opacity:1;
+    transform:translate(-50%,0);
 }
 
-/* MOBILE */
+@media(max-width:430px){
 
-@media (max-width: 430px) {
-
-    .app {
-        padding-left: 12px;
-        padding-right: 12px;
+    .app{
+        padding-left:12px;
+        padding-right:12px;
     }
 
-    .chat {
-        min-height: 340px;
+    .intro h1{
+        font-size:25px;
     }
 
-    .colors {
-        gap: 9px;
+    .chat{
+        height:345px;
     }
 
-    .presets {
-        gap: 6px;
-    }
-
-    .preset {
-        height: 48px;
+    .presets{
+        grid-template-columns:repeat(4,1fr);
     }
 }
 </style>
@@ -540,612 +565,602 @@ button {
 
 <div class="app">
 
-    <!-- HEADER -->
+<header class="header">
 
-    <header class="topbar">
+    <div class="logo">
 
-        <div class="brand">
-
-            <div class="brand-icon">
-                TS
-            </div>
-
-            <div class="brand-name">
-                Theme<span>Studio</span>
-            </div>
-
+        <div class="logo-mark">
+            TS
         </div>
 
-        <button
-            class="theme-toggle"
-            id="themeToggle"
-            onclick="toggleAppTheme()"
-        >
-            🌙
-        </button>
+        <div>
+            <div class="logo-title">
+                Theme Studio
+            </div>
 
-    </header>
-
-
-    <!-- NAME -->
-
-    <div class="name-wrap">
-
-        <input
-            id="themeName"
-            class="name-input"
-            value="Pink Night"
-            placeholder="Название темы"
-        >
+            <div class="logo-sub">
+                Telegram theme editor
+            </div>
+        </div>
 
     </div>
 
-
-    <!-- PLATFORM -->
-
-    <div class="platform">
+    <div class="header-actions">
 
         <button
-            id="androidBtn"
-            onclick="setPlatform('android')"
+            class="icon-button"
+            onclick="toggleTheme()"
+            id="themeButton"
         >
-            🤖 Android
-        </button>
-
-        <button
-            id="iosBtn"
-            class="active"
-            onclick="setPlatform('ios')"
-        >
-            🍎 iPhone
+            ☾
         </button>
 
     </div>
 
+</header>
 
-    <!-- PREVIEW -->
 
-    <section class="preview-card">
+<div class="intro">
 
-        <div
-            class="preview-top"
-            id="previewHeader"
-        >
+    <h1>
+        Создай свою тему
+    </h1>
 
-            <div class="back">‹</div>
-
-            <div
-                class="avatar"
-                id="avatar"
-            >
-                A
-            </div>
-
-            <div>
-
-                <div class="preview-name">
-                    Alex
-                </div>
-
-                <div class="preview-status">
-                    в сети
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="chat"
-            id="chat"
-        >
-
-            <div
-                class="message in"
-                id="incomingMessage"
-            >
-                Привет! Как тебе новая тема?
-
-                <div class="time">
-                    21:42
-                </div>
-
-            </div>
-
-
-            <div
-                class="message out"
-                id="outgoingMessage"
-            >
-                Она шикарная 😍
-
-                <div class="time">
-                    21:43 ✓✓
-                </div>
-
-            </div>
-
-
-            <div class="message in">
-
-                Особенно этот розовый.
-
-                <div class="time">
-                    21:43
-                </div>
-
-            </div>
-
-
-            <div class="message out">
-
-                Я сам его выбрал 😎
-
-                <div class="time">
-                    21:44 ✓✓
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="composer"
-            id="composer"
-        >
-
-            <div class="fake-input">
-                Сообщение
-            </div>
-
-            <div
-                class="send"
-                id="send"
-            >
-                ➤
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- PRESETS -->
-
-    <section class="card">
-
-        <div class="card-title">
-
-            <strong>
-                Готовые стили
-            </strong>
-
-            <span>
-                Быстрый выбор
-            </span>
-
-        </div>
-
-
-        <div class="presets">
-
-            <button
-                class="preset"
-                style="background:linear-gradient(135deg,#ff4fa3,#7928ca)"
-                onclick="preset('pink')"
-            >
-                Pink
-            </button>
-
-            <button
-                class="preset"
-                style="background:linear-gradient(135deg,#050505,#444)"
-                onclick="preset('black')"
-            >
-                Black
-            </button>
-
-            <button
-                class="preset"
-                style="background:linear-gradient(135deg,#7b0000,#ff3030)"
-                onclick="preset('blood')"
-            >
-                Blood
-            </button>
-
-            <button
-                class="preset"
-                style="background:linear-gradient(135deg,#162447,#1f8cff)"
-                onclick="preset('ocean')"
-            >
-                Ocean
-            </button>
-
-            <button
-                class="preset"
-                style="background:linear-gradient(135deg,#24103f,#9b59ff)"
-                onclick="preset('purple')"
-            >
-                Purple
-            </button>
-
-            <button
-                class="preset"
-                style="background:linear-gradient(135deg,#092e20,#2ecc71)"
-                onclick="preset('forest')"
-            >
-                Forest
-            </button>
-
-            <button
-                class="preset"
-                style="background:linear-gradient(135deg,#111,#00e5ff)"
-                onclick="preset('cyber')"
-            >
-                Cyber
-            </button>
-
-            <button
-                class="preset"
-                style="background:linear-gradient(135deg,#fff,#ddd);color:#111"
-                onclick="preset('minimal')"
-            >
-                Minimal
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- COLORS -->
-
-    <section class="card">
-
-        <div class="card-title">
-
-            <strong>
-                Цвета
-            </strong>
-
-            <span>
-                HEX
-            </span>
-
-        </div>
-
-
-        <div class="colors">
-
-
-            <div class="color-item">
-
-                <label>
-                    Фон чата
-                </label>
-
-                <div class="color-row">
-
-                    <input
-                        id="bg"
-                        class="color-picker"
-                        type="color"
-                        value="#111114"
-                    >
-
-                    <input
-                        id="bgHex"
-                        class="hex"
-                        value="#111114"
-                    >
-
-                </div>
-
-            </div>
-
-
-            <div class="color-item">
-
-                <label>
-                    Шапка
-                </label>
-
-                <div class="color-row">
-
-                    <input
-                        id="header"
-                        class="color-picker"
-                        type="color"
-                        value="#18181d"
-                    >
-
-                    <input
-                        id="headerHex"
-                        class="hex"
-                        value="#18181D"
-                    >
-
-                </div>
-
-            </div>
-
-
-            <div class="color-item">
-
-                <label>
-                    Акцент
-                </label>
-
-                <div class="color-row">
-
-                    <input
-                        id="accent"
-                        class="color-picker"
-                        type="color"
-                        value="#ff4fa3"
-                    >
-
-                    <input
-                        id="accentHex"
-                        class="hex"
-                        value="#FF4FA3"
-                    >
-
-                </div>
-
-            </div>
-
-
-            <div class="color-item">
-
-                <label>
-                    Исходящие
-                </label>
-
-                <div class="color-row">
-
-                    <input
-                        id="outgoingColor"
-                        class="color-picker"
-                        type="color"
-                        value="#ff4fa3"
-                    >
-
-                    <input
-                        id="outgoingColorHex"
-                        class="hex"
-                        value="#FF4FA3"
-                    >
-
-                </div>
-
-            </div>
-
-
-            <div class="color-item">
-
-                <label>
-                    Входящие
-                </label>
-
-                <div class="color-row">
-
-                    <input
-                        id="incomingColor"
-                        class="color-picker"
-                        type="color"
-                        value="#292930"
-                    >
-
-                    <input
-                        id="incomingColorHex"
-                        class="hex"
-                        value="#292930"
-                    >
-
-                </div>
-
-            </div>
-
-
-            <div class="color-item">
-
-                <label>
-                    Текст
-                </label>
-
-                <div class="color-row">
-
-                    <input
-                        id="text"
-                        class="color-picker"
-                        type="color"
-                        value="#ffffff"
-                    >
-
-                    <input
-                        id="textHex"
-                        class="hex"
-                        value="#FFFFFF"
-                    >
-
-                </div>
-
-            </div>
-
-
-            <div class="color-item">
-
-                <label>
-                    Ссылки
-                </label>
-
-                <div class="color-row">
-
-                    <input
-                        id="link"
-                        class="color-picker"
-                        type="color"
-                        value="#ff4fa3"
-                    >
-
-                    <input
-                        id="linkHex"
-                        class="hex"
-                        value="#FF4FA3"
-                    >
-
-                </div>
-
-            </div>
-
-
-            <div class="color-item">
-
-                <label>
-                    Вторичный текст
-                </label>
-
-                <div class="color-row">
-
-                    <input
-                        id="secondary"
-                        class="color-picker"
-                        type="color"
-                        value="#9999a3"
-                    >
-
-                    <input
-                        id="secondaryHex"
-                        class="hex"
-                        value="#9999A3"
-                    >
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- WALLPAPER -->
-
-    <section class="card">
-
-        <div class="card-title">
-
-            <strong>
-                Изображение
-            </strong>
-
-            <span>
-                Фон чата
-            </span>
-
-        </div>
-
-
-        <label class="upload">
-
-            🖼️
-            Выбрать изображение
-
-            <input
-                id="wallpaper"
-                type="file"
-                accept="image/*"
-            >
-
-        </label>
-
-
-        <div class="small-actions">
-
-            <button
-                onclick="removeWallpaper()"
-            >
-                Убрать фон
-            </button>
-
-            <button
-                onclick="randomGradient()"
-            >
-                Градиент
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- ACTIONS -->
-
-    <section class="card">
-
-        <div class="card-title">
-
-            <strong>
-                Готово?
-            </strong>
-
-            <span>
-                Финальный шаг
-            </span>
-
-        </div>
-
-
-        <div class="actions">
-
-            <button
-                class="action-button"
-                onclick="downloadPreview()"
-            >
-                📥 Скачать
-            </button>
-
-            <button
-                class="action-button primary"
-                onclick="createTelegramTheme()"
-            >
-                🎨 Создать тему
-            </button>
-
-        </div>
-
-    </section>
+    <p>
+        Настрой цвета и внешний вид Telegram
+    </p>
 
 </div>
 
 
-<!-- BOTTOM -->
+<div class="field">
+
+    <label class="field-label">
+        Название
+    </label>
+
+    <input
+        id="themeName"
+        class="text-input"
+        value="My Theme"
+        placeholder="Название темы"
+    >
+
+</div>
+
+
+<div class="segment">
+
+    <button
+        id="androidBtn"
+        onclick="setPlatform('android')"
+    >
+        Android
+    </button>
+
+    <button
+        id="iosBtn"
+        class="active"
+        onclick="setPlatform('ios')"
+    >
+        iPhone
+    </button>
+
+</div>
+
+
+<section class="preview">
+
+    <div
+        class="telegram-header"
+        id="previewHeader"
+    >
+
+        <div class="tg-back">
+            ‹
+        </div>
+
+        <div
+            class="tg-avatar"
+            id="avatar"
+        >
+            A
+        </div>
+
+        <div>
+
+            <div class="tg-user">
+                Alex
+            </div>
+
+            <div class="tg-status">
+                в сети
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="chat"
+        id="chat"
+    >
+
+        <div
+            class="msg in"
+            id="incoming"
+        >
+            Привет! Как тебе новая тема?
+
+            <div class="msg-time">
+                21:42
+            </div>
+
+        </div>
+
+
+        <div
+            class="msg out"
+            id="outgoing"
+        >
+            Выглядит отлично.
+
+            <div class="msg-time">
+                21:43 ✓✓
+            </div>
+
+        </div>
+
+
+        <div class="msg in">
+
+            Особенно цвета.
+
+            <div class="msg-time">
+                21:43
+            </div>
+
+        </div>
+
+
+        <div class="msg out">
+
+            Я сам всё настроил.
+
+            <div class="msg-time">
+                21:44 ✓✓
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="composer"
+        id="composer"
+    >
+
+        <div class="composer-input">
+            Сообщение
+        </div>
+
+        <div
+            class="send"
+            id="send"
+        >
+            ↑
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <div class="section-head">
+
+        <div class="section-title">
+            Presets
+        </div>
+
+        <div class="section-note">
+            Быстрый старт
+        </div>
+
+    </div>
+
+
+    <div class="presets">
+
+        <button
+            class="preset"
+            style="background:linear-gradient(135deg,#111827,#536dfe)"
+            onclick="preset('midnight')"
+        >
+            Midnight
+        </button>
+
+        <button
+            class="preset"
+            style="background:linear-gradient(135deg,#090909,#363636)"
+            onclick="preset('graphite')"
+        >
+            Graphite
+        </button>
+
+        <button
+            class="preset"
+            style="background:linear-gradient(135deg,#07151d,#1687a7)"
+            onclick="preset('ocean')"
+        >
+            Ocean
+        </button>
+
+        <button
+            class="preset"
+            style="background:linear-gradient(135deg,#17122a,#7557d9)"
+            onclick="preset('violet')"
+        >
+            Violet
+        </button>
+
+        <button
+            class="preset"
+            style="background:linear-gradient(135deg,#0b1510,#29935c)"
+            onclick="preset('forest')"
+        >
+            Forest
+        </button>
+
+        <button
+            class="preset"
+            style="background:linear-gradient(135deg,#15120c,#a87828)"
+            onclick="preset('amber')"
+        >
+            Amber
+        </button>
+
+        <button
+            class="preset"
+            style="background:linear-gradient(135deg,#0b1016,#4d88c7)"
+            onclick="preset('steel')"
+        >
+            Steel
+        </button>
+
+        <button
+            class="preset"
+            style="background:linear-gradient(135deg,#eeeeee,#999999);color:#111"
+            onclick="preset('light')"
+        >
+            Light
+        </button>
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <div class="section-head">
+
+        <div class="section-title">
+            Colors
+        </div>
+
+        <div class="section-note">
+            HEX
+        </div>
+
+    </div>
+
+
+    <div class="colors">
+
+
+        <div class="color-item">
+
+            <label>Фон</label>
+
+            <div class="color-line">
+
+                <input
+                    id="bg"
+                    class="color-picker"
+                    type="color"
+                    value="#0d0e12"
+                >
+
+                <input
+                    id="bgHex"
+                    class="hex"
+                    value="#0D0E12"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="color-item">
+
+            <label>Шапка</label>
+
+            <div class="color-line">
+
+                <input
+                    id="header"
+                    class="color-picker"
+                    type="color"
+                    value="#15171c"
+                >
+
+                <input
+                    id="headerHex"
+                    class="hex"
+                    value="#15171C"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="color-item">
+
+            <label>Акцент</label>
+
+            <div class="color-line">
+
+                <input
+                    id="accent"
+                    class="color-picker"
+                    type="color"
+                    value="#7180ff"
+                >
+
+                <input
+                    id="accentHex"
+                    class="hex"
+                    value="#7180FF"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="color-item">
+
+            <label>Исходящие</label>
+
+            <div class="color-line">
+
+                <input
+                    id="outgoingColor"
+                    class="color-picker"
+                    type="color"
+                    value="#7180ff"
+                >
+
+                <input
+                    id="outgoingColorHex"
+                    class="hex"
+                    value="#7180FF"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="color-item">
+
+            <label>Входящие</label>
+
+            <div class="color-line">
+
+                <input
+                    id="incomingColor"
+                    class="color-picker"
+                    type="color"
+                    value="#252831"
+                >
+
+                <input
+                    id="incomingColorHex"
+                    class="hex"
+                    value="#252831"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="color-item">
+
+            <label>Текст</label>
+
+            <div class="color-line">
+
+                <input
+                    id="text"
+                    class="color-picker"
+                    type="color"
+                    value="#ffffff"
+                >
+
+                <input
+                    id="textHex"
+                    class="hex"
+                    value="#FFFFFF"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="color-item">
+
+            <label>Ссылки</label>
+
+            <div class="color-line">
+
+                <input
+                    id="link"
+                    class="color-picker"
+                    type="color"
+                    value="#8794ff"
+                >
+
+                <input
+                    id="linkHex"
+                    class="hex"
+                    value="#8794FF"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="color-item">
+
+            <label>Вторичный текст</label>
+
+            <div class="color-line">
+
+                <input
+                    id="secondary"
+                    class="color-picker"
+                    type="color"
+                    value="#858b99"
+                >
+
+                <input
+                    id="secondaryHex"
+                    class="hex"
+                    value="#858B99"
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <div class="section-head">
+
+        <div class="section-title">
+            Wallpaper
+        </div>
+
+        <div class="section-note">
+            Фон чата
+        </div>
+
+    </div>
+
+
+    <label class="upload">
+
+        Добавить изображение
+
+        <input
+            id="wallpaper"
+            type="file"
+            accept="image/*"
+        >
+
+    </label>
+
+
+    <div class="secondary-actions">
+
+        <button onclick="removeWallpaper()">
+            Убрать изображение
+        </button>
+
+        <button onclick="randomGradient()">
+            Случайный градиент
+        </button>
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <div class="section-head">
+
+        <div class="section-title">
+            Export
+        </div>
+
+        <div class="section-note">
+            Финальный шаг
+        </div>
+
+    </div>
+
+
+    <div class="actions">
+
+        <button
+            class="action"
+            onclick="downloadPreview()"
+        >
+            Скачать
+        </button>
+
+        <button
+            class="action primary"
+            onclick="createTelegramTheme()"
+        >
+            Создать тему
+        </button>
+
+    </div>
+
+</section>
+
+</div>
+
 
 <div class="bottom">
 
     <button
-        class="bottom-save"
+        class="save"
         onclick="saveTheme()"
     >
-        💾 Сохранить
+        Сохранить
     </button>
 
     <button
-        class="bottom-create"
+        class="create"
         onclick="createTelegramTheme()"
     >
-        🎨 Создать тему
+        Создать тему
     </button>
 
 </div>
 
 
 <div
-    id="toast"
     class="toast"
+    id="toast"
 ></div>
 
 
@@ -1154,65 +1169,45 @@ button {
 const SERVER =
     "https://theme-studio-production-ec43.up.railway.app";
 
-
 let platform = "ios";
 
 
-function $(id) {
+function $(id){
     return document.getElementById(id);
 }
 
 
 /* PLATFORM */
 
-function setPlatform(type) {
+function setPlatform(type){
 
     platform = type;
 
     $("androidBtn")
         .classList
-        .remove("active");
+        .toggle("active",type==="android");
 
     $("iosBtn")
         .classList
-        .remove("active");
-
-
-    if (type === "android") {
-
-        $("androidBtn")
-            .classList
-            .add("active");
-
-    } else {
-
-        $("iosBtn")
-            .classList
-            .add("active");
-
-    }
+        .toggle("active",type==="ios");
 
 }
 
 
-/* THEME DATA */
+/* DATA */
 
-function getTheme() {
+function getTheme(){
 
     return {
 
         name:
-            $("themeName")
-            .value
-            .trim()
+            $("themeName").value.trim()
             ||
-            "Telegram Theme",
+            "My Theme",
 
-        platform:
+        platform,
 
-            platform,
-
-        colors: {
+        colors:{
 
             background:
                 $("bg").value,
@@ -1247,352 +1242,224 @@ function getTheme() {
 
 /* PREVIEW */
 
-function applyTheme() {
+function applyTheme(){
 
-    const theme =
+    const t =
         getTheme();
 
+    $("chat").style.backgroundColor =
+        t.colors.background;
 
-    $("chat")
-        .style
-        .backgroundColor =
-        theme.colors.background;
+    $("previewHeader").style.backgroundColor =
+        t.colors.header;
 
+    $("composer").style.backgroundColor =
+        t.colors.header;
 
-    $("previewHeader")
-        .style
-        .backgroundColor =
-        theme.colors.header;
+    $("avatar").style.backgroundColor =
+        t.colors.accent;
 
-
-    $("composer")
-        .style
-        .backgroundColor =
-        theme.colors.header;
-
-
-    $("avatar")
-        .style
-        .backgroundColor =
-        theme.colors.accent;
-
-
-    $("send")
-        .style
-        .backgroundColor =
-        theme.colors.accent;
-
+    $("send").style.backgroundColor =
+        t.colors.accent;
 
     document
-        .querySelectorAll(".message.out")
-        .forEach(
-            element => {
-
-                element.style.background =
-                    theme.colors.outgoing;
-
-            }
-        );
-
+        .querySelectorAll(".msg.out")
+        .forEach(el=>{
+            el.style.background =
+                t.colors.outgoing;
+        });
 
     document
-        .querySelectorAll(".message.in")
-        .forEach(
-            element => {
-
-                element.style.background =
-                    theme.colors.incoming;
-
-            }
-        );
-
-
-    document
-        .querySelectorAll(".message")
-        .forEach(
-            element => {
-
-                element.style.color =
-                    theme.colors.text;
-
-            }
-        );
-
-
-    $("fakeInput")
-        .style
-        .color =
-        theme.colors.secondary;
+        .querySelectorAll(".msg.in")
+        .forEach(el=>{
+            el.style.background =
+                t.colors.incoming;
+        });
 
 }
 
 
-/* COLOR CONTROLS */
+/* COLORS */
 
-const colorPairs = [
+const pairs=[
 
-    ["bg", "bgHex"],
-
-    ["header", "headerHex"],
-
-    ["accent", "accentHex"],
-
-    ["outgoingColor", "outgoingColorHex"],
-
-    ["incomingColor", "incomingColorHex"],
-
-    ["text", "textHex"],
-
-    ["link", "linkHex"],
-
-    ["secondary", "secondaryHex"]
+    ["bg","bgHex"],
+    ["header","headerHex"],
+    ["accent","accentHex"],
+    ["outgoingColor","outgoingColorHex"],
+    ["incomingColor","incomingColorHex"],
+    ["text","textHex"],
+    ["link","linkHex"],
+    ["secondary","secondaryHex"]
 
 ];
 
 
-colorPairs.forEach(
-    pair => {
+pairs.forEach(([colorId,hexId])=>{
 
-        const color =
-            $(pair[0]);
+    const color=$(colorId);
+    const hex=$(hexId);
 
-        const hex =
-            $(pair[1]);
+    color.addEventListener("input",()=>{
 
+        hex.value =
+            color.value.toUpperCase();
 
-        color.addEventListener(
-            "input",
-            () => {
+        applyTheme();
 
-                hex.value =
-                    color.value
-                    .toUpperCase();
+    });
 
-                applyTheme();
+    hex.addEventListener("change",()=>{
 
-            }
-        );
+        let value =
+            hex.value.trim();
 
+        if(!/^#[0-9a-fA-F]{6}$/.test(value)){
 
-        hex.addEventListener(
-            "change",
-            () => {
+            hex.value =
+                color.value.toUpperCase();
 
-                let value =
-                    hex.value
-                    .trim();
+            return;
 
+        }
 
-                if (
-                    !/^#[0-9a-fA-F]{6}$/
-                    .test(value)
-                ) {
+        color.value=value;
 
-                    hex.value =
-                        color.value
-                        .toUpperCase();
+        applyTheme();
 
-                    return;
+    });
 
-                }
-
-
-                color.value =
-                    value;
-
-
-                applyTheme();
-
-            }
-        );
-
-    }
-);
+});
 
 
 /* PRESETS */
 
-const presets = {
+const presets={
 
-    pink: {
-
-        background: "#111114",
-        header: "#18181D",
-        accent: "#FF4FA3",
-        outgoing: "#FF4FA3",
-        incoming: "#292930",
-        text: "#FFFFFF",
-        link: "#FF4FA3",
-        secondary: "#9999A3"
-
+    midnight:{
+        background:"#0D0E12",
+        header:"#15171C",
+        accent:"#7180FF",
+        outgoing:"#7180FF",
+        incoming:"#252831",
+        text:"#FFFFFF",
+        link:"#8794FF",
+        secondary:"#858B99"
     },
 
-
-    black: {
-
-        background: "#050505",
-        header: "#101010",
-        accent: "#777777",
-        outgoing: "#292929",
-        incoming: "#171717",
-        text: "#FFFFFF",
-        link: "#AAAAAA",
-        secondary: "#888888"
-
+    graphite:{
+        background:"#090A0C",
+        header:"#121316",
+        accent:"#8C929E",
+        outgoing:"#363A42",
+        incoming:"#1E2025",
+        text:"#FFFFFF",
+        link:"#AEB4C0",
+        secondary:"#7B818C"
     },
 
-
-    blood: {
-
-        background: "#160607",
-        header: "#22090B",
-        accent: "#FF3030",
-        outgoing: "#9E1118",
-        incoming: "#351014",
-        text: "#FFFFFF",
-        link: "#FF6060",
-        secondary: "#AA7777"
-
+    ocean:{
+        background:"#07141C",
+        header:"#0D202A",
+        accent:"#329CCB",
+        outgoing:"#197AA4",
+        incoming:"#17313D",
+        text:"#FFFFFF",
+        link:"#5EBDE6",
+        secondary:"#7897A3"
     },
 
-
-    ocean: {
-
-        background: "#07131F",
-        header: "#0B1E30",
-        accent: "#2498FF",
-        outgoing: "#1677C8",
-        incoming: "#132D43",
-        text: "#FFFFFF",
-        link: "#55AAFF",
-        secondary: "#8099AA"
-
+    violet:{
+        background:"#100C19",
+        header:"#181225",
+        accent:"#8C72E8",
+        outgoing:"#694FBD",
+        incoming:"#28203A",
+        text:"#FFFFFF",
+        link:"#A995F4",
+        secondary:"#8E849F"
     },
 
-
-    purple: {
-
-        background: "#10091B",
-        header: "#1A0E2B",
-        accent: "#A855F7",
-        outgoing: "#7936BD",
-        incoming: "#28183C",
-        text: "#FFFFFF",
-        link: "#C084FC",
-        secondary: "#9988AA"
-
+    forest:{
+        background:"#08120C",
+        header:"#0E1C13",
+        accent:"#3DB978",
+        outgoing:"#258355",
+        incoming:"#193024",
+        text:"#FFFFFF",
+        link:"#65D699",
+        secondary:"#819B8B"
     },
 
-
-    forest: {
-
-        background: "#07120C",
-        header: "#0C1D12",
-        accent: "#35C978",
-        outgoing: "#18834A",
-        incoming: "#14291D",
-        text: "#FFFFFF",
-        link: "#55DD99",
-        secondary: "#7D9988"
-
+    amber:{
+        background:"#141108",
+        header:"#201B0D",
+        accent:"#C9963A",
+        outgoing:"#8F6823",
+        incoming:"#332A17",
+        text:"#FFFFFF",
+        link:"#E2B85A",
+        secondary:"#9B9074"
     },
 
-
-    cyber: {
-
-        background: "#05090C",
-        header: "#081218",
-        accent: "#00E5FF",
-        outgoing: "#007F91",
-        incoming: "#102229",
-        text: "#FFFFFF",
-        link: "#00E5FF",
-        secondary: "#7AA0A8"
-
+    steel:{
+        background:"#0B1016",
+        header:"#121923",
+        accent:"#5C8BC2",
+        outgoing:"#416D9D",
+        incoming:"#1E2B39",
+        text:"#FFFFFF",
+        link:"#78A6D8",
+        secondary:"#7C8C9E"
     },
 
-
-    minimal: {
-
-        background: "#EEEEF2",
-        header: "#FFFFFF",
-        accent: "#777777",
-        outgoing: "#D8D8DF",
-        incoming: "#FFFFFF",
-        text: "#111111",
-        link: "#555555",
-        secondary: "#777777"
-
+    light:{
+        background:"#EDEEF2",
+        header:"#FFFFFF",
+        accent:"#5D6DF5",
+        outgoing:"#D9DDF8",
+        incoming:"#FFFFFF",
+        text:"#17181C",
+        link:"#5261D8",
+        secondary:"#777C87"
     }
 
 };
 
 
-function preset(type) {
+function preset(type){
 
-    const theme =
+    const p =
         presets[type];
 
+    const map={
 
-    $("bg").value =
-        theme.background;
+        bg:p.background,
+        header:p.header,
+        accent:p.accent,
+        outgoingColor:p.outgoing,
+        incomingColor:p.incoming,
+        text:p.text,
+        link:p.link,
+        secondary:p.secondary
 
-    $("bgHex").value =
-        theme.background;
+    };
 
+    Object.entries(map)
+        .forEach(([id,value])=>{
 
-    $("header").value =
-        theme.header;
+            $(id).value=value;
 
-    $("headerHex").value =
-        theme.header;
+            const hex=$(id+"Hex");
 
+            if(hex)
+                hex.value=value.toUpperCase();
 
-    $("accent").value =
-        theme.accent;
-
-    $("accentHex").value =
-        theme.accent;
-
-
-    $("outgoingColor").value =
-        theme.outgoing;
-
-    $("outgoingColorHex").value =
-        theme.outgoing;
-
-
-    $("incomingColor").value =
-        theme.incoming;
-
-    $("incomingColorHex").value =
-        theme.incoming;
-
-
-    $("text").value =
-        theme.text;
-
-    $("textHex").value =
-        theme.text;
-
-
-    $("link").value =
-        theme.link;
-
-    $("linkHex").value =
-        theme.link;
-
-
-    $("secondary").value =
-        theme.secondary;
-
-    $("secondaryHex").value =
-        theme.secondary;
-
+        });
 
     applyTheme();
 
-    toast("Стиль применён ✓");
+    toast("Стиль применён");
 
 }
 
@@ -1600,82 +1467,65 @@ function preset(type) {
 /* WALLPAPER */
 
 $("wallpaper")
-    .addEventListener(
-        "change",
-        function(event) {
+    .addEventListener("change",event=>{
 
-            const file =
-                event.target
-                    .files[0];
+        const file =
+            event.target.files[0];
 
+        if(!file)
+            return;
 
-            if (!file)
-                return;
+        const url =
+            URL.createObjectURL(file);
 
+        $("chat")
+            .style
+            .backgroundImage =
+            `url("${url}")`;
 
-            const url =
-                URL.createObjectURL(file);
+        toast("Изображение установлено");
 
-
-            $("chat")
-                .style
-                .backgroundImage =
-                `url("${url}")`;
+    });
 
 
-            toast("Фон установлен ✓");
-
-        }
-    );
-
-
-function removeWallpaper() {
+function removeWallpaper(){
 
     $("chat")
         .style
         .backgroundImage =
         "none";
 
+    $("wallpaper").value="";
 
-    $("wallpaper")
-        .value =
-        "";
-
-
-    toast("Фон убран");
+    toast("Изображение убрано");
 
 }
 
 
-function randomGradient() {
+function randomGradient(){
 
-    const gradients = [
+    const gradients=[
 
-        "linear-gradient(135deg,#ff4fa3,#7928ca)",
+        "linear-gradient(135deg,#111827,#536dfe)",
 
-        "linear-gradient(135deg,#0f2027,#203a43,#2c5364)",
+        "linear-gradient(135deg,#0f2027,#203a43)",
 
-        "linear-gradient(135deg,#200122,#6f0000)",
+        "linear-gradient(135deg,#17122a,#7557d9)",
 
-        "linear-gradient(135deg,#141e30,#243b55)",
+        "linear-gradient(135deg,#08120c,#29935c)",
 
-        "linear-gradient(135deg,#000428,#004e92)",
-
-        "linear-gradient(135deg,#42275a,#734b6d)"
+        "linear-gradient(135deg,#0b1016,#4d88c7)"
 
     ];
-
 
     $("chat")
         .style
         .backgroundImage =
         gradients[
             Math.floor(
-                Math.random() *
-                gradients.length
+                Math.random()*gradients.length
             )
         ];
-
 
     toast("Градиент установлен");
 
@@ -1684,28 +1534,24 @@ function randomGradient() {
 
 /* SAVE */
 
-function saveTheme() {
+function saveTheme(){
 
     localStorage.setItem(
         "themeStudio",
-        JSON.stringify(
-            getTheme()
-        )
+        JSON.stringify(getTheme())
     );
 
-
-    toast("Тема сохранена ✓");
+    toast("Сохранено");
 
 }
 
 
 /* DOWNLOAD */
 
-function downloadPreview() {
+function downloadPreview(){
 
     const theme =
         getTheme();
-
 
     const blob =
         new Blob(
@@ -1717,25 +1563,19 @@ function downloadPreview() {
                 )
             ],
             {
-                type:
-                    "application/json"
+                type:"application/json"
             }
         );
-
 
     const url =
         URL.createObjectURL(blob);
 
-
-    const link =
+    const a =
         document.createElement("a");
 
+    a.href=url;
 
-    link.href =
-        url;
-
-
-    link.download =
+    a.download=
         (
             theme.name
                 .replace(
@@ -1748,72 +1588,54 @@ function downloadPreview() {
         +
         ".json";
 
+    document.body.appendChild(a);
 
-    document.body
-        .appendChild(link);
+    a.click();
 
-
-    link.click();
-
-
-    link.remove();
-
+    a.remove();
 
     URL.revokeObjectURL(url);
 
 }
 
 
-/* CREATE */
+/* TELEGRAM */
 
-async function createTelegramTheme() {
+async function createTelegramTheme(){
 
     toast("Создаю тему…");
 
-
-    const theme =
-        getTheme();
-
-
-    try {
+    try{
 
         const response =
             await fetch(
-                SERVER +
-                "/api/theme",
+                SERVER+"/api/theme",
                 {
-
-                    method:
-                        "POST",
-
-                    headers: {
-
+                    method:"POST",
+                    headers:{
                         "Content-Type":
                             "application/json"
-
                     },
-
                     body:
-                        JSON.stringify(theme)
-
+                        JSON.stringify(
+                            getTheme()
+                        )
                 }
             );
-
 
         const result =
             await response.json();
 
-
-        if (result.ok) {
+        if(result.ok){
 
             toast(
-                "🎨 Тема отправлена в Telegram!"
+                "Тема отправлена в Telegram"
             );
 
-        } else {
+        }else{
 
             toast(
-                "Ошибка: " +
+                "Ошибка: "+
                 (
                     result.error ||
                     result.description ||
@@ -1823,8 +1645,7 @@ async function createTelegramTheme() {
 
         }
 
-
-    } catch (error) {
+    }catch(error){
 
         console.error(error);
 
@@ -1837,227 +1658,139 @@ async function createTelegramTheme() {
 }
 
 
-/* APP THEME */
+/* APP LIGHT / DARK */
 
-function toggleAppTheme() {
+function toggleTheme(){
 
-    const current =
+    const light =
         document.documentElement
-            .getAttribute(
-                "data-theme"
-            );
-
-
-    const next =
-        current === "dark"
-            ? "light"
-            : "dark";
-
-
-    document.documentElement
-        .setAttribute(
-            "data-theme",
-            next
-        );
-
+            .classList
+            .toggle("light");
 
     localStorage.setItem(
-        "appTheme",
-        next
+        "studioMode",
+        light
+            ? "light"
+            : "dark"
     );
 
-
-    $("themeToggle")
+    $("themeButton")
         .textContent =
-        next === "dark"
-            ? "☀️"
-            : "🌙";
+        light
+            ? "☀"
+            : "☾";
 
 }
 
 
-/* LOAD APP THEME */
+/* LOAD */
 
-function loadAppTheme() {
+function load(){
 
-    const saved =
+    const mode =
         localStorage.getItem(
-            "appTheme"
+            "studioMode"
         )
         ||
         "dark";
 
+    if(mode==="light")
+        document.documentElement
+            .classList
+            .add("light");
 
-    document.documentElement
-        .setAttribute(
-            "data-theme",
-            saved
-        );
-
-
-    $("themeToggle")
+    $("themeButton")
         .textContent =
-        saved === "dark"
-            ? "☀️"
-            : "🌙";
+        mode==="light"
+            ? "☀"
+            : "☾";
 
-}
-
-
-/* LOAD SAVED */
-
-function loadSavedTheme() {
 
     const saved =
         localStorage.getItem(
             "themeStudio"
         );
 
+    if(saved){
 
-    if (!saved)
-        return;
+        try{
 
+            const t =
+                JSON.parse(saved);
 
-    try {
+            if(t.name)
+                $("themeName").value=t.name;
 
-        const theme =
-            JSON.parse(saved);
+            if(t.platform)
+                setPlatform(t.platform);
 
+            if(t.colors){
 
-        if (theme.name) {
+                const map={
 
-            $("themeName")
-                .value =
-                theme.name;
+                    bg:t.colors.background,
+                    header:t.colors.header,
+                    accent:t.colors.accent,
+                    outgoingColor:t.colors.outgoing,
+                    incomingColor:t.colors.incoming,
+                    text:t.colors.text,
+                    link:t.colors.link,
+                    secondary:t.colors.secondary
 
-        }
+                };
 
+                Object.entries(map)
+                    .forEach(([id,value])=>{
 
-        if (theme.platform) {
-
-            setPlatform(
-                theme.platform
-            );
-
-        }
-
-
-        if (theme.colors) {
-
-            const c =
-                theme.colors;
-
-
-            const fields = {
-
-                bg:
-                    c.background,
-
-                header:
-                    c.header,
-
-                accent:
-                    c.accent,
-
-                outgoingColor:
-                    c.outgoing,
-
-                incomingColor:
-                    c.incoming,
-
-                text:
-                    c.text,
-
-                link:
-                    c.link,
-
-                secondary:
-                    c.secondary
-
-            };
-
-
-            Object.keys(fields)
-                .forEach(
-                    id => {
-
-                        if (!fields[id])
+                        if(!value)
                             return;
 
+                        $(id).value=value;
 
-                        $(id).value =
-                            fields[id];
+                        const hex=$(id+"Hex");
 
+                        if(hex)
+                            hex.value=value.toUpperCase();
 
-                        const hex =
-                            $(id + "Hex");
+                    });
 
+            }
 
-                        if (hex) {
+        }catch(e){
 
-                            hex.value =
-                                fields[id]
-                                    .toUpperCase();
-
-                        }
-
-                    }
-                );
+            console.log(e);
 
         }
 
-
-    } catch (error) {
-
-        console.error(error);
-
     }
+
+    applyTheme();
 
 }
 
 
-/* TOAST */
+function toast(message){
 
-function toast(message) {
+    const el=$("toast");
 
-    const element =
-        $("toast");
+    el.textContent=message;
 
+    el.classList.add("show");
 
-    element.textContent =
-        message;
+    clearTimeout(window.toastTimer);
 
-
-    element.classList
-        .add("show");
-
-
-    clearTimeout(
-        window.toastTimer
-    );
-
-
-    window.toastTimer =
+    window.toastTimer=
         setTimeout(
-            () => {
-
-                element.classList
-                    .remove("show");
-
+            ()=>{
+                el.classList.remove("show");
             },
-            2300
+            2200
         );
 
 }
 
 
-/* START */
-
-loadAppTheme();
-
-loadSavedTheme();
-
-applyTheme();
+load();
 
 </script>
 
