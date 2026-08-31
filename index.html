@@ -2,347 +2,536 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#09090d">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-<title>Telegram Theme Studio</title>
+<title>Theme Studio</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
+:root {
+    --bg: #f5f5f7;
+    --surface: #ffffff;
+    --surface-2: #f0f0f3;
+    --border: #e3e3e8;
+    --text: #17171a;
+    --muted: #85858d;
+    --accent: #ff4fa3;
+    --shadow: 0 8px 30px rgba(0,0,0,.06);
 }
 
-html,body{
-    margin:0;
-    padding:0;
-    background:#09090d;
-    color:white;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+html[data-theme="dark"] {
+    --bg: #0c0c0f;
+    --surface: #151518;
+    --surface-2: #1d1d21;
+    --border: #29292f;
+    --text: #f7f7f8;
+    --muted: #92929a;
+    --shadow: 0 12px 35px rgba(0,0,0,.25);
 }
 
-body{
-    padding-bottom:100px;
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.app{
-    width:100%;
-    max-width:650px;
-    margin:auto;
-    padding:15px;
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "SF Pro Text",
+        "Segoe UI",
+        sans-serif;
 }
 
-.header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:14px;
+body {
+    padding-bottom: 96px;
+    transition:
+        background .2s ease,
+        color .2s ease;
 }
 
-.logo{
-    font-size:23px;
-    font-weight:800;
+button,
+input {
+    font-family: inherit;
 }
 
-.logo span{
-    color:#ff4fa3;
+button {
+    border: 0;
 }
 
-input,button{
-    font-family:inherit;
+.app {
+    width: 100%;
+    max-width: 680px;
+    margin: auto;
+    padding: 18px 15px 30px;
 }
 
-button{
-    border:0;
-    cursor:pointer;
+/* HEADER */
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
 }
 
-.save{
-    background:#18181e;
-    color:white;
-    padding:10px 14px;
-    border-radius:12px;
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.name{
-    width:100%;
-    height:48px;
-    background:#15151a;
-    border:1px solid #2b2b32;
-    border-radius:14px;
-    color:white;
-    padding:0 14px;
-    outline:none;
-    margin-bottom:12px;
+.brand-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: var(--text);
+    color: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 16px;
 }
 
-.platform{
-    display:flex;
-    gap:4px;
-    background:#15151a;
-    border:1px solid #292930;
-    padding:4px;
-    border-radius:15px;
-    margin-bottom:14px;
+.brand-name {
+    font-size: 19px;
+    font-weight: 750;
+    letter-spacing: -.4px;
 }
 
-.platform button{
-    flex:1;
-    height:44px;
-    border-radius:11px;
-    background:transparent;
-    color:#888;
-    font-weight:700;
+.brand-name span {
+    color: var(--accent);
 }
 
-.platform button.active{
-    background:white;
-    color:black;
+.theme-toggle {
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 17px;
+    box-shadow: var(--shadow);
 }
 
-.preview{
-    overflow:hidden;
-    border-radius:26px;
-    border:1px solid #34343b;
-    margin-bottom:14px;
+/* NAME */
+
+.name-wrap {
+    margin-bottom: 13px;
 }
 
-.header-preview{
-    height:60px;
-    display:flex;
-    align-items:center;
-    padding:0 14px;
-    background:#18181d;
+.name-input {
+    width: 100%;
+    height: 52px;
+    padding: 0 16px;
+    border-radius: 15px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    outline: none;
+    font-size: 15px;
+    box-shadow: var(--shadow);
 }
 
-.back{
-    font-size:28px;
-    margin-right:10px;
+.name-input:focus {
+    border-color: var(--accent);
 }
 
-.avatar{
-    width:37px;
-    height:37px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:700;
-    margin-right:10px;
+/* PLATFORM */
+
+.platform {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    padding: 4px;
+    margin-bottom: 14px;
+    border-radius: 15px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
 }
 
-.user{
-    font-size:14px;
-    font-weight:700;
+.platform button {
+    height: 42px;
+    border-radius: 11px;
+    background: transparent;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 700;
 }
 
-.status{
-    font-size:10px;
-    opacity:.5;
+.platform button.active {
+    background: var(--surface);
+    color: var(--text);
+    box-shadow: 0 3px 10px rgba(0,0,0,.08);
 }
 
-.chat{
-    min-height:390px;
-    padding:14px;
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-end;
-    gap:8px;
-    background:#111114;
-    background-position:center;
-    background-size:cover;
+/* PREVIEW */
+
+.preview-card {
+    overflow: hidden;
+    border-radius: 22px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    margin-bottom: 14px;
 }
 
-.message{
-    max-width:80%;
-    padding:9px 12px;
-    font-size:14px;
-    line-height:1.3;
-    color:white;
+.preview-top {
+    height: 58px;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    background: #18181d;
+    color: white;
 }
 
-.in{
-    align-self:flex-start;
-    background:#292930;
-    border-radius:17px;
+.back {
+    font-size: 28px;
+    margin-right: 8px;
+    line-height: 1;
 }
 
-.out{
-    align-self:flex-end;
-    background:#ff4fa3;
-    border-radius:17px;
+.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 800;
+    background: var(--accent);
+    color: white;
 }
 
-.time{
-    text-align:right;
-    font-size:9px;
-    opacity:.55;
-    margin-top:4px;
+.preview-name {
+    font-size: 13px;
+    font-weight: 700;
 }
 
-.composer{
-    height:58px;
-    display:flex;
-    align-items:center;
-    gap:8px;
-    padding:8px;
-    background:#18181d;
+.preview-status {
+    font-size: 10px;
+    opacity: .55;
+    margin-top: 2px;
 }
 
-.fake-input{
-    flex:1;
-    background:#111114;
-    color:#999;
-    border-radius:20px;
-    padding:10px 14px;
-    font-size:13px;
+.chat {
+    min-height: 380px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 8px;
+    background: #111114;
+    background-position: center;
+    background-size: cover;
 }
 
-.send{
-    width:40px;
-    height:40px;
-    border-radius:50%;
-    background:#ff4fa3;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.message {
+    max-width: 78%;
+    padding: 9px 12px;
+    color: white;
+    font-size: 13px;
+    line-height: 1.35;
 }
 
-.card{
-    background:#15151a;
-    border:1px solid #28282f;
-    border-radius:19px;
-    padding:15px;
-    margin-bottom:11px;
+.message.in {
+    align-self: flex-start;
+    background: #292930;
+    border-radius: 16px 16px 16px 5px;
 }
 
-.title{
-    font-size:14px;
-    font-weight:750;
-    margin-bottom:13px;
+.message.out {
+    align-self: flex-end;
+    background: var(--accent);
+    border-radius: 16px 16px 5px 16px;
 }
 
-.colors{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
+.time {
+    margin-top: 3px;
+    text-align: right;
+    font-size: 9px;
+    opacity: .55;
 }
 
-.color label{
-    display:block;
-    color:#92929b;
-    font-size:10px;
-    margin-bottom:5px;
+.composer {
+    height: 57px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #18181d;
 }
 
-.color input[type=color]{
-    width:100%;
-    height:47px;
-    border:0;
-    padding:3px;
-    background:#101014;
-    border-radius:12px;
+.fake-input {
+    flex: 1;
+    height: 40px;
+    padding: 11px 14px;
+    border-radius: 20px;
+    background: #111114;
+    color: #888891;
+    font-size: 12px;
 }
 
-.hex{
-    width:100%;
-    margin-top:5px;
-    background:#101014;
-    border:1px solid #303039;
-    color:white;
-    border-radius:9px;
-    padding:7px 8px;
-    outline:none;
-    font-size:10px;
+.send {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
 }
 
-.actions{
-    display:flex;
-    gap:8px;
+/* CARDS */
+
+.card {
+    padding: 16px;
+    margin-bottom: 11px;
+    border-radius: 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
 }
 
-.actions button{
-    flex:1;
-    padding:13px 8px;
-    border-radius:12px;
-    background:#101014;
-    border:1px solid #33333a;
-    color:white;
-    font-size:12px;
-    font-weight:700;
+.card-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
 }
 
-.primary{
-    background:white !important;
-    color:black !important;
+.card-title strong {
+    font-size: 14px;
 }
 
-.presets{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:8px;
+.card-title span {
+    color: var(--muted);
+    font-size: 11px;
 }
 
-.preset{
-    height:54px;
-    border-radius:14px;
-    color:white;
-    font-size:10px;
-    font-weight:700;
+/* COLORS */
+
+.colors {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 11px;
 }
 
-.upload{
-    display:block;
-    text-align:center;
-    padding:16px;
-    border:1px dashed #44444d;
-    border-radius:14px;
-    color:#aaa;
-    font-size:12px;
-    background:#101014;
+.color-item label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--muted);
+    font-size: 10px;
 }
 
-.upload input{
-    display:none;
+.color-row {
+    display: flex;
+    gap: 6px;
 }
 
-.bottom{
-    position:fixed;
-    left:0;
-    right:0;
-    bottom:0;
-    z-index:50;
-    display:flex;
-    gap:8px;
-    padding:10px 13px;
-    padding-bottom:calc(10px + env(safe-area-inset-bottom));
-    background:rgba(9,9,13,.94);
-    border-top:1px solid #28282f;
-    backdrop-filter:blur(18px);
+.color-picker {
+    width: 47px;
+    height: 39px;
+    padding: 3px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
 }
 
-.bottom button{
-    flex:1;
-    height:48px;
-    border-radius:14px;
-    background:#17171c;
-    border:1px solid #33333b;
-    color:white;
-    font-weight:700;
+.hex {
+    min-width: 0;
+    width: 100%;
+    height: 39px;
+    padding: 0 9px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--text);
+    outline: none;
+    font-size: 10px;
 }
 
-.toast{
-    position:fixed;
-    top:15px;
-    left:50%;
-    transform:translateX(-50%);
-    background:white;
-    color:black;
-    padding:11px 15px;
-    border-radius:14px;
-    font-size:12px;
-    display:none;
-    z-index:999;
+.hex:focus {
+    border-color: var(--accent);
+}
+
+/* PRESETS */
+
+.presets {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.preset {
+    height: 52px;
+    border-radius: 13px;
+    color: white;
+    font-size: 10px;
+    font-weight: 750;
+}
+
+/* IMAGE */
+
+.upload {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 50px;
+    border-radius: 13px;
+    border: 1px dashed var(--border);
+    background: var(--surface-2);
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 650;
+}
+
+.upload input {
+    display: none;
+}
+
+.small-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 9px;
+}
+
+.small-actions button {
+    height: 43px;
+    border-radius: 12px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* ACTIONS */
+
+.actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.action-button {
+    height: 46px;
+    border-radius: 13px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.action-button.primary {
+    background: var(--accent);
+    color: white;
+    border-color: transparent;
+}
+
+/* BOTTOM */
+
+.bottom {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    display: flex;
+    gap: 8px;
+    padding: 9px 13px;
+    padding-bottom: calc(9px + env(safe-area-inset-bottom));
+    background: color-mix(
+        in srgb,
+        var(--bg) 92%,
+        transparent
+    );
+    backdrop-filter: blur(18px);
+    border-top: 1px solid var(--border);
+}
+
+.bottom button {
+    height: 48px;
+    border-radius: 14px;
+    font-size: 12px;
+    font-weight: 750;
+}
+
+.bottom-save {
+    width: 38%;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.bottom-create {
+    width: 62%;
+    background: var(--accent);
+    color: white;
+}
+
+/* TOAST */
+
+.toast {
+    position: fixed;
+    z-index: 999;
+    left: 50%;
+    top: 16px;
+    transform: translateX(-50%) translateY(-10px);
+    padding: 11px 15px;
+    border-radius: 13px;
+    background: var(--text);
+    color: var(--bg);
+    font-size: 11px;
+    font-weight: 650;
+    opacity: 0;
+    pointer-events: none;
+    transition: .2s ease;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* MOBILE */
+
+@media (max-width: 430px) {
+
+    .app {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .chat {
+        min-height: 340px;
+    }
+
+    .colors {
+        gap: 9px;
+    }
+
+    .presets {
+        gap: 6px;
+    }
+
+    .preset {
+        height: 48px;
+    }
 }
 </style>
 </head>
@@ -351,294 +540,703 @@ button{
 
 <div class="app">
 
-<div class="header">
-    <div class="logo">Theme<span>Studio</span></div>
-    <button class="save" onclick="saveTheme()">Сохранить</button>
-</div>
+    <!-- HEADER -->
 
-<input
-    id="themeName"
-    class="name"
-    value="Pink Night"
-    placeholder="Название темы"
->
+    <header class="topbar">
 
-<div class="platform">
+        <div class="brand">
 
-    <button id="androidBtn" onclick="setPlatform('android')">
-        🤖 Android
-    </button>
+            <div class="brand-icon">
+                TS
+            </div>
 
-    <button id="iosBtn" class="active" onclick="setPlatform('ios')">
-        🍎 iPhone
-    </button>
+            <div class="brand-name">
+                Theme<span>Studio</span>
+            </div>
 
-</div>
-
-<div class="preview">
-
-    <div id="previewHeader" class="header-preview">
-
-        <div class="back">‹</div>
-
-        <div id="avatar" class="avatar">A</div>
-
-        <div>
-            <div class="user">Alex</div>
-            <div class="status">в сети</div>
         </div>
+
+        <button
+            class="theme-toggle"
+            id="themeToggle"
+            onclick="toggleAppTheme()"
+        >
+            🌙
+        </button>
+
+    </header>
+
+
+    <!-- NAME -->
+
+    <div class="name-wrap">
+
+        <input
+            id="themeName"
+            class="name-input"
+            value="Pink Night"
+            placeholder="Название темы"
+        >
 
     </div>
 
-    <div id="chat" class="chat">
 
-        <div id="incoming" class="message in">
-            Привет! Как тебе новая тема?
-            <div class="time">21:42</div>
-        </div>
+    <!-- PLATFORM -->
 
-        <div id="outgoing" class="message out">
-            Она шикарная 😍
-            <div class="time">21:43 ✓✓</div>
-        </div>
+    <div class="platform">
 
-        <div class="message in">
-            Особенно этот розовый.
-            <div class="time">21:43</div>
-        </div>
+        <button
+            id="androidBtn"
+            onclick="setPlatform('android')"
+        >
+            🤖 Android
+        </button>
 
-        <div class="message out">
-            Я сам его выбрал 😎
-            <div class="time">21:44 ✓✓</div>
-        </div>
+        <button
+            id="iosBtn"
+            class="active"
+            onclick="setPlatform('ios')"
+        >
+            🍎 iPhone
+        </button>
 
     </div>
 
-    <div id="composer" class="composer">
 
-        <div id="fakeInput" class="fake-input">
-            Сообщение
+    <!-- PREVIEW -->
+
+    <section class="preview-card">
+
+        <div
+            class="preview-top"
+            id="previewHeader"
+        >
+
+            <div class="back">‹</div>
+
+            <div
+                class="avatar"
+                id="avatar"
+            >
+                A
+            </div>
+
+            <div>
+
+                <div class="preview-name">
+                    Alex
+                </div>
+
+                <div class="preview-status">
+                    в сети
+                </div>
+
+            </div>
+
         </div>
 
-        <div id="send" class="send">➤</div>
 
-    </div>
+        <div
+            class="chat"
+            id="chat"
+        >
+
+            <div
+                class="message in"
+                id="incomingMessage"
+            >
+                Привет! Как тебе новая тема?
+
+                <div class="time">
+                    21:42
+                </div>
+
+            </div>
+
+
+            <div
+                class="message out"
+                id="outgoingMessage"
+            >
+                Она шикарная 😍
+
+                <div class="time">
+                    21:43 ✓✓
+                </div>
+
+            </div>
+
+
+            <div class="message in">
+
+                Особенно этот розовый.
+
+                <div class="time">
+                    21:43
+                </div>
+
+            </div>
+
+
+            <div class="message out">
+
+                Я сам его выбрал 😎
+
+                <div class="time">
+                    21:44 ✓✓
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="composer"
+            id="composer"
+        >
+
+            <div class="fake-input">
+                Сообщение
+            </div>
+
+            <div
+                class="send"
+                id="send"
+            >
+                ➤
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PRESETS -->
+
+    <section class="card">
+
+        <div class="card-title">
+
+            <strong>
+                Готовые стили
+            </strong>
+
+            <span>
+                Быстрый выбор
+            </span>
+
+        </div>
+
+
+        <div class="presets">
+
+            <button
+                class="preset"
+                style="background:linear-gradient(135deg,#ff4fa3,#7928ca)"
+                onclick="preset('pink')"
+            >
+                Pink
+            </button>
+
+            <button
+                class="preset"
+                style="background:linear-gradient(135deg,#050505,#444)"
+                onclick="preset('black')"
+            >
+                Black
+            </button>
+
+            <button
+                class="preset"
+                style="background:linear-gradient(135deg,#7b0000,#ff3030)"
+                onclick="preset('blood')"
+            >
+                Blood
+            </button>
+
+            <button
+                class="preset"
+                style="background:linear-gradient(135deg,#162447,#1f8cff)"
+                onclick="preset('ocean')"
+            >
+                Ocean
+            </button>
+
+            <button
+                class="preset"
+                style="background:linear-gradient(135deg,#24103f,#9b59ff)"
+                onclick="preset('purple')"
+            >
+                Purple
+            </button>
+
+            <button
+                class="preset"
+                style="background:linear-gradient(135deg,#092e20,#2ecc71)"
+                onclick="preset('forest')"
+            >
+                Forest
+            </button>
+
+            <button
+                class="preset"
+                style="background:linear-gradient(135deg,#111,#00e5ff)"
+                onclick="preset('cyber')"
+            >
+                Cyber
+            </button>
+
+            <button
+                class="preset"
+                style="background:linear-gradient(135deg,#fff,#ddd);color:#111"
+                onclick="preset('minimal')"
+            >
+                Minimal
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- COLORS -->
+
+    <section class="card">
+
+        <div class="card-title">
+
+            <strong>
+                Цвета
+            </strong>
+
+            <span>
+                HEX
+            </span>
+
+        </div>
+
+
+        <div class="colors">
+
+
+            <div class="color-item">
+
+                <label>
+                    Фон чата
+                </label>
+
+                <div class="color-row">
+
+                    <input
+                        id="bg"
+                        class="color-picker"
+                        type="color"
+                        value="#111114"
+                    >
+
+                    <input
+                        id="bgHex"
+                        class="hex"
+                        value="#111114"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="color-item">
+
+                <label>
+                    Шапка
+                </label>
+
+                <div class="color-row">
+
+                    <input
+                        id="header"
+                        class="color-picker"
+                        type="color"
+                        value="#18181d"
+                    >
+
+                    <input
+                        id="headerHex"
+                        class="hex"
+                        value="#18181D"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="color-item">
+
+                <label>
+                    Акцент
+                </label>
+
+                <div class="color-row">
+
+                    <input
+                        id="accent"
+                        class="color-picker"
+                        type="color"
+                        value="#ff4fa3"
+                    >
+
+                    <input
+                        id="accentHex"
+                        class="hex"
+                        value="#FF4FA3"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="color-item">
+
+                <label>
+                    Исходящие
+                </label>
+
+                <div class="color-row">
+
+                    <input
+                        id="outgoingColor"
+                        class="color-picker"
+                        type="color"
+                        value="#ff4fa3"
+                    >
+
+                    <input
+                        id="outgoingColorHex"
+                        class="hex"
+                        value="#FF4FA3"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="color-item">
+
+                <label>
+                    Входящие
+                </label>
+
+                <div class="color-row">
+
+                    <input
+                        id="incomingColor"
+                        class="color-picker"
+                        type="color"
+                        value="#292930"
+                    >
+
+                    <input
+                        id="incomingColorHex"
+                        class="hex"
+                        value="#292930"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="color-item">
+
+                <label>
+                    Текст
+                </label>
+
+                <div class="color-row">
+
+                    <input
+                        id="text"
+                        class="color-picker"
+                        type="color"
+                        value="#ffffff"
+                    >
+
+                    <input
+                        id="textHex"
+                        class="hex"
+                        value="#FFFFFF"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="color-item">
+
+                <label>
+                    Ссылки
+                </label>
+
+                <div class="color-row">
+
+                    <input
+                        id="link"
+                        class="color-picker"
+                        type="color"
+                        value="#ff4fa3"
+                    >
+
+                    <input
+                        id="linkHex"
+                        class="hex"
+                        value="#FF4FA3"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="color-item">
+
+                <label>
+                    Вторичный текст
+                </label>
+
+                <div class="color-row">
+
+                    <input
+                        id="secondary"
+                        class="color-picker"
+                        type="color"
+                        value="#9999a3"
+                    >
+
+                    <input
+                        id="secondaryHex"
+                        class="hex"
+                        value="#9999A3"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- WALLPAPER -->
+
+    <section class="card">
+
+        <div class="card-title">
+
+            <strong>
+                Изображение
+            </strong>
+
+            <span>
+                Фон чата
+            </span>
+
+        </div>
+
+
+        <label class="upload">
+
+            🖼️
+            Выбрать изображение
+
+            <input
+                id="wallpaper"
+                type="file"
+                accept="image/*"
+            >
+
+        </label>
+
+
+        <div class="small-actions">
+
+            <button
+                onclick="removeWallpaper()"
+            >
+                Убрать фон
+            </button>
+
+            <button
+                onclick="randomGradient()"
+            >
+                Градиент
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ACTIONS -->
+
+    <section class="card">
+
+        <div class="card-title">
+
+            <strong>
+                Готово?
+            </strong>
+
+            <span>
+                Финальный шаг
+            </span>
+
+        </div>
+
+
+        <div class="actions">
+
+            <button
+                class="action-button"
+                onclick="downloadPreview()"
+            >
+                📥 Скачать
+            </button>
+
+            <button
+                class="action-button primary"
+                onclick="createTelegramTheme()"
+            >
+                🎨 Создать тему
+            </button>
+
+        </div>
+
+    </section>
 
 </div>
 
-<div class="card">
 
-<div class="title">Готовые стили</div>
-
-<div class="presets">
-
-<button class="preset"
-style="background:linear-gradient(135deg,#ff4fa3,#7928ca)"
-onclick="preset('pink')">Pink</button>
-
-<button class="preset"
-style="background:linear-gradient(135deg,#050505,#444)"
-onclick="preset('black')">Black</button>
-
-<button class="preset"
-style="background:linear-gradient(135deg,#7b0000,#ff3030)"
-onclick="preset('blood')">Blood</button>
-
-<button class="preset"
-style="background:linear-gradient(135deg,#162447,#1f8cff)"
-onclick="preset('ocean')">Ocean</button>
-
-<button class="preset"
-style="background:linear-gradient(135deg,#24103f,#9b59ff)"
-onclick="preset('purple')">Purple</button>
-
-<button class="preset"
-style="background:linear-gradient(135deg,#092e20,#2ecc71)"
-onclick="preset('forest')">Forest</button>
-
-<button class="preset"
-style="background:linear-gradient(135deg,#111,#00e5ff)"
-onclick="preset('cyber')">Cyber</button>
-
-<button class="preset"
-style="background:linear-gradient(135deg,#fff,#ddd);color:#111"
-onclick="preset('minimal')">Minimal</button>
-
-</div>
-</div>
-
-<div class="card">
-
-<div class="title">Цвета</div>
-
-<div class="colors">
-
-<div class="color">
-<label>Фон чата</label>
-<input id="bg" type="color" value="#111114">
-<input id="bgHex" class="hex" value="#111114">
-</div>
-
-<div class="color">
-<label>Шапка</label>
-<input id="header" type="color" value="#18181d">
-<input id="headerHex" class="hex" value="#18181d">
-</div>
-
-<div class="color">
-<label>Акцент</label>
-<input id="accent" type="color" value="#ff4fa3">
-<input id="accentHex" class="hex" value="#ff4fa3">
-</div>
-
-<div class="color">
-<label>Исходящие сообщения</label>
-<input id="outgoingColor" type="color" value="#ff4fa3">
-<input id="outgoingColorHex" class="hex" value="#ff4fa3">
-</div>
-
-<div class="color">
-<label>Входящие сообщения</label>
-<input id="incomingColor" type="color" value="#292930">
-<input id="incomingColorHex" class="hex" value="#292930">
-</div>
-
-<div class="color">
-<label>Текст</label>
-<input id="text" type="color" value="#ffffff">
-<input id="textHex" class="hex" value="#ffffff">
-</div>
-
-<div class="color">
-<label>Ссылки</label>
-<input id="link" type="color" value="#ff4fa3">
-<input id="linkHex" class="hex" value="#ff4fa3">
-</div>
-
-<div class="color">
-<label>Вторичный текст</label>
-<input id="secondary" type="color" value="#9999a3">
-<input id="secondaryHex" class="hex" value="#9999a3">
-</div>
-
-</div>
-</div>
-
-<div class="card">
-
-<div class="title">Фон</div>
-
-<label class="upload">
-🖼️ Выбрать изображение
-<input id="wallpaper" type="file" accept="image/*">
-</label>
-
-<br>
-
-<div class="actions">
-
-<button onclick="removeWallpaper()">
-Убрать фон
-</button>
-
-<button onclick="randomGradient()">
-Градиент
-</button>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<div class="title">Создание темы</div>
-
-<div class="actions">
-
-<button onclick="downloadPreview()">
-💾 Скачать
-</button>
-
-<button class="primary" onclick="createTelegramTheme()">
-🎨 Создать тему
-</button>
-
-</div>
-
-</div>
-
-</div>
+<!-- BOTTOM -->
 
 <div class="bottom">
 
-<button onclick="saveTheme()">
-💾 Сохранить
-</button>
+    <button
+        class="bottom-save"
+        onclick="saveTheme()"
+    >
+        💾 Сохранить
+    </button>
 
-<button class="primary" onclick="createTelegramTheme()">
-🎨 Создать
-</button>
+    <button
+        class="bottom-create"
+        onclick="createTelegramTheme()"
+    >
+        🎨 Создать тему
+    </button>
 
 </div>
 
-<div id="toast" class="toast"></div>
+
+<div
+    id="toast"
+    class="toast"
+></div>
+
 
 <script>
 
 const SERVER =
-"https://theme-studio-production-ec43.up.railway.app";
+    "https://theme-studio-production-ec43.up.railway.app";
+
 
 let platform = "ios";
 
-const $ = id =>
-document.getElementById(id);
+
+function $(id) {
+    return document.getElementById(id);
+}
 
 
 /* PLATFORM */
 
-function setPlatform(type){
+function setPlatform(type) {
 
     platform = type;
 
-    $("androidBtn").classList.remove("active");
-    $("iosBtn").classList.remove("active");
+    $("androidBtn")
+        .classList
+        .remove("active");
 
-    if(type === "android"){
-        $("androidBtn").classList.add("active");
-    }else{
-        $("iosBtn").classList.add("active");
+    $("iosBtn")
+        .classList
+        .remove("active");
+
+
+    if (type === "android") {
+
+        $("androidBtn")
+            .classList
+            .add("active");
+
+    } else {
+
+        $("iosBtn")
+            .classList
+            .add("active");
+
     }
 
 }
 
 
-/* THEME */
+/* THEME DATA */
 
-function getTheme(){
+function getTheme() {
 
     return {
 
-        name:$("themeName").value || "Telegram Theme",
+        name:
+            $("themeName")
+            .value
+            .trim()
+            ||
+            "Telegram Theme",
 
-        platform:platform,
+        platform:
 
-        colors:{
+            platform,
 
-            background:$("bg").value,
+        colors: {
 
-            header:$("header").value,
+            background:
+                $("bg").value,
 
-            accent:$("accent").value,
+            header:
+                $("header").value,
 
-            outgoing:$("outgoingColor").value,
+            accent:
+                $("accent").value,
 
-            incoming:$("incomingColor").value,
+            outgoing:
+                $("outgoingColor").value,
 
-            text:$("text").value,
+            incoming:
+                $("incomingColor").value,
 
-            link:$("link").value,
+            text:
+                $("text").value,
 
-            secondary:$("secondary").value
+            link:
+                $("link").value,
+
+            secondary:
+                $("secondary").value
 
         }
 
@@ -647,226 +1245,350 @@ function getTheme(){
 }
 
 
-/* APPLY */
+/* PREVIEW */
 
-function applyTheme(){
+function applyTheme() {
 
-    const t = getTheme();
+    const theme =
+        getTheme();
 
-    $("chat").style.backgroundColor =
-        t.colors.background;
 
-    $("previewHeader").style.backgroundColor =
-        t.colors.header;
+    $("chat")
+        .style
+        .backgroundColor =
+        theme.colors.background;
 
-    $("composer").style.backgroundColor =
-        t.colors.header;
 
-    $("avatar").style.backgroundColor =
-        t.colors.accent;
+    $("previewHeader")
+        .style
+        .backgroundColor =
+        theme.colors.header;
 
-    $("send").style.backgroundColor =
-        t.colors.accent;
+
+    $("composer")
+        .style
+        .backgroundColor =
+        theme.colors.header;
+
+
+    $("avatar")
+        .style
+        .backgroundColor =
+        theme.colors.accent;
+
+
+    $("send")
+        .style
+        .backgroundColor =
+        theme.colors.accent;
+
 
     document
-    .querySelectorAll(".out")
-    .forEach(el =>
-        el.style.background =
-        t.colors.outgoing
-    );
+        .querySelectorAll(".message.out")
+        .forEach(
+            element => {
+
+                element.style.background =
+                    theme.colors.outgoing;
+
+            }
+        );
+
 
     document
-    .querySelectorAll(".in")
-    .forEach(el =>
-        el.style.background =
-        t.colors.incoming
-    );
+        .querySelectorAll(".message.in")
+        .forEach(
+            element => {
+
+                element.style.background =
+                    theme.colors.incoming;
+
+            }
+        );
+
 
     document
-    .querySelectorAll(".message")
-    .forEach(el =>
-        el.style.color =
-        t.colors.text
-    );
+        .querySelectorAll(".message")
+        .forEach(
+            element => {
 
-    $("fakeInput").style.color =
-        t.colors.secondary;
+                element.style.color =
+                    theme.colors.text;
+
+            }
+        );
+
+
+    $("fakeInput")
+        .style
+        .color =
+        theme.colors.secondary;
 
 }
 
 
-/* COLORS */
+/* COLOR CONTROLS */
 
-const pairs = [
+const colorPairs = [
 
-["bg","bgHex"],
-["header","headerHex"],
-["accent","accentHex"],
-["outgoingColor","outgoingColorHex"],
-["incomingColor","incomingColorHex"],
-["text","textHex"],
-["link","linkHex"],
-["secondary","secondaryHex"]
+    ["bg", "bgHex"],
+
+    ["header", "headerHex"],
+
+    ["accent", "accentHex"],
+
+    ["outgoingColor", "outgoingColorHex"],
+
+    ["incomingColor", "incomingColorHex"],
+
+    ["text", "textHex"],
+
+    ["link", "linkHex"],
+
+    ["secondary", "secondaryHex"]
 
 ];
 
-pairs.forEach(pair => {
 
-    const color = $(pair[0]);
-    const hex = $(pair[1]);
+colorPairs.forEach(
+    pair => {
 
-    color.addEventListener("input",() => {
+        const color =
+            $(pair[0]);
 
-        hex.value =
-            color.value.toUpperCase();
+        const hex =
+            $(pair[1]);
 
-        applyTheme();
 
-    });
+        color.addEventListener(
+            "input",
+            () => {
 
-    hex.addEventListener("change",() => {
+                hex.value =
+                    color.value
+                    .toUpperCase();
 
-        let value =
-            hex.value.trim();
+                applyTheme();
 
-        if(!/^#[0-9a-fA-F]{6}$/.test(value)){
+            }
+        );
 
-            hex.value =
-                color.value;
 
-            return;
+        hex.addEventListener(
+            "change",
+            () => {
 
-        }
+                let value =
+                    hex.value
+                    .trim();
 
-        color.value =
-            value;
 
-        applyTheme();
+                if (
+                    !/^#[0-9a-fA-F]{6}$/
+                    .test(value)
+                ) {
 
-    });
+                    hex.value =
+                        color.value
+                        .toUpperCase();
 
-});
+                    return;
+
+                }
+
+
+                color.value =
+                    value;
+
+
+                applyTheme();
+
+            }
+        );
+
+    }
+);
 
 
 /* PRESETS */
 
-const themes = {
+const presets = {
 
-pink:{
-background:"#111114",
-header:"#18181d",
-accent:"#ff4fa3",
-outgoing:"#ff4fa3",
-incoming:"#292930",
-text:"#ffffff"
-},
+    pink: {
 
-black:{
-background:"#050505",
-header:"#101010",
-accent:"#777777",
-outgoing:"#292929",
-incoming:"#171717",
-text:"#ffffff"
-},
+        background: "#111114",
+        header: "#18181D",
+        accent: "#FF4FA3",
+        outgoing: "#FF4FA3",
+        incoming: "#292930",
+        text: "#FFFFFF",
+        link: "#FF4FA3",
+        secondary: "#9999A3"
 
-blood:{
-background:"#160607",
-header:"#22090b",
-accent:"#ff3030",
-outgoing:"#9e1118",
-incoming:"#351014",
-text:"#ffffff"
-},
+    },
 
-ocean:{
-background:"#07131f",
-header:"#0b1e30",
-accent:"#2498ff",
-outgoing:"#1677c8",
-incoming:"#132d43",
-text:"#ffffff"
-},
 
-purple:{
-background:"#10091b",
-header:"#1a0e2b",
-accent:"#a855f7",
-outgoing:"#7936bd",
-incoming:"#28183c",
-text:"#ffffff"
-},
+    black: {
 
-forest:{
-background:"#07120c",
-header:"#0c1d12",
-accent:"#35c978",
-outgoing:"#18834a",
-incoming:"#14291d",
-text:"#ffffff"
-},
+        background: "#050505",
+        header: "#101010",
+        accent: "#777777",
+        outgoing: "#292929",
+        incoming: "#171717",
+        text: "#FFFFFF",
+        link: "#AAAAAA",
+        secondary: "#888888"
 
-cyber:{
-background:"#05090c",
-header:"#081218",
-accent:"#00e5ff",
-outgoing:"#007f91",
-incoming:"#102229",
-text:"#ffffff"
-},
+    },
 
-minimal:{
-background:"#eeeeF2",
-header:"#ffffff",
-accent:"#777777",
-outgoing:"#d8d8df",
-incoming:"#ffffff",
-text:"#111111"
-}
+
+    blood: {
+
+        background: "#160607",
+        header: "#22090B",
+        accent: "#FF3030",
+        outgoing: "#9E1118",
+        incoming: "#351014",
+        text: "#FFFFFF",
+        link: "#FF6060",
+        secondary: "#AA7777"
+
+    },
+
+
+    ocean: {
+
+        background: "#07131F",
+        header: "#0B1E30",
+        accent: "#2498FF",
+        outgoing: "#1677C8",
+        incoming: "#132D43",
+        text: "#FFFFFF",
+        link: "#55AAFF",
+        secondary: "#8099AA"
+
+    },
+
+
+    purple: {
+
+        background: "#10091B",
+        header: "#1A0E2B",
+        accent: "#A855F7",
+        outgoing: "#7936BD",
+        incoming: "#28183C",
+        text: "#FFFFFF",
+        link: "#C084FC",
+        secondary: "#9988AA"
+
+    },
+
+
+    forest: {
+
+        background: "#07120C",
+        header: "#0C1D12",
+        accent: "#35C978",
+        outgoing: "#18834A",
+        incoming: "#14291D",
+        text: "#FFFFFF",
+        link: "#55DD99",
+        secondary: "#7D9988"
+
+    },
+
+
+    cyber: {
+
+        background: "#05090C",
+        header: "#081218",
+        accent: "#00E5FF",
+        outgoing: "#007F91",
+        incoming: "#102229",
+        text: "#FFFFFF",
+        link: "#00E5FF",
+        secondary: "#7AA0A8"
+
+    },
+
+
+    minimal: {
+
+        background: "#EEEEF2",
+        header: "#FFFFFF",
+        accent: "#777777",
+        outgoing: "#D8D8DF",
+        incoming: "#FFFFFF",
+        text: "#111111",
+        link: "#555555",
+        secondary: "#777777"
+
+    }
 
 };
 
 
-function preset(type){
+function preset(type) {
 
-    const t =
-        themes[type];
+    const theme =
+        presets[type];
+
 
     $("bg").value =
-        t.background;
+        theme.background;
 
     $("bgHex").value =
-        t.background.toUpperCase();
+        theme.background;
+
 
     $("header").value =
-        t.header;
+        theme.header;
 
     $("headerHex").value =
-        t.header.toUpperCase();
+        theme.header;
+
 
     $("accent").value =
-        t.accent;
+        theme.accent;
 
     $("accentHex").value =
-        t.accent.toUpperCase();
+        theme.accent;
+
 
     $("outgoingColor").value =
-        t.outgoing;
+        theme.outgoing;
 
     $("outgoingColorHex").value =
-        t.outgoing.toUpperCase();
+        theme.outgoing;
+
 
     $("incomingColor").value =
-        t.incoming;
+        theme.incoming;
 
     $("incomingColorHex").value =
-        t.incoming.toUpperCase();
+        theme.incoming;
+
 
     $("text").value =
-        t.text;
+        theme.text;
 
     $("textHex").value =
-        t.text.toUpperCase();
+        theme.text;
+
+
+    $("link").value =
+        theme.link;
+
+    $("linkHex").value =
+        theme.link;
+
+
+    $("secondary").value =
+        theme.secondary;
+
+    $("secondaryHex").value =
+        theme.secondary;
+
 
     applyTheme();
 
@@ -877,37 +1599,55 @@ function preset(type){
 
 /* WALLPAPER */
 
-$("wallpaper").addEventListener(
-"change",
-function(e){
+$("wallpaper")
+    .addEventListener(
+        "change",
+        function(event) {
 
-    const file =
-        e.target.files[0];
-
-    if(!file)
-        return;
-
-    const url =
-        URL.createObjectURL(file);
-
-    $("chat").style.backgroundImage =
-        `url("${url}")`;
-
-});
+            const file =
+                event.target
+                    .files[0];
 
 
-function removeWallpaper(){
+            if (!file)
+                return;
 
-    $("chat").style.backgroundImage =
+
+            const url =
+                URL.createObjectURL(file);
+
+
+            $("chat")
+                .style
+                .backgroundImage =
+                `url("${url}")`;
+
+
+            toast("Фон установлен ✓");
+
+        }
+    );
+
+
+function removeWallpaper() {
+
+    $("chat")
+        .style
+        .backgroundImage =
         "none";
 
-    $("wallpaper").value =
+
+    $("wallpaper")
+        .value =
         "";
+
+
+    toast("Фон убран");
 
 }
 
 
-function randomGradient(){
+function randomGradient() {
 
     const gradients = [
 
@@ -925,19 +1665,26 @@ function randomGradient(){
 
     ];
 
-    $("chat").style.backgroundImage =
+
+    $("chat")
+        .style
+        .backgroundImage =
         gradients[
             Math.floor(
-                Math.random()*gradients.length
+                Math.random() *
+                gradients.length
             )
         ];
+
+
+    toast("Градиент установлен");
 
 }
 
 
 /* SAVE */
 
-function saveTheme(){
+function saveTheme() {
 
     localStorage.setItem(
         "themeStudio",
@@ -946,48 +1693,124 @@ function saveTheme(){
         )
     );
 
+
     toast("Тема сохранена ✓");
+
+}
+
+
+/* DOWNLOAD */
+
+function downloadPreview() {
+
+    const theme =
+        getTheme();
+
+
+    const blob =
+        new Blob(
+            [
+                JSON.stringify(
+                    theme,
+                    null,
+                    2
+                )
+            ],
+            {
+                type:
+                    "application/json"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    const link =
+        document.createElement("a");
+
+
+    link.href =
+        url;
+
+
+    link.download =
+        (
+            theme.name
+                .replace(
+                    /[^a-zA-Z0-9а-яА-ЯёЁ_-]/g,
+                    "_"
+                )
+            ||
+            "telegram_theme"
+        )
+        +
+        ".json";
+
+
+    document.body
+        .appendChild(link);
+
+
+    link.click();
+
+
+    link.remove();
+
+
+    URL.revokeObjectURL(url);
 
 }
 
 
 /* CREATE */
 
-async function createTelegramTheme(){
+async function createTelegramTheme() {
+
+    toast("Создаю тему…");
+
 
     const theme =
         getTheme();
 
-    toast("Создаю тему…");
 
-    try{
+    try {
 
         const response =
             await fetch(
-                SERVER + "/api/theme",
+                SERVER +
+                "/api/theme",
                 {
-                    method:"POST",
 
-                    headers:{
+                    method:
+                        "POST",
+
+                    headers: {
+
                         "Content-Type":
-                        "application/json"
+                            "application/json"
+
                     },
 
                     body:
-                    JSON.stringify(theme)
+                        JSON.stringify(theme)
+
                 }
             );
+
 
         const result =
             await response.json();
 
-        if(result.ok){
+
+        if (result.ok) {
 
             toast(
                 "🎨 Тема отправлена в Telegram!"
             );
 
-        }else{
+        } else {
 
             toast(
                 "Ошибка: " +
@@ -1000,7 +1823,8 @@ async function createTelegramTheme(){
 
         }
 
-    }catch(error){
+
+    } catch (error) {
 
         console.error(error);
 
@@ -1013,174 +1837,215 @@ async function createTelegramTheme(){
 }
 
 
-/* LOCAL DOWNLOAD */
+/* APP THEME */
 
-function downloadPreview(){
+function toggleAppTheme() {
 
-    const theme =
-        getTheme();
+    const current =
+        document.documentElement
+            .getAttribute(
+                "data-theme"
+            );
 
-    const text =
-        JSON.stringify(
-            theme,
-            null,
-            2
+
+    const next =
+        current === "dark"
+            ? "light"
+            : "dark";
+
+
+    document.documentElement
+        .setAttribute(
+            "data-theme",
+            next
         );
 
-    const blob =
-        new Blob(
-            [text],
-            {
-                type:"application/json"
-            }
-        );
 
-    const url =
-        URL.createObjectURL(blob);
+    localStorage.setItem(
+        "appTheme",
+        next
+    );
 
-    const a =
-        document.createElement("a");
 
-    a.href =
-        url;
-
-    a.download =
-        (
-            theme.name
-            .replace(/[^a-zA-Z0-9а-яА-ЯёЁ_-]/g,"_")
-            ||
-            "telegram_theme"
-        )
-        +
-        ".json";
-
-    document.body.appendChild(a);
-
-    a.click();
-
-    a.remove();
-
-    URL.revokeObjectURL(url);
+    $("themeToggle")
+        .textContent =
+        next === "dark"
+            ? "☀️"
+            : "🌙";
 
 }
 
 
-/* LOAD */
+/* LOAD APP THEME */
 
-function loadSaved(){
+function loadAppTheme() {
+
+    const saved =
+        localStorage.getItem(
+            "appTheme"
+        )
+        ||
+        "dark";
+
+
+    document.documentElement
+        .setAttribute(
+            "data-theme",
+            saved
+        );
+
+
+    $("themeToggle")
+        .textContent =
+        saved === "dark"
+            ? "☀️"
+            : "🌙";
+
+}
+
+
+/* LOAD SAVED */
+
+function loadSavedTheme() {
 
     const saved =
         localStorage.getItem(
             "themeStudio"
         );
 
-    if(!saved)
+
+    if (!saved)
         return;
 
-    try{
 
-        const t =
+    try {
+
+        const theme =
             JSON.parse(saved);
 
-        if(t.name)
-            $("themeName").value =
-                t.name;
 
-        if(t.platform)
-            setPlatform(t.platform);
+        if (theme.name) {
 
-        if(t.colors){
-
-            const c =
-                t.colors;
-
-            if(c.background){
-                $("bg").value =
-                    c.background;
-                $("bgHex").value =
-                    c.background.toUpperCase();
-            }
-
-            if(c.header){
-                $("header").value =
-                    c.header;
-                $("headerHex").value =
-                    c.header.toUpperCase();
-            }
-
-            if(c.accent){
-                $("accent").value =
-                    c.accent;
-                $("accentHex").value =
-                    c.accent.toUpperCase();
-            }
-
-            if(c.outgoing){
-                $("outgoingColor").value =
-                    c.outgoing;
-                $("outgoingColorHex").value =
-                    c.outgoing.toUpperCase();
-            }
-
-            if(c.incoming){
-                $("incomingColor").value =
-                    c.incoming;
-                $("incomingColorHex").value =
-                    c.incoming.toUpperCase();
-            }
-
-            if(c.text){
-                $("text").value =
-                    c.text;
-                $("textHex").value =
-                    c.text.toUpperCase();
-            }
-
-            if(c.link){
-                $("link").value =
-                    c.link;
-                $("linkHex").value =
-                    c.link.toUpperCase();
-            }
-
-            if(c.secondary){
-                $("secondary").value =
-                    c.secondary;
-                $("secondaryHex").value =
-                    c.secondary.toUpperCase();
-            }
+            $("themeName")
+                .value =
+                theme.name;
 
         }
 
-    }catch(e){}
+
+        if (theme.platform) {
+
+            setPlatform(
+                theme.platform
+            );
+
+        }
+
+
+        if (theme.colors) {
+
+            const c =
+                theme.colors;
+
+
+            const fields = {
+
+                bg:
+                    c.background,
+
+                header:
+                    c.header,
+
+                accent:
+                    c.accent,
+
+                outgoingColor:
+                    c.outgoing,
+
+                incomingColor:
+                    c.incoming,
+
+                text:
+                    c.text,
+
+                link:
+                    c.link,
+
+                secondary:
+                    c.secondary
+
+            };
+
+
+            Object.keys(fields)
+                .forEach(
+                    id => {
+
+                        if (!fields[id])
+                            return;
+
+
+                        $(id).value =
+                            fields[id];
+
+
+                        const hex =
+                            $(id + "Hex");
+
+
+                        if (hex) {
+
+                            hex.value =
+                                fields[id]
+                                    .toUpperCase();
+
+                        }
+
+                    }
+                );
+
+        }
+
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
 
 }
 
 
 /* TOAST */
 
-function toast(text){
+function toast(message) {
 
-    const t =
+    const element =
         $("toast");
 
-    t.textContent =
-        text;
 
-    t.style.display =
-        "block";
+    element.textContent =
+        message;
+
+
+    element.classList
+        .add("show");
+
 
     clearTimeout(
         window.toastTimer
     );
 
+
     window.toastTimer =
         setTimeout(
             () => {
-                t.style.display =
-                    "none";
+
+                element.classList
+                    .remove("show");
+
             },
-            2200
+            2300
         );
 
 }
@@ -1188,7 +2053,9 @@ function toast(text){
 
 /* START */
 
-loadSaved();
+loadAppTheme();
+
+loadSavedTheme();
 
 applyTheme();
 
