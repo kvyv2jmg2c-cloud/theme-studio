@@ -1,14 +1,11 @@
 import os
-import uuid
 import requests
-from flask import Flask, jsonify, request, send_file
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
-THEMES_DIR = "/tmp/themes"
-os.makedirs(THEMES_DIR, exist_ok=True)
 @app.route("/")
 def home():
     return jsonify({
@@ -34,22 +31,6 @@ def get_chat_id():
             "ok": False,
             "error": str(e)
         }), 500
-@app.route("/theme/<theme_id>")
-def get_theme(theme_id):
-    if "/" in theme_id or "\\" in theme_id or ".." in theme_id:
-        return "Invalid theme", 400
-    filepath = os.path.join(
-        THEMES_DIR,
-        theme_id + ".attheme"
-    )
-    if not os.path.exists(filepath):
-        return "Тема не найдена.", 404
-    return send_file(
-        filepath,
-        as_attachment=True,
-        download_name=theme_id + ".attheme",
-        mimetype="application/octet-stream"
-    )
 @app.route("/api/theme", methods=["POST", "OPTIONS"])
 def create_theme():
     if request.method == "OPTIONS":
@@ -94,7 +75,6 @@ def create_theme():
                     default.replace("#", ""),
                     16
                 )
-        # Создаём .attheme
         theme = f"""name: {name}
 windowBackgroundWhite: {color("background", "#111114")}
 actionBarDefault: {color("header", "#18181D")}
@@ -102,78 +82,52 @@ actionBarDefaultIcon: {color("text", "#FFFFFF")}
 actionBarDefaultTitle: {color("text", "#FFFFFF")}
 windowBackgroundWhiteBlackText: {color("text", "#FFFFFF")}
 windowBackgroundWhiteGrayText: {color("secondary", "#999999")}
-windowBackgroundWhiteLinkText: {color("link", "#7180FF")}
-chat_outBubble: {color("outgoing", "#7180FF")}
+windowBackgroundWhiteLinkText: {color("link", "#FF4FA3")}
+chat_outBubble: {color("outgoing", "#FF4FA3")}
 chat_inBubble: {color("incoming", "#292930")}
 chat_messageTextIn: {color("text", "#FFFFFF")}
 chat_messageTextOut: {color("text", "#FFFFFF")}
-chat_linkIn: {color("link", "#7180FF")}
-chat_linkOut: {color("link", "#7180FF")}
-chat_outSentCheck: {color("accent", "#7180FF")}
-chat_inSentCheck: {color("accent", "#7180FF")}
+chat_linkIn: {color("link", "#FF4FA3")}
+chat_linkOut: {color("link", "#FF4FA3")}
+chat_outSentCheck: {color("accent", "#FF4FA3")}
+chat_inSentCheck: {color("accent", "#FF4FA3")}
 """
-        # Делаем уникальное имя
-        safe_name = str(name).strip()
-        if not safe_name:
-            safe_name = "Telegram_Theme"
-        safe_name = safe_name.replace(" ", "_")
-        safe_name = safe_name.replace("/", "_")
-        safe_name = safe_name.replace("\\", "_")
-        theme_id = (
-            safe_name[:35]
-            + "_"
-            + uuid.uuid4().hex[:8]
+        filename = str(name).strip()
+        if not filename:
+            filename = "Telegram_Theme"
+        filename = filename.replace(
+            " ",
+            "_"
         )
-        filepath = os.path.join(
-            THEMES_DIR,
-            theme_id + ".attheme"
+        filename = filename.replace(
+            "/",
+            "_"
         )
-        with open(
-            filepath,
-            "w",
-            encoding="utf-8"
-        ) as file:
-            file.write(theme)
-        # Публичная ссылка Railway
-        base_url = os.environ.get(
-            "RAILWAY_PUBLIC_DOMAIN"
+        filename = filename.replace(
+            "\\",
+            "_"
         )
-        if base_url:
-            if not base_url.startswith("http"):
-                base_url = "https://" + base_url
-        else:
-            base_url = request.host_url.rstrip("/")
-        theme_url = (
-            base_url
-            + "/theme/"
-            + theme_id
-        )
-        # Сообщение боту
-        text = (
-            f"🎨 Тема «{name}» готова!\n\n"
-            f"Платформа: {platform}\n\n"
-            f"🔗 Ссылка на тему:\n"
-            f"{theme_url}"
-        )
-        # Кнопка-ссылка
-        keyboard = {
-            "inline_keyboard": [
-                [
-                    {
-                        "text": "🎨 Открыть тему",
-                        "url": theme_url
-                    }
-                ]
-            ]
+        if not filename.endswith(".attheme"):
+            filename += ".attheme"
+        files = {
+            "document": (
+                filename,
+                theme.encode("utf-8"),
+                "application/octet-stream"
+            )
         }
+        caption = (
+            f"🎨 Тема «{name}» готова!\n"
+            f"Платформа: {platform}"
+        )
         telegram = requests.post(
             f"https://api.telegram.org/"
-            f"bot{BOT_TOKEN}/sendMessage",
-            json={
+            f"bot{BOT_TOKEN}/sendDocument",
+            data={
                 "chat_id": CHAT_ID,
-                "text": text,
-                "reply_markup": keyboard
+                "caption": caption
             },
+            files=files,
             timeout=30
         )
         result = telegram.json()
@@ -184,13 +138,16 @@ chat_inSentCheck: {color("accent", "#7180FF")}
             }), 500
         return jsonify({
             "ok": True,
-            "message": "Ссылка на тему отправлена",
-            "url": theme_url
+            "message":
+                "Тема отправлена в Telegram",
+            "telegram":
+                result
         })
     except Exception as e:
         return jsonify({
             "ok": False,
-            "error": str(e)
+            "error":
+                str(e)
         }), 500
 if __name__ == "__main__":
     port = int(
