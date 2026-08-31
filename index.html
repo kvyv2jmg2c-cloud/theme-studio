@@ -4,101 +4,316 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="theme-color" content="#09090d">
+
 <title>Theme Studio</title>
 
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;background:#09090d;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-body{padding-bottom:110px}
-.app{max-width:650px;margin:auto;padding:15px}
-h1{font-size:24px;margin:5px 0 15px}
-h1 span{color:#ff4fa3}
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+    margin:0;
+    padding:0;
+    background:#09090d;
+    color:#fff;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+body{
+    padding-bottom:40px;
+}
+
+.app{
+    width:100%;
+    max-width:650px;
+    margin:auto;
+    padding:15px;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:800;
+    margin:5px 0 15px;
+}
+
+.logo span{
+    color:#ff4fa3;
+}
 
 .card{
-background:#15151a;border:1px solid #292930;border-radius:18px;
-padding:15px;margin-bottom:12px
+    background:#15151a;
+    border:1px solid #292930;
+    border-radius:18px;
+    padding:15px;
+    margin-bottom:12px;
 }
-.title{font-weight:750;font-size:14px;margin-bottom:12px}
 
-input[type=text]{
-width:100%;height:48px;background:#101014;color:#fff;
-border:1px solid #303039;border-radius:13px;padding:0 13px;
-outline:none;font-size:15px
+.title{
+    font-size:14px;
+    font-weight:750;
+    margin-bottom:12px;
+}
+
+input[type="text"]{
+    width:100%;
+    height:48px;
+    background:#101014;
+    color:#fff;
+    border:1px solid #303039;
+    border-radius:13px;
+    padding:0 13px;
+    outline:none;
+    font-size:15px;
+}
+
+.platforms{
+    display:flex;
+    gap:7px;
+}
+
+.platforms button{
+    flex:1;
+    height:46px;
+    border:1px solid #333;
+    background:#101014;
+    color:#aaa;
+    border-radius:12px;
+    font-weight:700;
+}
+
+.platforms button.active{
+    background:#fff;
+    color:#000;
 }
 
 .preview{
-overflow:hidden;border-radius:25px;border:1px solid #333;
-margin-bottom:12px
+    overflow:hidden;
+    border-radius:25px;
+    border:1px solid #333;
 }
+
 .header{
-height:60px;background:#18181d;display:flex;align-items:center;padding:10px
+    height:60px;
+    background:#18181d;
+    display:flex;
+    align-items:center;
+    padding:10px;
 }
+
 .avatar{
-width:38px;height:38px;border-radius:50%;display:flex;
-align-items:center;justify-content:center;font-weight:700;margin-right:9px
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    margin-right:9px;
 }
-.name{font-weight:700;font-size:14px}
-.status{font-size:10px;opacity:.5}
+
+.name{
+    font-weight:700;
+    font-size:14px;
+}
+
+.status{
+    font-size:10px;
+    opacity:.5;
+}
+
 .chat{
-height:390px;background:#111114;padding:15px;
-display:flex;flex-direction:column;justify-content:flex-end;gap:8px
+    height:390px;
+    background:#111114;
+    padding:15px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    gap:8px;
 }
+
 .msg{
-max-width:80%;padding:9px 12px;font-size:14px;
-border-radius:17px;line-height:1.3
+    max-width:80%;
+    padding:9px 12px;
+    font-size:14px;
+    border-radius:17px;
+    line-height:1.3;
 }
-.in{align-self:flex-start}
-.out{align-self:flex-end}
-.time{font-size:9px;opacity:.5;text-align:right;margin-top:4px}
+
+.in{
+    align-self:flex-start;
+}
+
+.out{
+    align-self:flex-end;
+}
+
+.time{
+    font-size:9px;
+    opacity:.5;
+    text-align:right;
+    margin-top:4px;
+}
+
 .composer{
-height:56px;background:#18181d;padding:8px;display:flex;align-items:center
+    height:56px;
+    background:#18181d;
+    padding:8px;
+    display:flex;
+    align-items:center;
 }
+
 .fake{
-flex:1;background:#111114;color:#888;padding:10px 13px;border-radius:20px
+    flex:1;
+    background:#111114;
+    color:#888;
+    padding:10px 13px;
+    border-radius:20px;
 }
+
 .send{
-width:40px;height:40px;border-radius:50%;margin-left:8px;
-display:flex;align-items:center;justify-content:center
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    margin-left:8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
 .colors{
-display:grid;grid-template-columns:1fr 1fr;gap:10px
-}
-label{font-size:10px;color:#999;display:block;margin-bottom:5px}
-.color{
-background:#101014;border:1px solid #303039;border-radius:12px;padding:8px
-}
-.color input[type=color]{
-width:100%;height:35px;border:0;background:none;padding:0
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
 }
 
-.platforms{display:flex;gap:7px}
-.platforms button{
-flex:1;height:44px;border:1px solid #333;background:#101014;
-color:#aaa;border-radius:12px;font-weight:700
+.color{
+    background:#101014;
+    border:1px solid #303039;
+    border-radius:12px;
+    padding:8px;
 }
-.platforms button.active{background:#fff;color:#000}
+
+.color label{
+    display:block;
+    font-size:10px;
+    color:#999;
+    margin-bottom:5px;
+}
+
+.color input[type="color"]{
+    width:100%;
+    height:38px;
+    border:0;
+    background:none;
+    padding:0;
+}
 
 .wall{
-width:100%;padding:15px;border:1px dashed #444;background:#101014;
-border-radius:13px;color:#aaa;text-align:center
+    display:block;
+    width:100%;
+    padding:16px;
+    border:1px dashed #444;
+    background:#101014;
+    border-radius:13px;
+    color:#aaa;
+    text-align:center;
+    font-size:12px;
 }
-.wall input{display:none}
 
-.buttons{display:flex;gap:8px}
-.buttons button{
-flex:1;min-height:50px;border:0;border-radius:14px;
-font-weight:750;font-size:13px
+.wall input{
+    display:none;
 }
-.android{background:#fff;color:#000}
-.iphone{background:#ff4fa3;color:#fff}
 
-.reset{background:#17171c;color:#fff;border:1px solid #333!important}
+.main-buttons{
+    display:flex;
+    gap:8px;
+}
+
+.main-buttons button{
+    flex:1;
+    min-height:54px;
+    border:0;
+    border-radius:14px;
+    font-weight:800;
+    font-size:13px;
+}
+
+.android{
+    background:#fff;
+    color:#000;
+}
+
+.iphone{
+    background:#ff4fa3;
+    color:#fff;
+}
+
+.download-button{
+    width:100%;
+    min-height:52px;
+    border:0;
+    border-radius:14px;
+    background:#fff;
+    color:#000;
+    font-weight:800;
+    font-size:14px;
+    margin-top:10px;
+}
+
+.copy-button{
+    width:100%;
+    min-height:48px;
+    border:1px solid #333;
+    border-radius:13px;
+    background:#101014;
+    color:#fff;
+    font-weight:700;
+}
+
+.result{
+    margin-top:12px;
+    padding:14px;
+    border-radius:14px;
+    background:#101014;
+    border:1px solid #303039;
+}
+
+.result-title{
+    font-weight:800;
+    margin-bottom:7px;
+}
+
+.result-text{
+    font-size:12px;
+    line-height:1.5;
+    color:#aaa;
+}
+
+.reset{
+    width:100%;
+    min-height:46px;
+    border:1px solid #333;
+    border-radius:13px;
+    background:#101014;
+    color:#fff;
+    font-weight:700;
+}
 
 .toast{
-position:fixed;top:15px;left:50%;transform:translateX(-50%);
-background:#fff;color:#000;padding:11px 15px;border-radius:13px;
-display:none;z-index:99;font-size:12px
+    position:fixed;
+    top:15px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#fff;
+    color:#000;
+    padding:11px 15px;
+    border-radius:13px;
+    display:none;
+    z-index:999;
+    font-size:12px;
+    box-shadow:0 5px 30px rgba(0,0,0,.4);
 }
 </style>
 </head>
@@ -107,219 +322,530 @@ display:none;z-index:99;font-size:12px
 
 <div class="app">
 
-<h1>Theme<span>Studio</span></h1>
-
-<div class="card">
-<div class="title">Название темы</div>
-<input id="themeName" type="text" value="Pink Night">
+<div class="logo">
+Theme<span>Studio</span>
 </div>
 
+
+<!-- НАЗВАНИЕ -->
+
 <div class="card">
-<div class="title">Платформа</div>
+
+<div class="title">
+Название темы
+</div>
+
+<input
+id="themeName"
+type="text"
+value="Pink Night"
+placeholder="Название темы">
+
+</div>
+
+
+<!-- ПЛАТФОРМА -->
+
+<div class="card">
+
+<div class="title">
+Для какого устройства?
+</div>
 
 <div class="platforms">
-<button id="androidPlatform" class="active" onclick="setPlatform('android')">
+
+<button
+id="androidPlatform"
+class="active"
+onclick="setPlatform('android')">
+
 🤖 Android
+
 </button>
 
-<button id="iphonePlatform" onclick="setPlatform('iphone')">
+<button
+id="iphonePlatform"
+onclick="setPlatform('iphone')">
+
 🍎 iPhone
+
 </button>
+
 </div>
+
 </div>
+
+
+<!-- ПРЕДПРОСМОТР -->
 
 <div class="card">
-<div class="title">Предпросмотр</div>
+
+<div class="title">
+Предпросмотр
+</div>
 
 <div class="preview">
 
-<div id="header" class="header">
-<div id="avatar" class="avatar">A</div>
+<div
+id="header"
+class="header">
+
+<div
+id="avatar"
+class="avatar">
+
+A
+
+</div>
 
 <div>
-<div class="name">Alex</div>
-<div class="status">в сети</div>
-</div>
+
+<div class="name">
+Alex
 </div>
 
-<div id="chat" class="chat">
+<div class="status">
+в сети
+</div>
 
-<div id="incoming1" class="msg in">
+</div>
+
+</div>
+
+
+<div
+id="chat"
+class="chat">
+
+
+<div
+id="incoming1"
+class="msg in">
+
 Привет! Как тебе новая тема?
-<div class="time">21:42</div>
+
+<div class="time">
+21:42
 </div>
 
-<div id="outgoing1" class="msg out">
+</div>
+
+
+<div
+id="outgoing1"
+class="msg out">
+
 Она шикарная 😍
-<div class="time">21:43 ✓✓</div>
+
+<div class="time">
+21:43 ✓✓
 </div>
 
-<div id="incoming2" class="msg in">
+</div>
+
+
+<div
+id="incoming2"
+class="msg in">
+
 Особенно этот розовый.
-<div class="time">21:43</div>
+
+<div class="time">
+21:43
 </div>
 
-<div id="outgoing2" class="msg out">
+</div>
+
+
+<div
+id="outgoing2"
+class="msg out">
+
 Я сам его выбрал 😎
-<div class="time">21:44 ✓✓</div>
+
+<div class="time">
+21:44 ✓✓
 </div>
 
 </div>
+
+
+</div>
+
 
 <div class="composer">
-<div id="fake" class="fake">Сообщение</div>
-<div id="send" class="send">➤</div>
+
+<div
+id="fake"
+class="fake">
+
+Сообщение
+
+</div>
+
+<div
+id="send"
+class="send">
+
+➤
+
 </div>
 
 </div>
+
 </div>
+
+</div>
+
+
+<!-- ЦВЕТА -->
 
 <div class="card">
-<div class="title">Цвета</div>
+
+<div class="title">
+Цвета
+</div>
 
 <div class="colors">
 
-<div class="color">
-<label>Фон</label>
-<input id="background" type="color" value="#111114">
-</div>
 
 <div class="color">
-<label>Шапка</label>
-<input id="headerColor" type="color" value="#18181d">
+
+<label>
+Фон
+</label>
+
+<input
+id="background"
+type="color"
+value="#111114">
+
 </div>
+
 
 <div class="color">
-<label>Акцент</label>
-<input id="accent" type="color" value="#ff4fa3">
+
+<label>
+Шапка
+</label>
+
+<input
+id="headerColor"
+type="color"
+value="#18181d">
+
 </div>
+
 
 <div class="color">
-<label>Исходящие</label>
-<input id="outgoing" type="color" value="#ff4fa3">
+
+<label>
+Акцент
+</label>
+
+<input
+id="accent"
+type="color"
+value="#ff4fa3">
+
 </div>
+
 
 <div class="color">
-<label>Входящие</label>
-<input id="incoming" type="color" value="#292930">
+
+<label>
+Исходящие сообщения
+</label>
+
+<input
+id="outgoing"
+type="color"
+value="#ff4fa3">
+
 </div>
+
 
 <div class="color">
-<label>Текст</label>
-<input id="textColor" type="color" value="#ffffff">
+
+<label>
+Входящие сообщения
+</label>
+
+<input
+id="incoming"
+type="color"
+value="#292930">
+
 </div>
+
 
 <div class="color">
-<label>Ссылки</label>
-<input id="link" type="color" value="#ff4fa3">
+
+<label>
+Основной текст
+</label>
+
+<input
+id="textColor"
+type="color"
+value="#ffffff">
+
 </div>
+
 
 <div class="color">
-<label>Вторичный текст</label>
-<input id="secondary" type="color" value="#9999a3">
+
+<label>
+Ссылки
+</label>
+
+<input
+id="link"
+type="color"
+value="#ff4fa3">
+
+</div>
+
+
+<div class="color">
+
+<label>
+Вторичный текст
+</label>
+
+<input
+id="secondary"
+type="color"
+value="#9999a3">
+
+</div>
+
+
 </div>
 
 </div>
-</div>
+
+
+<!-- ОБОИ -->
 
 <div class="card">
-<div class="title">Фон чата</div>
+
+<div class="title">
+Фон чата
+</div>
 
 <label class="wall">
+
 🖼️ Выбрать изображение
-<input id="wallpaper" type="file" accept="image/*">
+
+<input
+id="wallpaper"
+type="file"
+accept="image/*">
+
 </label>
+
 </div>
+
+
+<!-- СОЗДАНИЕ -->
 
 <div class="card">
-<div class="title">Создание темы</div>
 
-<div class="buttons">
+<div class="title">
+Создать тему
+</div>
 
-<button class="android" onclick="createAndroid()">
-🤖 Создать Android
+<div class="main-buttons">
+
+<button
+class="android"
+onclick="createAndroid()">
+
+🤖 Android
+
 </button>
 
-<button class="iphone" onclick="createIphone()">
-🍎 Создать iPhone
+
+<button
+class="iphone"
+onclick="createIphone()">
+
+🍎 iPhone
+
 </button>
 
 </div>
+
+
+<div
+id="result">
 </div>
+
+</div>
+
+
+<!-- СБРОС -->
 
 <div class="card">
-<div class="buttons">
 
-<button class="reset" onclick="resetTheme()">
-↺ Сбросить
+<button
+class="reset"
+onclick="resetTheme()">
+
+↺ Сбросить настройки
+
 </button>
 
-<button class="reset" onclick="saveLocal()">
-💾 Сохранить
-</button>
-
-</div>
 </div>
 
 </div>
 
-<div id="toast" class="toast"></div>
+
+<div
+id="toast"
+class="toast">
+</div>
+
 
 <script>
 
 let platform = "android";
+
 let wallpaperData = "";
 
-const $ = id => document.getElementById(id);
+const $ = id =>
+document.getElementById(id);
+
+
+/* =====================================================
+   ПЛАТФОРМА
+===================================================== */
 
 function setPlatform(type){
 
 platform = type;
 
-$("androidPlatform").classList.remove("active");
-$("iphonePlatform").classList.remove("active");
+$("androidPlatform")
+.classList.remove("active");
+
+$("iphonePlatform")
+.classList.remove("active");
 
 if(type === "android"){
-$("androidPlatform").classList.add("active");
+
+$("androidPlatform")
+.classList.add("active");
+
 }
 
 if(type === "iphone"){
-$("iphonePlatform").classList.add("active");
+
+$("iphonePlatform")
+.classList.add("active");
+
 }
 
 }
+
+
+/* =====================================================
+   ПРЕДПРОСМОТР
+===================================================== */
 
 function apply(){
 
-const bg = $("background").value;
-const header = $("headerColor").value;
-const accent = $("accent").value;
-const outgoing = $("outgoing").value;
-const incoming = $("incoming").value;
-const text = $("textColor").value;
-const secondary = $("secondary").value;
+const bg =
+$("background").value;
 
-$("chat").style.backgroundColor = bg;
-$("header").style.backgroundColor = header;
-$("composer").style.backgroundColor = header;
+const header =
+$("headerColor").value;
 
-$("avatar").style.backgroundColor = accent;
-$("send").style.backgroundColor = accent;
+const accent =
+$("accent").value;
 
-$("incoming1").style.backgroundColor = incoming;
-$("incoming2").style.backgroundColor = incoming;
+const outgoing =
+$("outgoing").value;
 
-$("outgoing1").style.backgroundColor = outgoing;
-$("outgoing2").style.backgroundColor = outgoing;
+const incoming =
+$("incoming").value;
 
-document.querySelectorAll(".msg").forEach(x=>{
-x.style.color = text;
+const text =
+$("textColor").value;
+
+const secondary =
+$("secondary").value;
+
+const link =
+$("link").value;
+
+
+$("chat")
+.style.backgroundColor =
+bg;
+
+
+$("header")
+.style.backgroundColor =
+header;
+
+
+$("composer")
+.style.backgroundColor =
+header;
+
+
+$("avatar")
+.style.backgroundColor =
+accent;
+
+
+$("send")
+.style.backgroundColor =
+accent;
+
+
+$("incoming1")
+.style.backgroundColor =
+incoming;
+
+
+$("incoming2")
+.style.backgroundColor =
+incoming;
+
+
+$("outgoing1")
+.style.backgroundColor =
+outgoing;
+
+
+$("outgoing2")
+.style.backgroundColor =
+outgoing;
+
+
+document
+.querySelectorAll(".msg")
+.forEach(message => {
+
+message.style.color =
+text;
+
 });
 
-$("fake").style.backgroundColor = bg;
-$("fake").style.color = secondary;
+
+$("fake")
+.style.backgroundColor =
+bg;
+
+
+$("fake")
+.style.color =
+secondary;
 
 }
+
 
 [
 "background",
@@ -330,299 +856,302 @@ $("fake").style.color = secondary;
 "textColor",
 "link",
 "secondary"
-].forEach(id=>{
-$(id).addEventListener("input",apply);
+
+].forEach(id => {
+
+$(id)
+.addEventListener(
+"input",
+apply
+);
+
 });
 
-$("wallpaper").addEventListener("change",function(e){
 
-const file = e.target.files[0];
+/* =====================================================
+   ОБОИ
+===================================================== */
 
-if(!file)return;
+$("wallpaper")
+.addEventListener(
+"change",
+function(event){
 
-const reader = new FileReader();
+const file =
+event.target.files[0];
 
-reader.onload = function(){
+if(!file)
+return;
 
-wallpaperData = reader.result;
 
-$("chat").style.backgroundImage =
+const reader =
+new FileReader();
+
+
+reader.onload =
+function(){
+
+wallpaperData =
+reader.result;
+
+
+$("chat")
+.style.backgroundImage =
 `url("${wallpaperData}")`;
 
-$("chat").style.backgroundSize = "cover";
-$("chat").style.backgroundPosition = "center";
+$("chat")
+.style.backgroundSize =
+"cover";
+
+$("chat")
+.style.backgroundPosition =
+"center";
 
 };
+
 
 reader.readAsDataURL(file);
 
 });
 
 
+/* =====================================================
+   ТЕМА
+===================================================== */
+
 function getTheme(){
 
 return {
 
-name:$("themeName").value || "My Theme",
+name:
+$("themeName").value
+||
+"My Telegram Theme",
 
-platform:platform,
+platform:
+platform,
 
 colors:{
-background:$("background").value,
-header:$("headerColor").value,
-accent:$("accent").value,
-outgoing:$("outgoing").value,
-incoming:$("incoming").value,
-text:$("textColor").value,
-link:$("link").value,
-secondary:$("secondary").value
+
+background:
+$("background").value,
+
+header:
+$("headerColor").value,
+
+accent:
+$("accent").value,
+
+outgoing:
+$("outgoing").value,
+
+incoming:
+$("incoming").value,
+
+text:
+$("textColor").value,
+
+link:
+$("link").value,
+
+secondary:
+$("secondary").value
+
 },
 
-wallpaper:wallpaperData
+wallpaper:
+wallpaperData
 
 };
 
 }
 
 
-function hex(hex){
+/* =====================================================
+   HEX → DECIMAL
+===================================================== */
+
+function hex(hexColor){
 
 return parseInt(
-hex.replace("#",""),
+hexColor
+.replace("#",""),
 16
 );
 
 }
 
 
-/*
-====================================================
-ANDROID
-====================================================
-*/
-
-function createAndroid(){
-
-const t = getTheme();
-
-let data = "";
-
-data += "name: " + t.name + "\n";
-data += "windowBackgroundWhite: " + hex(t.colors.background) + "\n";
-data += "actionBarDefault: " + hex(t.colors.header) + "\n";
-data += "actionBarDefaultIcon: " + hex(t.colors.text) + "\n";
-data += "actionBarDefaultTitle: " + hex(t.colors.text) + "\n";
-data += "windowBackgroundWhiteBlackText: " + hex(t.colors.text) + "\n";
-data += "windowBackgroundWhiteGrayText: " + hex(t.colors.secondary) + "\n";
-data += "windowBackgroundWhiteLinkText: " + hex(t.colors.link) + "\n";
-data += "chat_outBubble: " + hex(t.colors.outgoing) + "\n";
-data += "chat_inBubble: " + hex(t.colors.incoming) + "\n";
-data += "chat_messageTextIn: " + hex(t.colors.text) + "\n";
-data += "chat_messageTextOut: " + hex(t.colors.text) + "\n";
-data += "chat_linkIn: " + hex(t.colors.link) + "\n";
-data += "chat_linkOut: " + hex(t.colors.link) + "\n";
-data += "chat_outSentCheck: " + hex(t.colors.accent) + "\n";
-data += "chat_outSentCheckSelected: " + hex(t.colors.accent) + "\n";
-data += "chat_inSentCheck: " + hex(t.colors.accent) + "\n";
-data += "chat_inSentCheckSelected: " + hex(t.colors.accent) + "\n";
-data += "featuredStickers_addButton: " + hex(t.colors.accent) + "\n";
-data += "chat_attachButtonIcon: " + hex(t.colors.accent) + "\n";
-
-downloadFile(
-data,
-slug(t.name) + ".attheme",
-"text/plain"
-);
-
-toast("Android-тема создана ✓");
-
-}
-
-
-/*
-====================================================
-IPHONE
-====================================================
-*/
-
-async function createIphone(){
-
-const t = getTheme();
-
-const payload = {
-
-name:t.name,
-
-platform:"iphone",
-
-colors:t.colors,
-
-wallpaper:t.wallpaper
-
-};
-
-
-/*
-Отправляем настройки на наш Railway.
-*/
-
-try{
-
-const response = await fetch(
-"https://theme-studio-production-ec43.up.railway.app/api/theme",
-{
-method:"POST",
-
-headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify(payload)
-
-}
-);
-
-const result = await response.json();
-
-if(!result.ok){
-
-throw new Error(
-result.error || "Ошибка сервера"
-);
-
-}
-
-
-/*
-Сохраняем подготовленные данные.
-*/
-
-localStorage.setItem(
-"iphoneTheme",
-JSON.stringify(payload)
-);
-
-
-/*
-Пока сервер не авторизован
-как пользователь Telegram,
-он не может вызвать
-account.createTheme.
-
-Поэтому показываем
-понятное сообщение.
-*/
-
-showIphoneResult(t.name);
-
-}
-catch(error){
-
-console.error(error);
-
-toast(
-"Не удалось связаться с сервером"
-);
-
-}
-
-}
-
-
-function showIphoneResult(name){
-
-const slugValue =
-slug(name);
-
-const fakeLink =
-"https://t.me/addtheme/" +
-slugValue;
-
-const box = document.createElement("div");
-
-box.className = "card";
-
-box.innerHTML = `
-<div class="title">🍎 Тема подготовлена</div>
-
-<div style="
-font-size:12px;
-color:#aaa;
-line-height:1.5;
-margin-bottom:12px;
-">
-Настройки темы отправлены на сервер.
-<br><br>
-Настоящая ссылка установки
-будет создана после подключения
-Telegram Cloud Theme API.
-</div>
-
-<button
-style="
-width:100%;
-padding:13px;
-border:0;
-border-radius:12px;
-background:#ff4fa3;
-color:#fff;
-font-weight:700;
-"
-onclick="copyText('${fakeLink}')"
->
-Скопировать ссылку
-</button>
-`;
-
-document.querySelector(".app").appendChild(box);
-
-box.scrollIntoView({
-behavior:"smooth"
-});
-
-}
-
-
-function copyText(text){
-
-navigator.clipboard.writeText(text)
-.then(()=>{
-toast("Скопировано ✓");
-})
-.catch(()=>{
-prompt("Скопируй:",text);
-});
-
-}
-
+/* =====================================================
+   SLUG
+===================================================== */
 
 function slug(name){
 
-return String(name || "telegram_theme")
+return String(name)
+
 .toLowerCase()
-.replace(/[^a-z0-9]+/g,"_")
-.replace(/^_+|_+$/g,"")
+
+.replace(
+/[^a-z0-9]+/g,
+"_"
+)
+
+.replace(
+/^_+|_+$/g,
+""
+)
+
 .slice(0,40)
-|| "telegram_theme";
+
+||
+"telegram_theme";
 
 }
 
 
-function downloadFile(data,name,type){
+/* =====================================================
+   ANDROID
+===================================================== */
 
-const blob = new Blob(
+function createAndroid(){
+
+const theme =
+getTheme();
+
+
+const data = [
+
+"name: " +
+theme.name,
+
+"windowBackgroundWhite: " +
+hex(theme.colors.background),
+
+"actionBarDefault: " +
+hex(theme.colors.header),
+
+"actionBarDefaultIcon: " +
+hex(theme.colors.text),
+
+"actionBarDefaultTitle: " +
+hex(theme.colors.text),
+
+"windowBackgroundWhiteBlackText: " +
+hex(theme.colors.text),
+
+"windowBackgroundWhiteGrayText: " +
+hex(theme.colors.secondary),
+
+"windowBackgroundWhiteLinkText: " +
+hex(theme.colors.link),
+
+"chat_outBubble: " +
+hex(theme.colors.outgoing),
+
+"chat_inBubble: " +
+hex(theme.colors.incoming),
+
+"chat_messageTextIn: " +
+hex(theme.colors.text),
+
+"chat_messageTextOut: " +
+hex(theme.colors.text),
+
+"chat_linkIn: " +
+hex(theme.colors.link),
+
+"chat_linkOut: " +
+hex(theme.colors.link),
+
+"chat_outSentCheck: " +
+hex(theme.colors.accent),
+
+"chat_outSentCheckSelected: " +
+hex(theme.colors.accent),
+
+"chat_inSentCheck: " +
+hex(theme.colors.accent),
+
+"chat_inSentCheckSelected: " +
+hex(theme.colors.accent),
+
+"chat_attachButtonIcon: " +
+hex(theme.colors.accent)
+
+].join("\n");
+
+
+/*
+Создаём Blob.
+*/
+
+const blob =
+new Blob(
 [data],
-{type:type}
+{
+type:
+"application/octet-stream"
+}
 );
+
+
+/*
+Создаём временную ссылку.
+*/
 
 const url =
 URL.createObjectURL(blob);
 
+
+/*
+Показываем кнопку скачивания
+на странице вместо
+принудительного перехода.
+*/
+
+const result =
+$("result");
+
+
+result.innerHTML = `
+
+<div class="result">
+
+<div class="result-title">
+🤖 Android-тема готова
+</div>
+
+<div class="result-text">
+Нажми кнопку ниже, чтобы скачать файл темы.
+</div>
+
+<button
+class="download-button"
+id="downloadAndroid">
+
+⬇️ Скачать ${escapeHtml(theme.name)}.attheme
+
+</button>
+
+</div>
+
+`;
+
+
+$("downloadAndroid")
+.onclick =
+function(){
+
 const a =
 document.createElement("a");
 
-a.href = url;
-a.download = name;
+a.href =
+url;
+
+a.download =
+slug(theme.name) +
+".attheme";
 
 document.body.appendChild(a);
 
@@ -630,100 +1159,326 @@ a.click();
 
 a.remove();
 
-setTimeout(()=>{
-URL.revokeObjectURL(url);
-},1000);
+toast(
+"Тема скачивается ✓"
+);
+
+};
+
+
+result
+.scrollIntoView({
+behavior:"smooth",
+block:"center"
+});
 
 }
 
 
-function saveLocal(){
+/* =====================================================
+   IPHONE
+===================================================== */
+
+async function createIphone(){
+
+const theme =
+getTheme();
+
+
+const result =
+$("result");
+
+
+result.innerHTML = `
+
+<div class="result">
+
+<div class="result-title">
+🍎 Создаём тему...
+</div>
+
+<div class="result-text">
+Подождите немного.
+</div>
+
+</div>
+
+`;
+
+
+try{
+
+const response =
+await fetch(
+
+"https://theme-studio-production-ec43.up.railway.app/api/theme",
+
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":
+"application/json"
+},
+
+body:
+JSON.stringify(theme)
+
+}
+
+);
+
+
+const data =
+await response.json();
+
+
+if(!data.ok){
+
+throw new Error(
+data.error ||
+"Ошибка сервера"
+);
+
+}
+
+
+/*
+Если сервер уже вернул
+готовую Telegram-ссылку.
+*/
+
+if(data.url){
+
+result.innerHTML = `
+
+<div class="result">
+
+<div class="result-title">
+🍎 Тема готова!
+</div>
+
+<div class="result-text">
+Нажми кнопку ниже, чтобы открыть тему в Telegram.
+</div>
+
+<br>
+
+<button
+class="download-button"
+onclick="openTelegramTheme('${escapeAttribute(data.url)}')">
+
+🍎 Установить в Telegram
+
+</button>
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+/*
+Если сервер пока только
+принял настройки.
+*/
+
+result.innerHTML = `
+
+<div class="result">
+
+<div class="result-title">
+🍎 Тема создана
+</div>
+
+<div class="result-text">
+Telegram получил настройки темы.
+</div>
+
+</div>
+
+`;
+
+}
+catch(error){
+
+console.error(error);
+
+result.innerHTML = `
+
+<div class="result">
+
+<div class="result-title">
+❌ Ошибка
+</div>
+
+<div class="result-text">
+Не удалось создать тему.
+Попробуй ещё раз.
+</div>
+
+</div>
+
+`;
+
+}
+
+}
+
+
+/* =====================================================
+   ОТКРЫТЬ TELEGRAM
+===================================================== */
+
+function openTelegramTheme(url){
+
+window.location.href =
+url;
+
+}
+
+
+/* =====================================================
+   БЕЗОПАСНЫЙ HTML
+===================================================== */
+
+function escapeHtml(text){
+
+return String(text)
+
+.replace(/&/g,"&amp;")
+
+.replace(/</g,"&lt;")
+
+.replace(/>/g,"&gt;")
+
+.replace(/"/g,"&quot;")
+
+.replace(/'/g,"&#039;");
+
+}
+
+
+function escapeAttribute(text){
+
+return String(text)
+
+.replace(/'/g,"%27");
+
+}
+
+
+/* =====================================================
+   СОХРАНЕНИЕ
+===================================================== */
+
+function saveTheme(){
 
 localStorage.setItem(
+
 "themeStudio",
+
 JSON.stringify(
 getTheme()
 )
+
 );
 
-toast("Сохранено ✓");
+toast(
+"Настройки сохранены ✓"
+);
 
 }
 
 
-function loadLocal(){
+/* =====================================================
+   ЗАГРУЗКА
+===================================================== */
 
-const raw =
+function loadTheme(){
+
+const saved =
 localStorage.getItem(
 "themeStudio"
 );
 
-if(!raw)return;
+if(!saved)
+return;
+
 
 try{
 
-const t = JSON.parse(raw);
+const theme =
+JSON.parse(saved);
+
 
 $("themeName").value =
-t.name || "Pink Night";
+theme.name ||
+"Pink Night";
 
-if(t.colors){
 
-if(t.colors.background)
+if(theme.platform){
+
+setPlatform(
+theme.platform
+);
+
+}
+
+
+if(theme.colors){
+
+if(theme.colors.background)
 $("background").value =
-t.colors.background;
+theme.colors.background;
 
-if(t.colors.header)
+if(theme.colors.header)
 $("headerColor").value =
-t.colors.header;
+theme.colors.header;
 
-if(t.colors.accent)
+if(theme.colors.accent)
 $("accent").value =
-t.colors.accent;
+theme.colors.accent;
 
-if(t.colors.outgoing)
+if(theme.colors.outgoing)
 $("outgoing").value =
-t.colors.outgoing;
+theme.colors.outgoing;
 
-if(t.colors.incoming)
+if(theme.colors.incoming)
 $("incoming").value =
-t.colors.incoming;
+theme.colors.incoming;
 
-if(t.colors.text)
+if(theme.colors.text)
 $("textColor").value =
-t.colors.text;
+theme.colors.text;
 
-if(t.colors.link)
+if(theme.colors.link)
 $("link").value =
-t.colors.link;
+theme.colors.link;
 
-if(t.colors.secondary)
+if(theme.colors.secondary)
 $("secondary").value =
-t.colors.secondary;
-
-}
-
-if(t.platform)
-setPlatform(t.platform);
-
-if(t.wallpaper){
-
-wallpaperData =
-t.wallpaper;
-
-$("chat").style.backgroundImage =
-`url("${wallpaperData}")`;
-
-$("chat").style.backgroundSize =
-"cover";
+theme.colors.secondary;
 
 }
 
 }
-catch(e){}
+catch(error){
+
+console.log(error);
 
 }
 
+}
+
+
+/* =====================================================
+   СБРОС
+===================================================== */
 
 function resetTheme(){
 
@@ -736,25 +1491,69 @@ location.reload();
 }
 
 
+/* =====================================================
+   TOAST
+===================================================== */
+
 function toast(text){
 
-const x = $("toast");
+const element =
+$("toast");
 
-x.textContent = text;
+element.textContent =
+text;
 
-x.style.display = "block";
+element.style.display =
+"block";
 
-clearTimeout(window.toastTimer);
+
+clearTimeout(
+window.toastTimer
+);
+
 
 window.toastTimer =
-setTimeout(()=>{
-x.style.display = "none";
-},1800);
+setTimeout(
+function(){
+
+element.style.display =
+"none";
+
+},
+1800
+);
 
 }
 
 
-loadLocal();
+/* =====================================================
+   АВТОСОХРАНЕНИЕ
+===================================================== */
+
+setInterval(
+function(){
+
+localStorage.setItem(
+
+"themeStudio",
+
+JSON.stringify(
+getTheme()
+)
+
+);
+
+},
+3000
+);
+
+
+/* =====================================================
+   START
+===================================================== */
+
+loadTheme();
+
 apply();
 
 </script>
