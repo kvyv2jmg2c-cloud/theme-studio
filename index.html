@@ -1030,7 +1030,40 @@ let ctx=canvas.getContext("2d");
 
 canvas.width=1;
 canvas.height=1;
+function createTheme(){
 
+    const theme = getTheme();
+
+    const data = JSON.stringify(theme, null, 2);
+
+    const blob = new Blob(
+        [data],
+        { type: "application/json" }
+    );
+
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+
+    a.href = url;
+
+    a.download =
+        (theme.name || "telegram-theme")
+        .replace(/[\\/:*?"<>|]/g, "_")
+        + ".json";
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    document.body.removeChild(a);
+
+    setTimeout(() => {
+        URL.revokeObjectURL(url);
+    }, 1000);
+
+    toast("Тема создана ✓");
+}
 ctx.drawImage(img,0,0,1,1);
 
 let pixel=ctx.getImageData(0,0,1,1).data;
