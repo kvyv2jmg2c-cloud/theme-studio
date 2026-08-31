@@ -1608,6 +1608,110 @@ toast("JSON экспортирован ✓");
 
 function createTheme(){
 
+    const theme = getTheme();
+    const c = theme.colors;
+
+    const lines = [
+
+        // Основные окна
+        "windowBackgroundWhite: " + c.background,
+        "windowBackgroundGray: " + c.background,
+
+        // Верхняя панель
+        "actionBarDefault: " + c.header,
+        "actionBarDefaultTitle: " + c.text,
+        "actionBarDefaultSubtitle: " + c.secondary,
+        "actionBarDefaultIcon: " + c.text,
+
+        // Исходящие сообщения
+        "chat_outBubble: " + c.outgoing,
+        "chat_outBubbleGradient1: " + c.outgoing,
+        "chat_outBubbleGradient2: " + c.outgoing,
+        "chat_outBubbleGradient3: " + c.outgoing,
+        "chat_outBubbleGradient4: " + c.outgoing,
+
+        // Входящие сообщения
+        "chat_inBubble: " + c.incoming,
+
+        // Текст сообщений
+        "chat_messageTextIn: " + c.text,
+        "chat_messageTextOut: " + c.text,
+
+        // Время
+        "chat_inTimeText: " + c.secondary,
+        "chat_outTimeText: " + c.secondary,
+
+        // Ссылки
+        "chat_inTextSelectionHighlight: " + c.link,
+        "chat_outTextSelectionHighlight: " + c.link,
+
+        // Списки чатов
+        "chats_name: " + c.text,
+        "chats_message: " + c.secondary,
+        "chats_date: " + c.secondary,
+
+        // Профиль
+        "profile_title: " + c.text,
+        "profile_actionIcon: " + c.accent,
+
+        // Основной акцент
+        "windowBackgroundWhiteBlueText: " + c.link,
+        "windowBackgroundWhiteLinkText: " + c.link,
+        "windowBackgroundWhiteBlueButton: " + c.accent,
+
+        // Выделение
+        "chat_textSelectBackground: " + c.accent,
+
+        // Кнопки
+        "chat_goDownButton: " + c.accent,
+        "chat_recordVoiceButton: " + c.accent,
+        "chat_attachFileBackground: " + c.accent,
+
+        // Разделители
+        "divider: " + c.header
+
+    ];
+
+    const content =
+        lines.join("\n");
+
+    const blob =
+        new Blob(
+            [content],
+            {
+                type: "text/plain;charset=utf-8"
+            }
+        );
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const link =
+        document.createElement("a");
+
+    link.href = url;
+
+    link.download =
+        (theme.name || "Telegram Theme")
+        .replace(/[\\/:*?"<>|]/g, "_")
+        + ".attheme";
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
+
+    setTimeout(function(){
+
+        URL.revokeObjectURL(url);
+
+    }, 1000);
+
+    toast("Тема создана 🎨");
+
+}
+
 /*
 Здесь пока создаём проектный файл.
 Следующим шагом подключим
