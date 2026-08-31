@@ -15,7 +15,7 @@ def home():
         "service": "Telegram Theme Studio",
         "status": "online"
     })
-
+ 
 
 @app.route("/api/chat-id")
 def get_chat_id():
