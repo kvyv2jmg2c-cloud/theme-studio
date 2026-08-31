@@ -1010,6 +1010,262 @@ toast("Обои убраны");
 
 function analyzeImage(){
 
+    const file = $("wallpaper").files[0];
+
+    if (!file) {
+        toast("Сначала выбери изображение");
+        return;
+    }
+
+    const img = new Image();
+
+    img.onload = function(){
+
+        const canvas = document.createElement("canvas");
+
+        const size = 80;
+
+        canvas.width = size;
+        canvas.height = size;
+
+        const ctx = canvas.getContext("2d");
+
+        ctx.drawImage(
+            img,
+            0,
+            0,
+            size,
+            size
+        );
+
+        const data =
+            ctx.getImageData(
+                0,
+                0,
+                size,
+                size
+            ).data;
+
+        const colors = [];
+
+        for(let i = 0; i < data.length; i += 4){
+
+            const r = data[i];
+            const g = data[i + 1];
+            const b = data[i + 2];
+            const a = data[i + 3];
+
+            if(a < 180) continue;
+
+            /*
+            Игнорируем почти белые,
+            почти чёрные и серые пиксели.
+            */
+
+            const max = Math.max(r,g,b);
+            const min = Math.min(r,g,b);
+
+            if(max < 25) continue;
+            if(max > 245 && min > 235) continue;
+            if(max - min < 15) continue;
+
+            colors.push([r,g,b]);
+        }
+
+        if(!colors.length){
+
+            toast("Не удалось определить цвета");
+
+            return;
+        }
+
+        /*
+        Разбиваем цвета на группы
+        */
+
+        const groups = [];
+
+        colors.forEach(color => {
+
+            let found = false;
+
+            for(const group of groups){
+
+                const d =
+                    Math.abs(color[0]-group.r) +
+                    Math.abs(color[1]-group.g) +
+                    Math.abs(color[2]-group.b);
+
+                if(d < 80){
+
+                    group.r =
+                        Math.round(
+                            (group.r + color[0]) / 2
+                        );
+
+                    group.g =
+                        Math.round(
+                            (group.g + color[1]) / 2
+                        );
+
+                    group.b =
+                        Math.round(
+                            (group.b + color[2]) / 2
+                        );
+
+                    group.count++;
+
+                    found = true;
+
+                    break;
+                }
+            }
+
+            if(!found){
+
+                groups.push({
+                    r:color[0],
+                    g:color[1],
+                    b:color[2],
+                    count:1
+                });
+
+            }
+
+        });
+
+        /*
+        Самые частые цвета
+        */
+
+        groups.sort(
+            (a,b) =>
+                b.count - a.count
+        );
+
+        const palette =
+            groups
+            .slice(0,5)
+            .map(
+                c =>
+                rgbToHex(
+                    c.r,
+                    c.g,
+                    c.b
+                )
+            );
+
+        /*
+        Показываем палитру
+        */
+
+        $("palette").innerHTML = "";
+
+        palette.forEach(color => {
+
+            const button =
+                document.createElement("button");
+
+            button.style.background =
+                color;
+
+            button.title =
+                color;
+
+            button.onclick = () => {
+
+                setColor(
+                    "accent",
+                    color
+                );
+
+                setColor(
+                    "outColor",
+                    color
+                );
+
+                applyTheme();
+
+                toast(
+                    "Цвет применён ✓"
+                );
+
+            };
+
+            $("palette")
+                .appendChild(button);
+
+        });
+
+        /*
+        Первый цвет —
+        основной автоматически
+        */
+
+        const main =
+            palette[0];
+
+        setColor(
+            "accent",
+            main
+        );
+
+        setColor(
+            "outColor",
+            main
+        );
+
+        /*
+        Второй цвет —
+        входящие сообщения
+        */
+
+        if(palette[1]){
+
+            setColor(
+                "inColor",
+                darken(
+                    palette[1],
+                    20
+                )
+            );
+
+        }
+
+        /*
+        Затемняем основной цвет
+        для фона
+        */
+
+        setColor(
+            "bg",
+            darken(
+                main,
+                80
+            )
+        );
+
+        setColor(
+            "header",
+            darken(
+                main,
+                60
+            )
+        );
+
+        applyTheme();
+
+        toast(
+            "Палитра создана ✨"
+        );
+
+    };
+
+    img.src =
+        URL.createObjectURL(file);
+
+}
+
 let file=$("wallpaper").files[0];
 
 if(!file){
