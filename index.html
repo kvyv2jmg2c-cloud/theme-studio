@@ -1,1775 +1,254 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+const express = require("express");
+const cors = require("cors");
 
-<title>Theme Studio</title>
+const app = express();
 
-<style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+app.use(cors());
+app.use(express.json({ limit: "10mb" }));
 
-html,body{
-margin:0;
-padding:0;
-background:#09090d;
-color:#fff;
-font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif
-}
-
-body{
-padding-bottom:100px
-}
-
-button,input{
-font:inherit
-}
-
-button{
-border:0
-}
-
-.app{
-max-width:680px;
-margin:auto;
-padding:15px 14px 30px
-}
-
-.header{
-display:flex;
-align-items:center;
-justify-content:space-between;
-margin-bottom:14px
-}
-
-.logo{
-font-size:23px;
-font-weight:800
-}
-
-.logo span{
-color:#ff4fa3
-}
-
-.save{
-background:#18181e;
-color:white;
-padding:9px 13px;
-border-radius:12px;
-font-size:12px
-}
-
-.theme-name{
-width:100%;
-height:48px;
-background:#15151a;
-border:1px solid #2b2b32;
-border-radius:14px;
-color:white;
-padding:0 14px;
-outline:none;
-margin-bottom:12px
-}
-
-.tabs{
-display:flex;
-gap:6px;
-overflow:auto;
-margin-bottom:12px
-}
-
-.tabs button{
-flex:none;
-background:#15151a;
-border:1px solid #292930;
-color:#999;
-padding:10px 13px;
-border-radius:12px;
-font-size:12px
-}
-
-.tabs button.active{
-background:white;
-color:#000
-}
-
-.preview{
-overflow:hidden;
-border-radius:27px;
-border:1px solid #34343b;
-margin-bottom:13px;
-box-shadow:0 18px 60px rgba(0,0,0,.5)
-}
-
-.top{
-height:60px;
-display:flex;
-align-items:center;
-padding:0 13px;
-background:#18181d
-}
-
-.back{
-font-size:29px;
-margin-right:9px
-}
-
-.avatar{
-width:37px;
-height:37px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:700;
-margin-right:9px
-}
-
-.name{
-font-size:14px;
-font-weight:700
-}
-
-.status{
-font-size:10px;
-opacity:.55;
-margin-top:2px
-}
-
-.chat{
-min-height:390px;
-padding:13px;
-display:flex;
-flex-direction:column;
-justify-content:flex-end;
-gap:8px;
-background:#111114;
-background-position:center;
-background-size:cover
-}
-
-.message{
-max-width:80%;
-padding:9px 12px;
-font-size:14px;
-line-height:1.3
-}
-
-.in{
-align-self:flex-start
-}
-
-.out{
-align-self:flex-end
-}
-
-.time{
-text-align:right;
-font-size:9px;
-opacity:.55;
-margin-top:4px
-}
-
-.composer{
-height:57px;
-padding:8px;
-display:flex;
-gap:8px;
-align-items:center;
-background:#18181d
-}
-
-.fake-input{
-flex:1;
-padding:10px 13px;
-border-radius:20px;
-font-size:13px;
-background:#111114;
-color:#85858d
-}
-
-.send{
-width:40px;
-height:40px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center
-}
-
-.card{
-background:#15151a;
-border:1px solid #28282f;
-border-radius:19px;
-padding:15px;
-margin-bottom:11px
-}
-
-.title{
-font-size:14px;
-font-weight:750;
-margin-bottom:13px
-}
-
-.colors{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px
-}
-
-.color label{
-display:block;
-color:#92929b;
-font-size:10px;
-margin-bottom:5px
-}
-
-.color-box{
-height:47px;
-padding:4px;
-background:#101014;
-border:1px solid #303039;
-border-radius:12px
-}
-
-.color-box input{
-width:100%;
-height:100%;
-padding:0;
-border:0;
-background:transparent
-}
-
-.hex{
-width:100%;
-margin-top:5px;
-background:#101014;
-border:1px solid #303039;
-color:white;
-border-radius:9px;
-padding:7px 8px;
-font-size:10px;
-outline:none
-}
-
-.range{
-margin-bottom:17px
-}
-
-.range:last-child{
-margin-bottom:0
-}
-
-.range-top{
-display:flex;
-justify-content:space-between;
-margin-bottom:7px
-}
-
-.range-name{
-font-size:12px;
-color:#aaa
-}
-
-.range-value{
-font-size:11px;
-color:#777
-}
-
-input[type=range]{
-width:100%;
-accent-color:#ff4fa3
-}
-
-.presets{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:8px
-}
-
-.preset{
-height:55px;
-border-radius:14px;
-color:white;
-font-size:10px;
-font-weight:700;
-text-shadow:0 1px 4px #000;
-border:1px solid #333
-}
-
-.upload{
-display:block;
-text-align:center;
-padding:17px;
-border:1px dashed #44444d;
-border-radius:14px;
-color:#aaa;
-font-size:12px;
-background:#101014
-}
-
-.upload input{
-display:none
-}
-
-.actions{
-display:flex;
-gap:8px
-}
-
-.actions button{
-flex:1;
-padding:12px;
-border:1px solid #33333a;
-border-radius:12px;
-background:#101014;
-color:white;
-font-size:12px
-}
-
-.palette{
-display:flex;
-gap:7px;
-margin-top:10px
-}
-
-.palette button{
-width:42px;
-height:42px;
-border-radius:12px;
-border:2px solid #333
-}
-
-.bottom{
-position:fixed;
-left:0;
-right:0;
-bottom:0;
-z-index:100;
-display:flex;
-gap:8px;
-padding:10px 13px;
-padding-bottom:calc(10px + env(safe-area-inset-bottom));
-background:rgba(9,9,13,.94);
-border-top:1px solid #28282f;
-backdrop-filter:blur(18px)
-}
-
-.bottom button{
-flex:1;
-height:48px;
-border-radius:14px;
-background:#17171c;
-border:1px solid #33333b;
-color:white;
-font-weight:700
-}
-
-.bottom .primary{
-background:white;
-color:black
-}
-
-.toast{
-position:fixed;
-top:15px;
-left:50%;
-transform:translateX(-50%);
-padding:11px 15px;
-border-radius:14px;
-background:white;
-color:black;
-font-size:12px;
-display:none;
-z-index:999
-}
-
-.hidden{
-display:none
-}
-</style>
-</head>
-
-<body>
-
-<div class="app">
-
-<div class="header">
-<div class="logo">Theme<span>Studio</span></div>
-<button class="save" onclick="saveProject()">💾 Сохранить</button>
-</div>
-
-<input
-id="themeName"
-class="theme-name"
-value="Pink Night"
-placeholder="Название темы"
->
-
-<div class="tabs">
-<button class="active" onclick="openTab('editor',this)">🎨 Редактор</button>
-<button onclick="openTab('image',this)">🖼 Изображение</button>
-<button onclick="openTab('presets',this)">✨ Пресеты</button>
-<button onclick="openTab('projects',this)">💾 Проекты</button>
-</div>
-
-<!-- PREVIEW -->
-
-<div class="preview">
-
-<div class="top" id="top">
-<div class="back">‹</div>
-
-<div class="avatar" id="avatar">A</div>
-
-<div>
-<div class="name">Alex</div>
-<div class="status">в сети</div>
-</div>
-</div>
-
-<div class="chat" id="chat">
-
-<div class="message in" id="incoming">
-Привет! Как тебе новая тема?
-<div class="time">21:42</div>
-</div>
-
-<div class="message out" id="outgoing">
-Она шикарная 😍
-<div class="time">21:43 ✓✓</div>
-</div>
-
-<div class="message in" id="incoming2">
-Особенно этот розовый.
-<div class="time">21:43</div>
-</div>
-
-<div class="message out" id="outgoing2">
-Я сам его выбрал 😎
-<div class="time">21:44 ✓✓</div>
-</div>
-
-</div>
-
-<div class="composer" id="composer">
-
-<div class="fake-input" id="input">
-Сообщение
-</div>
-
-<div class="send" id="send">➤</div>
-
-</div>
-
-</div>
-
-<!-- EDITOR -->
-
-<div id="editor">
-
-<div class="card">
-
-<div class="title">🎨 Цвета</div>
-
-<div class="colors">
-
-<div class="color">
-<label>Фон чата</label>
-<div class="color-box">
-<input type="color" id="bg" value="#111114">
-</div>
-<input class="hex" id="bgHex" value="#111114">
-</div>
-
-<div class="color">
-<label>Шапка</label>
-<div class="color-box">
-<input type="color" id="header" value="#18181d">
-</div>
-<input class="hex" id="headerHex" value="#18181d">
-</div>
-
-<div class="color">
-<label>Акцент</label>
-<div class="color-box">
-<input type="color" id="accent" value="#ff4fa3">
-</div>
-<input class="hex" id="accentHex" value="#FF4FA3">
-</div>
-
-<div class="color">
-<label>Исходящие</label>
-<div class="color-box">
-<input type="color" id="outColor" value="#ff4fa3">
-</div>
-<input class="hex" id="outColorHex" value="#FF4FA3">
-</div>
-
-<div class="color">
-<label>Входящие</label>
-<div class="color-box">
-<input type="color" id="inColor" value="#292930">
-</div>
-<input class="hex" id="inColorHex" value="#292930">
-</div>
-
-<div class="color">
-<label>Текст</label>
-<div class="color-box">
-<input type="color" id="textColor" value="#ffffff">
-</div>
-<input class="hex" id="textColorHex" value="#FFFFFF">
-</div>
-
-<div class="color">
-<label>Ссылки</label>
-<div class="color-box">
-<input type="color" id="linkColor" value="#ff4fa3">
-</div>
-<input class="hex" id="linkColorHex" value="#FF4FA3">
-</div>
-
-<div class="color">
-<label>Вторичный текст</label>
-<div class="color-box">
-<input type="color" id="secondary" value="#9999a3">
-</div>
-<input class="hex" id="secondaryHex" value="#9999A3">
-</div>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<div class="title">✨ Эффекты</div>
-
-<div class="range">
-
-<div class="range-top">
-<span class="range-name">Прозрачность</span>
-<span class="range-value" id="opacityValue">100%</span>
-</div>
-
-<input id="opacity" type="range" min="30" max="100" value="100">
-
-</div>
-
-<div class="range">
-
-<div class="range-top">
-<span class="range-name">Скругление</span>
-<span class="range-value" id="radiusValue">17 px</span>
-</div>
-
-<input id="radius" type="range" min="4" max="30" value="17">
-
-</div>
-
-<div class="range">
-
-<div class="range-top">
-<span class="range-name">Затемнение</span>
-<span class="range-value" id="darkValue">0%</span>
-</div>
-
-<input id="darkness" type="range" min="0" max="70" value="0">
-
-</div>
-
-</div>
-
-<div class="card">
-
-<div class="title">🌈 Градиент</div>
-
-<div class="actions">
-
-<button onclick="gradient('pink')">🩷 Pink</button>
-<button onclick="gradient('purple')">💜 Purple</button>
-<button onclick="gradient('blue')">💙 Blue</button>
-<button onclick="gradient('sunset')">🌅 Sunset</button>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- IMAGE -->
-
-<div id="image" class="hidden">
-
-<div class="card">
-
-<div class="title">🖼 Обои</div>
-
-<label class="upload">
-
-Нажми, чтобы выбрать изображение
-
-<input
-type="file"
-id="wallpaper"
-accept="image/*"
->
-<button
-    type="button"
-    onclick="document.getElementById('wallpaper').click()"
-    style="
-        width:100%;
-        margin-top:10px;
-        padding:13px;
-        border-radius:12px;
-        background:#ff4fa3;
-        color:#fff;
-        font-weight:700;
-    ">
-    🖼️ Выбрать изображение
-</button>
-</label>
-
-<div class="actions" style="margin-top:10px">
-
-<button onclick="removeWallpaper()">Убрать</button>
-<button onclick="analyzeImage()">✨ Подобрать цвета</button>
-
-</div>
-
-<div id="palette" class="palette"></div>
-
-</div>
-
-</div>
-
-<!-- PRESETS -->
-
-<div id="presets" class="hidden">
-
-<div class="card">
-
-<div class="title">✨ Готовые темы</div>
-
-<div class="presets">
-
-<button class="preset" style="background:linear-gradient(135deg,#ff4fa3,#7928ca)" onclick="preset('pink')">Pink Night</button>
-
-<button class="preset" style="background:linear-gradient(135deg,#050505,#444)" onclick="preset('black')">Black</button>
-
-<button class="preset" style="background:linear-gradient(135deg,#7b0000,#ff3030)" onclick="preset('blood')">Blood</button>
-
-<button class="preset" style="background:linear-gradient(135deg,#162447,#1f8cff)" onclick="preset('ocean')">Ocean</button>
-
-<button class="preset" style="background:linear-gradient(135deg,#24103f,#9b59ff)" onclick="preset('purple')">Purple</button>
-
-<button class="preset" style="background:linear-gradient(135deg,#092e20,#2ecc71)" onclick="preset('forest')">Forest</button>
-
-<button class="preset" style="background:linear-gradient(135deg,#111,#00e5ff)" onclick="preset('cyber')">Cyber</button>
-
-<button class="preset" style="background:linear-gradient(135deg,#fff,#ddd);color:#111;text-shadow:none" onclick="preset('minimal')">Minimal</button>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- PROJECTS -->
-
-<div id="projects" class="hidden">
-
-<div class="card">
-
-<div class="title">💾 Сохранённые проекты</div>
-
-<div id="projectList"></div>
-
-<div class="actions">
-
-<button onclick="saveProject()">Сохранить текущую</button>
-
-<button onclick="clearProjects()">Удалить все</button>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<div class="title">✨ Создание темы</div>
-
-<div style="
-color:#888;
-font-size:12px;
-line-height:1.5;
-margin-bottom:12px;
-">
-После создания тема будет подготовлена
-для установки в Telegram.
-</div>
-
-<button
-onclick="createTheme()"
-style="
-width:100%;
-height:50px;
-border-radius:14px;
-background:#ff4fa3;
-color:white;
-font-weight:800;
-font-size:14px;
-"
->
-✨ СОЗДАТЬ TELEGRAM-ТЕМУ
-</button>
-
-</div>
-
-</div>
-
-<div class="bottom">
-
-<button onclick="saveProject()">💾 Сохранить</button>
-
-<button class="primary" onclick="createTheme()">✨ Создать тему</button>
-
-</div>
-
-<div id="toast" class="toast"></div>
-
-<script>
-
-const $=id=>document.getElementById(id);
-
-let currentGradient="none";
-
-function toast(text){
-
-const t=$("toast");
-
-t.textContent=text;
-
-t.style.display="block";
-
-setTimeout(()=>t.style.display="none",1800);
-
-}
-
-function openTab(tab,button){
-
-["editor","image","presets","projects"].forEach(id=>{
-$(id).classList.add("hidden");
-});
-
-$(tab).classList.remove("hidden");
-
-document.querySelectorAll(".tabs button").forEach(b=>{
-b.classList.remove("active");
-});
-
-button.classList.add("active");
-
-if(tab==="projects") renderProjects();
-
-}
-
-const pairs=[
-["bg","bgHex"],
-["header","headerHex"],
-["accent","accentHex"],
-["outColor","outColorHex"],
-["inColor","inColorHex"],
-["textColor","textColorHex"],
-["linkColor","linkColorHex"],
-["secondary","secondaryHex"]
-];
-
-pairs.forEach(([color,hex])=>{
-
-$(color).addEventListener("input",()=>{
-
-$(hex).value=$(color).value.toUpperCase();
-
-applyTheme();
-
-});
-
-$(hex).addEventListener("change",()=>{
-
-let v=$(hex).value.trim();
-
-if(!/^#[0-9a-fA-F]{6}$/.test(v)){
-
-$(hex).value=$(color).value;
-
-return;
-
-}
-
-$(color).value=v;
-
-applyTheme();
-
-});
-
-});
-
-["opacity","radius","darkness"].forEach(id=>{
-$(id).addEventListener("input",applyTheme);
-});
-
-function applyTheme(){
-
-let bg=$("bg").value;
-let header=$("header").value;
-let accent=$("accent").value;
-let out=$("outColor").value;
-let incoming=$("inColor").value;
-let text=$("textColor").value;
-let secondary=$("secondary").value;
-
-let opacity=Number($("opacity").value)/100;
-let radius=$("radius").value;
-let darkness=Number($("darkness").value)/100;
-
-$("chat").style.backgroundColor=bg;
-
-$("chat").style.boxShadow=
-`inset 0 0 0 9999px rgba(0,0,0,${darkness})`;
-
-$("top").style.backgroundColor=header;
-
-$("composer").style.backgroundColor=header;
-
-$("avatar").style.backgroundColor=accent;
-
-$("send").style.backgroundColor=accent;
-
-$("incoming").style.backgroundColor=incoming;
-$("incoming2").style.backgroundColor=incoming;
-
-$("outgoing").style.background=out;
-$("outgoing2").style.background=out;
-
-document.querySelectorAll(".message").forEach(m=>{
-m.style.opacity=opacity;
-m.style.borderRadius=radius+"px";
-m.style.color=text;
-});
-
-$("input").style.color=secondary;
-
-$("opacityValue").textContent=$("opacity").value+"%";
-$("radiusValue").textContent=radius+" px";
-$("darkValue").textContent=$("darkness").value+"%";
-
-}
-
-function gradient(type){
-
-const gradients={
-
-pink:"linear-gradient(135deg,#ff4fa3,#ff7abe)",
-
-purple:"linear-gradient(135deg,#7c3aed,#c084fc)",
-
-blue:"linear-gradient(135deg,#2563eb,#38bdf8)",
-
-sunset:"linear-gradient(135deg,#ff512f,#dd2476)"
-
-};
-
-currentGradient=gradients[type];
-
-$("outgoing").style.background=currentGradient;
-$("outgoing2").style.background=currentGradient;
-
-toast("Градиент применён ✓");
-
-}
-
-const themes={
-
-pink:{
-name:"Pink Night",
-bg:"#111114",
-header:"#18181d",
-accent:"#ff4fa3",
-out:"#ff4fa3",
-incoming:"#292930",
-text:"#ffffff",
-secondary:"#9999a3"
-},
-
-black:{
-name:"Black",
-bg:"#050505",
-header:"#101010",
-accent:"#777777",
-out:"#292929",
-incoming:"#171717",
-text:"#ffffff",
-secondary:"#999999"
-},
-
-blood:{
-name:"Blood",
-bg:"#160607",
-header:"#22090b",
-accent:"#ff3030",
-out:"#9e1118",
-incoming:"#351014",
-text:"#ffffff",
-secondary:"#bb9999"
-},
-
-ocean:{
-name:"Ocean",
-bg:"#07131f",
-header:"#0b1e30",
-accent:"#2498ff",
-out:"#1677c8",
-incoming:"#132d43",
-text:"#ffffff",
-secondary:"#9bbbd6"
-},
-
-purple:{
-name:"Purple",
-bg:"#10091b",
-header:"#1a0e2b",
-accent:"#a855f7",
-out:"#7936bd",
-incoming:"#28183c",
-text:"#ffffff",
-secondary:"#b9a9cc"
-},
-
-forest:{
-name:"Forest",
-bg:"#07120c",
-header:"#0c1d12",
-accent:"#35c978",
-out:"#18834a",
-incoming:"#14291d",
-text:"#ffffff",
-secondary:"#9ac2aa"
-},
-
-cyber:{
-name:"Cyber",
-bg:"#05090c",
-header:"#081218",
-accent:"#00e5ff",
-out:"#007f91",
-incoming:"#102229",
-text:"#ffffff",
-secondary:"#9adce5"
-},
-
-minimal:{
-name:"Minimal",
-bg:"#eeeeF2",
-header:"#ffffff",
-accent:"#777777",
-out:"#d8d8df",
-incoming:"#ffffff",
-text:"#111111",
-secondary:"#666666"
-}
-
-};
-
-function preset(type){
-
-let t=themes[type];
-
-$("themeName").value=t.name;
-
-setColor("bg",t.bg);
-setColor("header",t.header);
-setColor("accent",t.accent);
-setColor("outColor",t.out);
-setColor("inColor",t.incoming);
-setColor("textColor",t.text);
-setColor("secondary",t.secondary);
-
-applyTheme();
-
-toast(t.name+" применена ✓");
-
-}
-
-function setColor(id,value){
-
-$(id).value=value;
-
-let hex=$(id+"Hex");
-
-if(hex) hex.value=value.toUpperCase();
-
-}
-
-$("wallpaper").addEventListener("change",function(e){
-
-let file=e.target.files[0];
-
-if(!file)return;
-
-let url=URL.createObjectURL(file);
-
-$("chat").style.backgroundImage=`url("${url}")`;
-
-toast("Обои установлены ✓");
-
-});
-
-function removeWallpaper(){
-
-$("chat").style.backgroundImage="none";
-
-$("wallpaper").value="";
-
-toast("Обои убраны");
-
-}
-
-function analyzeImage(){
-
-    const file = $("wallpaper").files[0];
-
-    if (!file) {
-        toast("Сначала выбери изображение");
-        return;
-    }
-
-    const img = new Image();
-
-    img.onload = function(){
-
-        const canvas = document.createElement("canvas");
-
-        const size = 80;
-
-        canvas.width = size;
-        canvas.height = size;
-
-        const ctx = canvas.getContext("2d");
-
-        ctx.drawImage(
-            img,
-            0,
-            0,
-            size,
-            size
-        );
-
-        const data =
-            ctx.getImageData(
-                0,
-                0,
-                size,
-                size
-            ).data;
-
-        const colors = [];
-
-        for(let i = 0; i < data.length; i += 4){
-
-            const r = data[i];
-            const g = data[i + 1];
-            const b = data[i + 2];
-            const a = data[i + 3];
-
-            if(a < 180) continue;
-
-            /*
-            Игнорируем почти белые,
-            почти чёрные и серые пиксели.
-            */
-
-            const max = Math.max(r,g,b);
-            const min = Math.min(r,g,b);
-
-            if(max < 25) continue;
-            if(max > 245 && min > 235) continue;
-            if(max - min < 15) continue;
-
-            colors.push([r,g,b]);
-        }
-
-        if(!colors.length){
-
-            toast("Не удалось определить цвета");
-
-            return;
-        }
-
-        /*
-        Разбиваем цвета на группы
-        */
-
-        const groups = [];
-
-        colors.forEach(color => {
-
-            let found = false;
-
-            for(const group of groups){
-
-                const d =
-                    Math.abs(color[0]-group.r) +
-                    Math.abs(color[1]-group.g) +
-                    Math.abs(color[2]-group.b);
-
-                if(d < 80){
-
-                    group.r =
-                        Math.round(
-                            (group.r + color[0]) / 2
-                        );
-
-                    group.g =
-                        Math.round(
-                            (group.g + color[1]) / 2
-                        );
-
-                    group.b =
-                        Math.round(
-                            (group.b + color[2]) / 2
-                        );
-
-                    group.count++;
-
-                    found = true;
-
-                    break;
-                }
-            }
-
-            if(!found){
-
-                groups.push({
-                    r:color[0],
-                    g:color[1],
-                    b:color[2],
-                    count:1
-                });
-
-            }
-
-        });
-
-        /*
-        Самые частые цвета
-        */
-
-        groups.sort(
-            (a,b) =>
-                b.count - a.count
-        );
-
-        const palette =
-            groups
-            .slice(0,5)
-            .map(
-                c =>
-                rgbToHex(
-                    c.r,
-                    c.g,
-                    c.b
-                )
-            );
-
-        /*
-        Показываем палитру
-        */
-
-        $("palette").innerHTML = "";
-
-        palette.forEach(color => {
-
-            const button =
-                document.createElement("button");
-
-            button.style.background =
-                color;
-
-            button.title =
-                color;
-
-            button.onclick = () => {
-
-                setColor(
-                    "accent",
-                    color
-                );
-
-                setColor(
-                    "outColor",
-                    color
-                );
-
-                applyTheme();
-
-                toast(
-                    "Цвет применён ✓"
-                );
-
-            };
-
-            $("palette")
-                .appendChild(button);
-
-        });
-
-        /*
-        Первый цвет —
-        основной автоматически
-        */
-
-        const main =
-            palette[0];
-
-        setColor(
-            "accent",
-            main
-        );
-
-        setColor(
-            "outColor",
-            main
-        );
-
-        /*
-        Второй цвет —
-        входящие сообщения
-        */
-
-        if(palette[1]){
-
-            setColor(
-                "inColor",
-                darken(
-                    palette[1],
-                    20
-                )
-            );
-
-        }
-
-        /*
-        Затемняем основной цвет
-        для фона
-        */
-
-        setColor(
-            "bg",
-            darken(
-                main,
-                80
-            )
-        );
-
-        setColor(
-            "header",
-            darken(
-                main,
-                60
-            )
-        );
-
-        applyTheme();
-
-        toast(
-            "Палитра создана ✨"
-        );
-
-    };
-
-    img.src =
-        URL.createObjectURL(file);
-
-}
-
-let file=$("wallpaper").files[0];
-
-if(!file){
-
-toast("Сначала выбери изображение");
-
-return;
-
-}
-
-let img=new Image();
-
-img.onload=()=>{
-
-let canvas=document.createElement("canvas");
-
-let ctx=canvas.getContext("2d");
-
-canvas.width=1;
-canvas.height=1;
-function createTheme(){
-
-    const theme = getTheme();
-
-    const data = JSON.stringify(theme, null, 2);
-
-    const blob = new Blob(
-        [data],
-        { type: "application/json" }
-    );
-
-    const url = URL.createObjectURL(blob);
-
-    const a = document.createElement("a");
-
-    a.href = url;
-
-    a.download =
-        (theme.name || "telegram-theme")
-        .replace(/[\\/:*?"<>|]/g, "_")
-        + ".json";
-
-    document.body.appendChild(a);
-
-    a.click();
-
-    document.body.removeChild(a);
-
-    setTimeout(() => {
-        URL.revokeObjectURL(url);
-    }, 1000);
-
-    toast("Тема создана ✓");
-}
-ctx.drawImage(img,0,0,1,1);
-
-let pixel=ctx.getImageData(0,0,1,1).data;
-
-let color="#"+
-[pixel[0],pixel[1],pixel[2]]
-.map(x=>x.toString(16).padStart(2,"0"))
-.join("");
-
-setColor("accent",color);
-setColor("outColor",color);
-
-applyTheme();
-
-showPalette(color);
-
-toast("Палитра подобрана ✓");
-
-};
-
-img.src=URL.createObjectURL(file);
-
-}
-
-function showPalette(main){
-
-let colors=[
-main,
-lighten(main,30),
-darken(main,30),
-"#ffffff",
-"#111111"
-];
-
-$("palette").innerHTML="";
-
-colors.forEach(c=>{
-
-let b=document.createElement("button");
-
-b.style.background=c;
-
-b.onclick=()=>{
-
-setColor("accent",c);
-setColor("outColor",c);
-applyTheme();
-
-};
-
-$("palette").appendChild(b);
-
-});
-
-}
-
-function hexToRgb(hex){
-
-hex=hex.replace("#","");
-
-return{
-
-r:parseInt(hex.substring(0,2),16),
-g:parseInt(hex.substring(2,4),16),
-b:parseInt(hex.substring(4,6),16)
-
-};
-
-}
-
-function rgbToHex(r,g,b){
-
-return "#"+
-[r,g,b]
-.map(x=>Math.max(0,Math.min(255,x))
-.toString(16)
-.padStart(2,"0"))
-.join("");
-
-}
-
-function lighten(hex,amount){
-
-let c=hexToRgb(hex);
-
-return rgbToHex(
-c.r+amount,
-c.g+amount,
-c.b+amount
-);
-
-}
-
-function darken(hex,amount){
-
-let c=hexToRgb(hex);
-
-return rgbToHex(
-c.r-amount,
-c.g-amount,
-c.b-amount
-);
-
-}
-
-function getTheme(){
-
-return{
-
-name:$("themeName").value || "My Telegram Theme",
-
-colors:{
-
-background:$("bg").value,
-
-header:$("header").value,
-
-accent:$("accent").value,
-
-outgoing:$("outColor").value,
-
-incoming:$("inColor").value,
-
-text:$("textColor").value,
-
-link:$("linkColor").value,
-
-secondary:$("secondary").value
-
-},
-
-effects:{
-
-opacity:$("opacity").value,
-
-radius:$("radius").value,
-
-darkness:$("darkness").value
-
-},
-
-gradient:currentGradient
-
-};
-
-}
-
-function saveProject(){
-
-let projects=JSON.parse(
-localStorage.getItem("themeProjects")||"[]"
-);
-
-let theme=getTheme();
-
-theme.id=Date.now();
-
-projects.unshift(theme);
-
-localStorage.setItem(
-"themeProjects",
-JSON.stringify(projects.slice(0,20))
-);
-
-toast("Проект сохранён ✓");
-
-}
-
-function renderProjects(){
-
-let projects=JSON.parse(
-localStorage.getItem("themeProjects")||"[]"
-);
-
-let list=$("projectList");
-
-if(!projects.length){
-
-list.innerHTML=
-"<div style='color:#777;font-size:12px;margin-bottom:12px'>Пока нет сохранённых тем.</div>";
-
-return;
-
-}
-
-list.innerHTML="";
-
-projects.forEach(p=>{
-
-let row=document.createElement("div");
-
-row.style.cssText=
-"padding:12px;background:#101014;border-radius:12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center";
-
-row.innerHTML=
-`<span>${escapeHtml(p.name)}</span>
-<button style="background:#222;color:white;border-radius:8px;padding:7px 10px">Открыть</button>`;
-
-row.querySelector("button").onclick=()=>loadProject(p);
-
-list.appendChild(row);
-
-});
-
-}
-
-function loadProject(theme){
-
-$("themeName").value=theme.name;
-
-setColor("bg",theme.colors.background);
-setColor("header",theme.colors.header);
-setColor("accent",theme.colors.accent);
-setColor("outColor",theme.colors.outgoing);
-setColor("inColor",theme.colors.incoming);
-setColor("textColor",theme.colors.text);
-setColor("linkColor",theme.colors.link);
-setColor("secondary",theme.colors.secondary);
-
-$("opacity").value=theme.effects.opacity;
-$("radius").value=theme.effects.radius;
-$("darkness").value=theme.effects.darkness;
-
-applyTheme();
-
-toast("Проект загружен ✓");
-
-}
-
-function clearProjects(){
-
-if(confirm("Удалить все сохранённые проекты?")){
-
-localStorage.removeItem("themeProjects");
-
-renderProjects();
-
-toast("Проекты удалены");
-
-}
-
-}
-
-function exportJSON(){
-
-let data=JSON.stringify(getTheme(),null,2);
-
-let blob=new Blob([data],{
-type:"application/json"
-});
-
-let url=URL.createObjectURL(blob);
-
-let a=document.createElement("a");
-
-a.href=url;
-
-a.download=
-($("themeName").value||"telegram-theme")
-+".json";
-
-a.click();
-
-URL.revokeObjectURL(url);
-
-toast("JSON экспортирован ✓");
-
-}
-
-function createTheme(){
-
-    const theme = getTheme();
-    const c = theme.colors;
-
-    const lines = [
-
-        // Основные окна
-        "windowBackgroundWhite: " + c.background,
-        "windowBackgroundGray: " + c.background,
-
-        // Верхняя панель
-        "actionBarDefault: " + c.header,
-        "actionBarDefaultTitle: " + c.text,
-        "actionBarDefaultSubtitle: " + c.secondary,
-        "actionBarDefaultIcon: " + c.text,
-
-        // Исходящие сообщения
-        "chat_outBubble: " + c.outgoing,
-        "chat_outBubbleGradient1: " + c.outgoing,
-        "chat_outBubbleGradient2: " + c.outgoing,
-        "chat_outBubbleGradient3: " + c.outgoing,
-        "chat_outBubbleGradient4: " + c.outgoing,
-
-        // Входящие сообщения
-        "chat_inBubble: " + c.incoming,
-
-        // Текст сообщений
-        "chat_messageTextIn: " + c.text,
-        "chat_messageTextOut: " + c.text,
-
-        // Время
-        "chat_inTimeText: " + c.secondary,
-        "chat_outTimeText: " + c.secondary,
-
-        // Ссылки
-        "chat_inTextSelectionHighlight: " + c.link,
-        "chat_outTextSelectionHighlight: " + c.link,
-
-        // Списки чатов
-        "chats_name: " + c.text,
-        "chats_message: " + c.secondary,
-        "chats_date: " + c.secondary,
-
-        // Профиль
-        "profile_title: " + c.text,
-        "profile_actionIcon: " + c.accent,
-
-        // Основной акцент
-        "windowBackgroundWhiteBlueText: " + c.link,
-        "windowBackgroundWhiteLinkText: " + c.link,
-        "windowBackgroundWhiteBlueButton: " + c.accent,
-
-        // Выделение
-        "chat_textSelectBackground: " + c.accent,
-
-        // Кнопки
-        "chat_goDownButton: " + c.accent,
-        "chat_recordVoiceButton: " + c.accent,
-        "chat_attachFileBackground: " + c.accent,
-
-        // Разделители
-        "divider: " + c.header
-
-    ];
-
-    const content =
-        lines.join("\n");
-
-    const blob =
-        new Blob(
-            [content],
-            {
-                type: "text/plain;charset=utf-8"
-            }
-        );
-
-    const url =
-        URL.createObjectURL(blob);
-
-    const link =
-        document.createElement("a");
-
-    link.href = url;
-
-    link.download =
-        (theme.name || "Telegram Theme")
-        .replace(/[\\/:*?"<>|]/g, "_")
-        + ".attheme";
-
-    document.body.appendChild(link);
-
-    link.click();
-
-    document.body.removeChild(link);
-
-    setTimeout(function(){
-
-        URL.revokeObjectURL(url);
-
-    }, 1000);
-
-    toast("Тема создана 🎨");
-
-}
+const PORT = process.env.PORT || 3000;
 
 /*
-Здесь пока создаём проектный файл.
-Следующим шагом подключим
-настоящую генерацию Telegram .attheme
-и отправку результата через бота.
+========================================================
+  TELEGRAM THEME SERVER
+========================================================
+
+  Mini App отправляет сюда:
+
+  {
+    name: "Pink Night",
+    colors: {
+      background: "#111114",
+      header: "#18181d",
+      accent: "#ff4fa3",
+      outgoing: "#ff4fa3",
+      incoming: "#292930",
+      text: "#ffffff",
+      link: "#ff4fa3",
+      secondary: "#9999a3"
+    }
+  }
+
+========================================================
 */
 
-let data=JSON.stringify(getTheme(),null,2);
 
-let blob=new Blob([data],{
-type:"application/json"
+function hexToInt(hex) {
+
+    hex = String(hex)
+        .replace("#", "")
+        .trim();
+
+    if (!/^[0-9a-fA-F]{6}$/.test(hex)) {
+        return 0;
+    }
+
+    return parseInt(hex, 16);
+}
+
+
+function makeSlug(name) {
+
+    return String(name || "telegram-theme")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "_")
+        .replace(/^_+|_+$/g, "")
+        .slice(0, 50)
+        || "telegram_theme";
+}
+
+
+/*
+========================================================
+  ПОЛУЧИТЬ ТЕМУ
+========================================================
+*/
+
+app.post("/api/theme", async (req, res) => {
+
+    try {
+
+        const {
+            name,
+            colors
+        } = req.body;
+
+        if (!colors) {
+
+            return res.status(400).json({
+                ok: false,
+                error: "Не переданы цвета"
+            });
+
+        }
+
+
+        const themeName =
+            name ||
+            "My Telegram Theme";
+
+
+        const slug =
+            makeSlug(themeName);
+
+
+        /*
+        Telegram ThemeSettings:
+
+        accent_color
+        outbox_accent_color
+        message_colors
+        base_theme
+        */
+
+
+        const accent =
+            hexToInt(
+                colors.accent
+            );
+
+
+        const outgoing =
+            hexToInt(
+                colors.outgoing
+            );
+
+
+        const incoming =
+            hexToInt(
+                colors.incoming
+            );
+
+
+        const settings = {
+
+            day: {
+
+                base_theme: "day",
+
+                accent_color:
+                    accent,
+
+                outbox_accent_color:
+                    outgoing,
+
+                message_colors: [
+                    outgoing,
+                    incoming
+                ]
+
+            },
+
+            night: {
+
+                base_theme: "night",
+
+                accent_color:
+                    accent,
+
+                outbox_accent_color:
+                    outgoing,
+
+                message_colors: [
+                    outgoing,
+                    incoming
+                ]
+
+            }
+
+        };
+
+
+        /*
+        ------------------------------------------------
+        ЗДЕСЬ БУДЕТ ВЫЗОВ TELEGRAM MTProto
+        ------------------------------------------------
+
+        account.uploadTheme
+        ↓
+        account.createTheme
+
+        После создания Telegram возвращает slug.
+
+        ------------------------------------------------
+        */
+
+        /*
+        ВРЕМЕННО возвращаем данные,
+        чтобы Mini App уже мог работать.
+        */
+
+        const fakeTelegramSlug =
+            slug;
+
+
+        const link =
+            "https://t.me/addtheme/"
+            +
+            encodeURIComponent(
+                fakeTelegramSlug
+            );
+
+
+        res.json({
+
+            ok: true,
+
+            name: themeName,
+
+            slug: fakeTelegramSlug,
+
+            link: link,
+
+            settings: settings
+
+        });
+
+    }
+
+    catch(error) {
+
+        console.error(error);
+
+        res.status(500).json({
+
+            ok: false,
+
+            error:
+                "Ошибка создания темы"
+
+        });
+
+    }
+
 });
 
-let url=URL.createObjectURL(blob);
 
-let a=document.createElement("a");
+/*
+========================================================
+  HEALTH CHECK
+========================================================
+*/
 
-a.href=url;
+app.get("/", (req, res) => {
 
-a.download=
-($("themeName").value||"telegram-theme")
-+".json";
+    res.json({
 
-a.click();
+        ok: true,
 
-URL.revokeObjectURL(url);
+        service:
+            "Telegram Theme Studio"
 
-toast("Тема создана ✓");
+    });
 
-}
+});
 
-function escapeHtml(text){
 
-return String(text)
-.replaceAll("&","&amp;")
-.replaceAll("<","&lt;")
-.replaceAll(">","&gt;")
-.replaceAll('"',"&quot;")
-.replaceAll("'","&#039;");
+app.listen(PORT, () => {
 
-}
+    console.log(
+        "Theme server running on port "
+        + PORT
+    );
 
-applyTheme();
-
-</script>
-
-</body>
-</html>
+});
