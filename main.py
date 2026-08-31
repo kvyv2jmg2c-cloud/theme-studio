@@ -2,10 +2,13 @@ import os
 import requests
 
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
+CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
 
 
 @app.route("/")
@@ -41,8 +44,11 @@ def get_chat_id():
         }), 500
 
 
-@app.route("/api/theme", methods=["POST"])
+@app.route("/api/theme", methods=["POST", "OPTIONS"])
 def create_theme():
+
+    if request.method == "OPTIONS":
+        return "", 200
 
     if not BOT_TOKEN:
         return jsonify({
@@ -50,94 +56,63 @@ def create_theme():
             "error": "TELEGRAM_BOT_TOKEN не найден"
         }), 500
 
+    if not CHAT_ID:
+        return jsonify({
+            "ok": False,
+            "error": "TELEGRAM_CHAT_ID не найден"
+        }), 500
+
     try:
-        data = request.get_json(force=True)
+        data = request.get_json(force=True) or {}
 
-        name = data.get(
-            "name",
-            "Telegram Theme"
-        )
+        name = data.get("name", "Telegram Theme")
+        platform = data.get("platform", "android")
 
-        colors = data.get(
-            "colors",
-            {}
-        )
+        colors = data.get("colors", {})
 
-        chat_id = data.get(
-            "chat_id"
-        )
-
-        if not chat_id:
-            return jsonify({
-                "ok": False,
-                "error": "CHAT_ID не указан"
-            }), 400
-
-        def get_color(key, default):
-
-            value = colors.get(
-                key,
-                default
-            )
-
-            value = str(value)
+        def color(key, default):
+            value = str(colors.get(key, default))
 
             if value.startswith("#"):
                 value = value[1:]
 
             try:
                 return int(value, 16)
-            except:
-                return int(
-                    default.replace("#", ""),
-                    16
-                )
+            except ValueError:
+                return int(default.replace("#", ""), 16)
 
         theme = f"""name: {name}
 
-windowBackgroundWhite: {get_color("background", "#111114")}
-actionBarDefault: {get_color("header", "#18181d")}
-actionBarDefaultIcon: {get_color("text", "#ffffff")}
-actionBarDefaultTitle: {get_color("text", "#ffffff")}
+windowBackgroundWhite: {color("background", "#111114")}
+actionBarDefault: {color("header", "#18181D")}
+actionBarDefaultIcon: {color("text", "#FFFFFF")}
+actionBarDefaultTitle: {color("text", "#FFFFFF")}
 
-windowBackgroundWhiteBlackText: {get_color("text", "#ffffff")}
-windowBackgroundWhiteGrayText: {get_color("secondary", "#9999a3")}
-windowBackgroundWhiteLinkText: {get_color("link", "#ff4fa3")}
+windowBackgroundWhiteBlackText: {color("text", "#FFFFFF")}
+windowBackgroundWhiteGrayText: {color("secondary", "#999999")}
+windowBackgroundWhiteLinkText: {color("link", "#FF4FA3")}
 
-chat_outBubble: {get_color("outgoing", "#ff4fa3")}
-chat_inBubble: {get_color("incoming", "#292930")}
+chat_outBubble: {color("outgoing", "#FF4FA3")}
+chat_inBubble: {color("incoming", "#292930")}
 
-chat_messageTextIn: {get_color("text", "#ffffff")}
-chat_messageTextOut: {get_color("text", "#ffffff")}
+chat_messageTextIn: {color("text", "#FFFFFF")}
+chat_messageTextOut: {color("text", "#FFFFFF")}
 
-chat_linkIn: {get_color("link", "#ff4fa3")}
-chat_linkOut: {get_color("link", "#ff4fa3")}
+chat_linkIn: {color("link", "#FF4FA3")}
+chat_linkOut: {color("link", "#FF4FA3")}
 
-chat_outSentCheck: {get_color("accent", "#ff4fa3")}
-chat_inSentCheck: {get_color("accent", "#ff4fa3")}
+chat_outSentCheck: {color("accent", "#FF4FA3")}
+chat_inSentCheck: {color("accent", "#FF4FA3")}
 """
 
-        filename = str(
-            name
-        ).strip()
+        filename = str(name).strip()
 
         if not filename:
             filename = "Telegram_Theme"
 
-        filename = filename.replace(
-            " ",
-            "_"
-        )
-
-        filename = filename.replace(
-            "/",
-            "_"
-        )
-
-        filename = filename.replace(
-            "\\",
-            "_"
-        )
+        filename = filename.replace(" ", "_")
+        filename = filename.replace("/", "_")
+        filename = filename.replace("\\", "_")
 
         if not filename.endswith(".attheme"):
             filename += ".attheme"
@@ -150,20 +125,34 @@ chat_inSentCheck: {get_color("accent", "#ff4fa3")}
             )
         }
 
-        telegram_response = requests.post(
+        caption = (
+            f"🎨 Тема «{name}» готова!\n"
+            f"Платформа: {platform}"
+        )
+
+        telegram = requests.post(
             f"https://api.telegram.org/bot{BOT_TOKEN}/sendDocument",
             data={
-                "chat_id": chat_id,
-                "caption":
-                    f"🎨 Тема «{name}» готова!"
+                "chat_id": CHAT_ID,
+                "caption": caption
             },
             files=files,
             timeout=30
         )
 
-        return jsonify(
-            telegram_response.json()
-        )
+        result = telegram.json()
+
+        if not telegram.ok:
+            return jsonify({
+                "ok": False,
+                "telegram_error": result
+            }), 500
+
+        return jsonify({
+            "ok": True,
+            "message": "Тема отправлена в Telegram",
+            "telegram": result
+        })
 
     except Exception as e:
 
@@ -175,12 +164,7 @@ chat_inSentCheck: {get_color("accent", "#ff4fa3")}
 
 if __name__ == "__main__":
 
-    port = int(
-        os.environ.get(
-            "PORT",
-            "8000"
-        )
-    )
+    port = int(os.environ.get("PORT", "8000"))
 
     app.run(
         host="0.0.0.0",
